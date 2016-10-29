@@ -25,13 +25,13 @@ class PanelHelper extends Helper
      */
     protected $_defaultConfig = [
         'templates' => [
-            'panel' => '<div class="panel panel-default panel-primary">{{heading}}{{body}}{{footer}}</div>',
+            'panel' => '<div class="panel panel-default {{class}}" {{attrs}}>{{heading}}{{body}}{{footer}}</div>',
             'panelHeading' => '<div class="panel-heading">{{content}}</div>',
             'panelBody' => '<div class="panel-body">{{content}}</div>',
             'panelFooter' => '<div class="panel-footer">{{actions}}</div>',
             //'panelActionList' => '<div class="actions btn-group"><ul><li>{{items}}</li></ul>',
             //'panelActionListItem' => '<li>{{link}}</li>',
-            'panelActionList' => '<div class="btn-group">{{items}}</div>',
+            'panelActionList' => '<div class="">{{items}}</div>',
             'panelActionListItem' => '{{link}}',
 
         ],
@@ -39,7 +39,8 @@ class PanelHelper extends Helper
 
     protected $_defaultParams = [
         'id' => null,
-        'title' => null
+        'title' => null,
+        'class' => 'panel-primary'
     ];
 
     protected $_id;
@@ -51,6 +52,8 @@ class PanelHelper extends Helper
 
     public function create($title = null, $params = []) {
 
+        $this->clean();
+
         if (is_array($title)) {
             $params = $title;
             $title = null;
@@ -58,7 +61,7 @@ class PanelHelper extends Helper
 
         $params['title'] = $title;
 
-        $this->_params = $params += $this->_defaultParams;
+        $this->_params = $params + $this->_defaultParams;
         $this->_id = ($this->_params['id']) ?: uniqid('panel');
     }
 
@@ -159,6 +162,10 @@ class PanelHelper extends Helper
             return '';
         }
         */
+        if (empty($this->_actions)) {
+            return '';
+        }
+
         return $this->templater()->format('panelFooter', [
             'actions' => $this->renderActions()
         ]);
@@ -185,10 +192,24 @@ class PanelHelper extends Helper
     {
         $this->end();
 
-        return $this->templater()->format('panel', [
+        $html = $this->templater()->format('panel', [
             'heading' => $this->renderHeading(),
             'body' => $this->renderBody(),
-            'footer' => $this->renderFooter()
+            'footer' => $this->renderFooter(),
+            'class' => $this->_params['class'],
+            'attrs' => $this->templater()->formatAttributes($this->_params, ['class'])
         ]);
+
+        $this->clean();
+        return $html;
+    }
+
+    public function clean() {
+        $this->end();
+        $this->_id = null;
+        $this->_params = [];
+        $this->_currentBlock = null;
+        $this->_contents = [ 'heading' => '', 'body' => [], 'footer' => ''];
+        $this->_actions = [];
     }
 }
