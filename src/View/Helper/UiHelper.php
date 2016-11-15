@@ -1,6 +1,7 @@
 <?php
 namespace Bootstrap\View\Helper;
 
+use Cake\Datasource\EntityTrait;
 use Cake\View\Helper;
 use Cake\View\Helper\HtmlHelper;
 use Cake\View\Helper\UrlHelper;
@@ -127,6 +128,11 @@ class UiHelper extends Helper
         $items = "";
 
         foreach ($menuList as $alias => $item) {
+
+            if (is_object($item) && $item instanceof EntityTrait) {
+                $item = $item->toArray();
+            }
+
             $items .= $this->menuItem($item, $childMenuOptions, $itemOptions);
         }
 
@@ -139,22 +145,31 @@ class UiHelper extends Helper
 
     public function menuItem($item = [], $childMenuOptions = [], $itemOptions = [])
     {
-        $item += ['title' => null, 'plugin' => null, 'url' => [], 'itemprop' => 'url', '_children' => []];
 
-
-        $plugin = $item['plugin'];
-        unset($item['plugin']);
+        $item += ['url' => null, 'children' => [], 'title' => null, 'class' => null, 'hide_in_nav' => null];
 
         $url = $item['url'];
-        unset($item['url']);
+        if (isset($item['view_url'])) {
+            $url = $item['view_url'];
+        }
+        $children = (isset($item['children'])) ? $item['children'] : [];
+        // legacy support
+        // _children is now children
+        if (empty($children) && isset($item['_children'])) {
+            $children = $item['_children'];
+            unset($item['_children']);
+        }
 
-        $children = $item['_children'];
-        unset($item['_children']);
-
+        // workaround
+        if ( $item['hide_in_nav']) {
+            return '';
+        }
 
         if (!$item['title']) {
             $item['title'] = $this->Url->build($url);
         }
+
+        $itemAttrs = ['title' => $item['title'], 'class' => $item['class'], 'itemprop' => 'url'];
 
         // build item
         if (!empty($children)) {
@@ -168,9 +183,9 @@ class UiHelper extends Helper
                 'href' => '#',
                 'data-href' => ($url) ? $this->Url->build($url) : null,
             ];
-            $ddAttrs += $item;
+            $ddAttrs += $itemAttrs;
             $ddLink = $this->templater()->format('menuDropdownButton', [
-                'attrs' => $this->templater()->formatAttributes($ddAttrs, ['requireRoot', 'data-icon', '_children']),
+                'attrs' => $this->templater()->formatAttributes($ddAttrs, ['requireRoot', 'data-icon']),
                 'title' => $item['title']
             ]);
 
@@ -178,7 +193,7 @@ class UiHelper extends Helper
             $tag = 'menuItemDropdown';
             $children = $this->menu($children, $childMenuOptions, $childMenuOptions, $itemOptions);
         } else {
-            $link = $this->link($item['title'], $url, $item);
+            $link = $this->link($item['title'], $url, $itemAttrs);
             $tag = 'menuItem';
             $children = null;
         }
