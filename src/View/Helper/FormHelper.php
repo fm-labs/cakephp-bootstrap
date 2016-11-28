@@ -26,10 +26,11 @@ class FormHelper extends CakeFormHelper
         //$this->templater()->load('Bootstrap.form_horizontal_templates');
 
         $widgets = [
-            '_default' => ['Bootstrap\View\Widget\BasicWidget'],
+            '_default' => ['Bootstrap\View\Widget\BasicWidget', 'datalist'],
             'button' => ['Bootstrap\View\Widget\ButtonWidget'],
             'hidden' => ['Bootstrap\View\Widget\HiddenWidget'],
             'textarea' => ['Bootstrap\View\Widget\TextareaWidget'],
+            'datalist' => ['Bootstrap\View\Widget\DatalistWidget'],
         ];
         foreach ($widgets as $type => $config) {
             $this->addWidget($type, $config);

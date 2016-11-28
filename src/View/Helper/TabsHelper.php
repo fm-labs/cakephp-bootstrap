@@ -7,43 +7,57 @@ use Cake\View\Helper;
 
 class TabsHelper extends Helper
 {
+    use ContentBlockHelperTrait {
+        ContentBlockHelperTrait::start as startContent;
+        ContentBlockHelperTrait::end as endContent;
+        ContentBlockHelperTrait::clean as cleanContent;
+    }
+
     public $helpers = ['Html', 'Url'];
 
-    protected $_items = [];
+    protected $_blockNamespace = 'tabs';
+    protected $_tabs = [];
+    protected $_tabId;
 
-    protected $_started = null;
-
-    public function start($options = [])
+    public function create($options = [])
     {
-        $this->_items = [];
+        $this->_tabs = [];
+        $this->_tabId = null;
+    }
+
+    /**
+     * @param array $options
+     * @deprecated Use
+     */
+    public function start($options = []) {
+        $this->create($options);
     }
 
     public function add($title, $params = [])
     {
-        $this->end();
+        $params = array_merge(['title' => $title, 'url' => null, 'content' => null, 'debugOnly' => false], $params);
 
-        $params = array_merge(['title' => $title, 'url' => null, 'debugOnly' => false], $params);
+        if ($this->_tabId) {
+            $this->end();
+        }
 
-        $blockId = uniqid('tab');
-        $this->_items[$blockId] = $params;
-        $this->_started = $blockId;
-        $this->_View->Blocks->start($blockId);
+        $this->_tabId = uniqid('tab');
+        $this->_tabs[$this->_tabId] = $params;
+        $this->startContent($this->_tabId);
     }
 
     public function end()
     {
-        if ($this->_started) {
-            $this->_View->Blocks->end();
-            $blockId = $this->_started;
-            $this->_items[$blockId]['content'] = $this->_View->Blocks->get($blockId);
-            $this->_View->Blocks->set($blockId, null);
-            $this->_started = null;
+        if ($this->_tabId) {
+            $this->_tabs[$this->_tabId]['content'] = $this->endContent();
+            $this->_tabId = null;
         }
     }
 
     public function render()
     {
         $this->end();
+        $this->cleanContent();
 
         $tabs = "";
         $js = "";
@@ -53,7 +67,7 @@ class TabsHelper extends Helper
 
         // render tab menu
         $menuClass = "nav nav-tabs";
-        foreach ($this->_items as $tabId => $item) {
+        foreach ($this->_tabs as $tabId => $item) {
 
             if ($debugEnabled !== true && $item['debugOnly'] === true)
                 continue;
@@ -83,7 +97,7 @@ class TabsHelper extends Helper
         // render tab contents
         $tabClass = "tab-pane";
         $i = 0;
-        foreach ($this->_items as $tabId => $item) {
+        foreach ($this->_tabs as $tabId => $item) {
             $class = ($i++ > 0) ? $tabClass : $tabClass . " active";
 
             $attrs = ['id' => $tabId, 'role' => 'tabpanel'];

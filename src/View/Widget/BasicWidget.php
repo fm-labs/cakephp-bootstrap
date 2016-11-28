@@ -50,6 +50,7 @@ class BasicWidget extends CakeBasicWidget
             'escape' => true,
             'templateVars' => [],
             'class' => null,
+            'datalist' => null,
         ];
         $data['value'] = $data['val'];
         unset($data['val']);

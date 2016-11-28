@@ -120,7 +120,7 @@ class UiHelper extends Helper
     public function menu($menuList = [], $menuOptions = [], $childMenuOptions = [], $itemOptions = [])
     {
         $menuOptions += [
-            'class' => 'nav navbar-nav',
+            'class' => null,
             'itemscope' => 'itemscope',
             'itemtype' => 'http://www.schema.org/SiteNavigationElement'
         ];
