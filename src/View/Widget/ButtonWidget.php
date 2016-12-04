@@ -14,7 +14,7 @@ class ButtonWidget extends CakeButtonWidget
         }
 
         $class = explode(' ', $data['class']);
-        $class = array_merge(['btn', 'btn-default'], $class);
+        $class = array_merge(['btn'], $class);
         $class = array_unique($class);
         $data['class'] = join(' ', $class);
 
