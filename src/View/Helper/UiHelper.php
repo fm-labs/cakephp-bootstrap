@@ -70,7 +70,10 @@ class UiHelper extends Helper
 
     public function statusLabel($status, $options = [], $map = [])
     {
-        $options += [];
+        $options += ['label' => null, 'class' => null, 'toggle' => null];
+        $label = $toggle = $class = null;
+        #$map = [];
+        extract($options, EXTR_IF_EXISTS);
 
         if (empty($map)) {
             $map = [
@@ -79,9 +82,17 @@ class UiHelper extends Helper
             ];
         }
 
-        $status = (int) $status;
-        $label = $status;
-        $class = "";
+        if (!$label) {
+            $label = (string) $status;
+        }
+
+        if (!$class) {
+            $class = 'default';
+        }
+
+        if (!is_string($status)) {
+            $status = (int) $status;
+        }
 
         if (array_key_exists($status, $map)) {
             $stat = $map[$status];
@@ -98,7 +109,7 @@ class UiHelper extends Helper
         $label = $this->templater()->format('label', [
             'class' => $class,
             'label' => $label,
-            'attrs' => $this->templater()->formatAttributes($options, ['toggle', 'class', 'label'])
+            'attrs' => $this->templater()->formatAttributes($options, ['toggle', 'class', 'label', 'map'])
         ]);
         return $label;
     }
