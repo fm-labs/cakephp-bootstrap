@@ -5,6 +5,12 @@ namespace Bootstrap\View\Helper;
 use Cake\Core\Configure;
 use Cake\View\Helper;
 
+/**
+ * Class TabsHelper
+ * @package Bootstrap\View\Helper
+ *
+ * @TODO Refactor with StringTemplater
+ */
 class TabsHelper extends Helper
 {
     use ContentBlockHelperTrait {
@@ -27,7 +33,7 @@ class TabsHelper extends Helper
 
     /**
      * @param array $options
-     * @deprecated Use
+     * @deprecated Use create() instead.
      */
     public function start($options = []) {
         $this->create($options);
@@ -59,18 +65,18 @@ class TabsHelper extends Helper
         $this->end();
         $this->cleanContent();
 
+        $debugEnabled = Configure::read('debug');
         $tabs = "";
         $js = "";
         $menuItems = "";
-
-        $debugEnabled = Configure::read('debug');
 
         // render tab menu
         $menuClass = "nav nav-tabs";
         foreach ($this->_tabs as $tabId => $item) {
 
-            if ($debugEnabled !== true && $item['debugOnly'] === true)
+            if ($item['debugOnly'] === true && $debugEnabled !== true) {
                 continue;
+            }
 
             $tabMenuId = $tabId . '-menu';
             $href = '#' . $tabId;
