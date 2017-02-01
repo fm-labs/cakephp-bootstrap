@@ -3,24 +3,21 @@ namespace Bootstrap\View\Helper;
 
 use Cake\Datasource\EntityTrait;
 use Cake\View\Helper;
-use Cake\View\Helper\HtmlHelper;
-use Cake\View\Helper\UrlHelper;
 use Cake\View\StringTemplateTrait;
-use Cake\View\Helper\FormHelper;
 
 /**
  * Class UiHelper
  *
  * @package Backend\View\Helper
- * @property HtmlHelper $Html
- * @property FormHelper $Form
- * @property UrlHelper $Url
+ * @property \Cake\View\Helper\HtmlHelper $Html
+ * @property \Cake\View\Helper\FormHelper $Form
+ * @property \Cake\View\Helper\UrlHelper $Url
  */
 class UiHelper extends Helper
 {
     use StringTemplateTrait;
 
-    public $helpers = ['Html', 'Bootstrap.Form', 'Url'];
+    public $helpers = ['Html', 'Url', 'Bootstrap.Form',];
 
     /**
      * Default config for this class
