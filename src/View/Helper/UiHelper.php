@@ -20,7 +20,7 @@ class UiHelper extends Helper
 {
     use StringTemplateTrait;
 
-    public $helpers = ['Html', 'Form', 'Url'];
+    public $helpers = ['Html', 'Bootstrap.Form', 'Url'];
 
     /**
      * Default config for this class
