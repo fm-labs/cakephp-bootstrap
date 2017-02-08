@@ -156,11 +156,21 @@ class UiHelper extends Helper
 
         $item += ['url' => null, 'children' => [], 'title' => null, 'class' => null, 'hide_in_nav' => null];
 
+        // workaround
+        if ( $item['hide_in_nav']) {
+            return '';
+        }
+
         $url = $item['url'];
+        unset($item['url']);
+
         if (isset($item['view_url'])) {
             $url = $item['view_url'];
+            unset($item['view_url']);
         }
         $children = (isset($item['children'])) ? $item['children'] : [];
+        unset($item['children']);
+
         // legacy support
         // _children is now children
         if (empty($children) && isset($item['_children'])) {
@@ -168,16 +178,9 @@ class UiHelper extends Helper
             unset($item['_children']);
         }
 
-        // workaround
-        if ( $item['hide_in_nav']) {
-            return '';
-        }
+        $item['title'] = ($item['title']) ?: $this->Url->build($url);
+        $item['itemprop'] = 'url';
 
-        if (!$item['title']) {
-            $item['title'] = $this->Url->build($url);
-        }
-
-        $itemAttrs = ['title' => $item['title'], 'class' => $item['class'], 'itemprop' => 'url'];
 
         // build item
         if (!empty($children)) {
@@ -191,7 +194,7 @@ class UiHelper extends Helper
                 'href' => '#',
                 'data-href' => ($url) ? $this->Url->build($url) : null,
             ];
-            $ddAttrs += $itemAttrs;
+            $ddAttrs += $item;
             $ddLink = $this->templater()->format('menuDropdownButton', [
                 'attrs' => $this->templater()->formatAttributes($ddAttrs, ['requireRoot', 'data-icon']),
                 'title' => $item['title']
@@ -201,7 +204,7 @@ class UiHelper extends Helper
             $tag = 'menuItemDropdown';
             $children = $this->menu($children, $childMenuOptions, $childMenuOptions, $itemOptions);
         } else {
-            $link = $this->link($item['title'], $url, $itemAttrs);
+            $link = $this->link($item['title'], $url, $item);
             $tag = 'menuItem';
             $children = null;
         }
