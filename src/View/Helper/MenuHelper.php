@@ -26,6 +26,7 @@ class MenuHelper extends Helper
      */
     protected $_defaultConfig = [
         'templates' => [
+            'navLink' => '<a href="{{url}}"{{attrs}}>{{content}}</a>',
             'navList' => '{{title}}<ul class="{{class}}">{{items}}</ul>',
             'navListItem' => '<li role="presentation"{{attrs}}>{{link}}</li>',
             'navListTitle' => '<h4>{{content}}</h4>',
@@ -153,11 +154,13 @@ class MenuHelper extends Helper
 
     protected function _renderLink(&$item)
     {
-        $linkAttrs = $item;
-        unset($linkAttrs['url']);
-        unset($linkAttrs['children']);
+        $item['attr'] = (isset($item['attr'])) ? $item['attr'] : [];
 
-        return $this->Html->link($item['title'], $item['url'], $linkAttrs);
+        return $this->templater()->format('navLink', [
+            'url' => $this->Html->Url->build($item['url']),
+            'attrs' => $this->templater()->formatAttributes($item['attr']),
+            'content' => h($item['title']),
+        ]);
     }
 
     protected function _isActiveUrl($url)
