@@ -13,7 +13,15 @@ class ButtonWidget extends CakeButtonWidget
             $data['class'] = '';
         }
 
-        $class = explode(' ', $data['class']);
+        $class = array_map(function($val) {
+            if (in_array($val, ['default', 'success', 'danger', 'info', 'warning'])) {
+                return 'btn-'.$val;
+            }
+
+            return $val;
+
+        }, explode(' ', $data['class']));
+
         $class = array_merge(['btn'], $class);
         $class = array_unique($class);
         $data['class'] = join(' ', $class);
