@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: flow
- * Date: 11/6/16
- * Time: 7:09 PM
- */
 
 namespace Bootstrap\View\Helper;
 
