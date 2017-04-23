@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: flow
- * Date: 11/19/16
- * Time: 8:24 PM
- */
 
 namespace Bootstrap\View\Helper;
 
@@ -62,7 +56,7 @@ class FormHelper extends CakeFormHelper
     public function label($fieldName, $text = null, array $options = [])
     {
         if ($this->_horizontal && !isset($options['input'])) {
-            $options = $this->addClass($options, 'col-sm-3');
+        //    $options = $this->addClass($options, 'col-sm-3');
             $options = $this->addClass($options, 'control-label');
         }
         return parent::label($fieldName, $text, $options);

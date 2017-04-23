@@ -32,6 +32,8 @@ class MenuHelper extends Helper
 
     protected $_menu;
 
+    protected $_urlCallback = null;
+
     public function create(array $menu)
     {
         $menu += ['title' => null, 'class' => null, 'items' => null, 'trail' => true, 'active' => true, 'template' => null, 'templates' => [], 'classes' => []];
@@ -57,6 +59,12 @@ class MenuHelper extends Helper
             $this->templater()->add($menu['templates']);
         }
 
+        return $this;
+    }
+
+    public function setUrlCallback(callable $callback)
+    {
+        $this->_urlCallback = $callback;
         return $this;
     }
 
@@ -106,8 +114,20 @@ class MenuHelper extends Helper
 
         $template = 'navListItem';
 
-        $isOnTrail = ($this->_menu['trail'] && $this->_isUrlOnTrail($item['url'])) ? true : false;
-        $isActive = ($this->_menu['active'] && $this->_isActiveUrl($item['url'])) ? true : false;
+        $url = $this->_getItemUrl($item);
+
+
+        //if (is_array($this->_menu['active'])) {
+        //
+        //    $isOnTrail = false; // @TODO check trail for
+        //    $isActive = (in_array($item['id'], $this->_menu['active'])) ? true : false;
+
+        //} else {
+
+            $isOnTrail = ($this->_menu['trail'] && $this->_isUrlOnTrail($url)) ? true : false;
+            $isActive = ($this->_menu['active'] && $this->_isActiveUrl($url)) ? true : false;
+        //}
+
 
         $attrs = ['class' => $this->_menu['classes']['item']];
         if ($isOnTrail) {
@@ -116,6 +136,7 @@ class MenuHelper extends Helper
 
         if ($isActive) {
             $attrs = $this->Html->addClass($attrs, $this->_menu['classes']['activeItem']);
+            $item['title'] = sprintf('[%s]', $item['title']);
         }
 
         $submenu = null;
@@ -151,46 +172,26 @@ class MenuHelper extends Helper
         $item['attr'] = (isset($item['attr'])) ? $item['attr'] : [];
 
         return $this->templater()->format('navLink', [
-            'url' => $this->Html->Url->build($item['url']),
+            'url' => $this->Html->Url->build($this->_getItemUrl($item)),
             'attrs' => $this->templater()->formatAttributes($item['attr']),
             'content' => h($item['title']),
         ]);
     }
 
+    protected function _getItemUrl($item) {
+        if ($this->_urlCallback && is_callable($this->_urlCallback)) {
+            return call_user_func($this->_urlCallback, $item);
+        }
+        return $item['url'];
+    }
+
     protected function _isActiveUrl($url)
     {
-        if (is_array($url)) {
-            $url += ['plugin' => null, 'controller' => null, 'action' => 'index'];
-
-            $request =& $this->_View->request;
-
-            if ($url['plugin'] == $request['plugin'] && $url['controller'] == $request['controller'] && $url['action'] == $request['action']) {
-                return true;
-            }
-        }
-
         return (Router::normalize($url) === Router::normalize($this->_View->request->url));
     }
 
     protected function _isUrlOnTrail($url)
     {
-        if (!is_array($url)) {
-            return false;
-        }
-
-        $url += ['plugin' => null, 'controller' => null, 'action' => null];
-        $request =& $this->_View->request;
-
-        if ($url['plugin'] == $request['plugin'] && $url['controller'] == $request['controller'] && $url['action'] == $request['action']) {
-            return true;
-        }
-        elseif ($url['plugin'] == $request['plugin'] && $url['controller'] == $request['controller']) {
-            return true;
-        }
-        elseif ($url['plugin'] == $request['plugin']) {
-            return true;
-        }
-
-        return false;
+        return false; //@TODO
     }
 }
