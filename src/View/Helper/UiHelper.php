@@ -34,9 +34,19 @@ class UiHelper extends Helper
             'menuItem' => '<li{{attrs}}>{{content}}</li>',
             'menuItemDropdown' => '<li class="dropdown"{{attrs}}>{{content}}{{children}}</li>',
             'menuDropdownButton' => '<a{{attrs}}>{{title}} <span class="caret"></span></a>',
-            'menuLink' => '<a{{attrs}}>{{title}}</a>'
+            'menuLink' => '<a{{attrs}}>{{title}}</a>',
+            //'button' => '<button{{attrs}}>{{content}}</button>'
         ]
     ];
+
+    public function button($title, $url, array $options = [])
+    {
+        $options = $this->Html->addClass($options, 'btn');
+        //if ($url) {
+            return $this->link($title, $url, $options);
+        //}
+
+    }
 
     public function link($title, $url = null, array $options = [])
     {
