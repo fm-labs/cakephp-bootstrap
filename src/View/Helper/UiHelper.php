@@ -161,9 +161,8 @@ class UiHelper extends Helper
         ]);
     }
 
-    public function menuItem($item = [], $childMenuOptions = [], $itemOptions = [])
+    public function menuItem(array $item = [], array $childMenuOptions = [], array $itemOptions = [])
     {
-
         $item += ['url' => null, 'children' => [], 'title' => null, 'class' => null, 'hide_in_nav' => null];
 
         // workaround
