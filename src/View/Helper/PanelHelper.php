@@ -1,22 +1,22 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: flow
- * Date: 10/16/16
- * Time: 2:29 PM
- */
-
 namespace Bootstrap\View\Helper;
-
 
 use Cake\View\Helper;
 use Cake\View\StringTemplateTrait;
 
+/**
+ * Class PanelHelper
+ *
+ * @package Bootstrap\View\Helper
+ */
 class PanelHelper extends Helper
 {
-    public $helpers = ['Html'];
-
     use StringTemplateTrait;
+
+    /**
+     * @var array
+     */
+    public $helpers = ['Html'];
 
     /**
      * Default config for this class
@@ -37,21 +37,46 @@ class PanelHelper extends Helper
         ],
     ];
 
+    /**
+     * @var array
+     */
     protected $_defaultParams = [
         'id' => null,
         'title' => null,
         'class' => 'panel-primary'
     ];
 
+    /**
+     * @var string
+     */
     protected $_id;
+
+    /**
+     * @var array
+     */
     protected $_params = [];
 
+    /**
+     * @var string
+     */
     protected $_currentBlock;
+
+    /**
+     * @var array
+     */
     protected $_contents = [ 'heading' => '', 'body' => [], 'footer' => ''];
+
+    /**
+     * @var array
+     */
     protected $_actions = [];
 
-    public function create($title = null, $params = []) {
-
+    /**
+     * @param null $title
+     * @param array $params
+     */
+    public function create($title = null, $params = [])
+    {
         $this->clean();
 
         if (is_array($title)) {
@@ -65,7 +90,11 @@ class PanelHelper extends Helper
         $this->_id = ($this->_params['id']) ?: uniqid('panel');
     }
 
-    public function heading($content = null) {
+    /**
+     * @param null $content
+     */
+    public function heading($content = null)
+    {
         if ($content === null) {
             $this->start('heading');
             return;
@@ -74,8 +103,12 @@ class PanelHelper extends Helper
         $this->_contents['heading'] = $content;
     }
 
-    public function body($content = null, $merge = true) {
-
+    /**
+     * @param null $content
+     * @param bool|true $merge
+     */
+    public function body($content = null, $merge = true)
+    {
         if ($merge !== true) {
             $this->_contents['body'] = [];
         }
@@ -88,6 +121,9 @@ class PanelHelper extends Helper
         $this->_contents['body'][] = $content;
     }
 
+    /**
+     * @param string $block
+     */
     public function start($block = 'body')
     {
         if ($this->_currentBlock) {
@@ -100,6 +136,9 @@ class PanelHelper extends Helper
         $this->_currentBlock = $block;
     }
 
+    /**
+     *
+     */
     public function end()
     {
         if (!$this->_currentBlock) {
@@ -120,10 +159,19 @@ class PanelHelper extends Helper
         $this->_currentBlock = null;
     }
 
-    public function addAction($title, $url, $attrs = []) {
+    /**
+     * @param $title
+     * @param $url
+     * @param array $attrs
+     */
+    public function addAction($title, $url, $attrs = [])
+    {
         $this->_actions[] = compact('title', 'url', 'attrs');
     }
 
+    /**
+     * @return null|string
+     */
     public function renderHeading()
     {
         $content = $this->_contents['heading'];
@@ -141,6 +189,9 @@ class PanelHelper extends Helper
         ]);
     }
 
+    /**
+     * @return string
+     */
     public function renderBody()
     {
         $out = "";
@@ -154,6 +205,9 @@ class PanelHelper extends Helper
         return $out;
     }
 
+    /**
+     * @return null|string
+     */
     public function renderFooter()
     {
         /*
@@ -171,6 +225,9 @@ class PanelHelper extends Helper
         ]);
     }
 
+    /**
+     * @return null|string
+     */
     public function renderActions()
     {
         $items = "";
@@ -188,6 +245,9 @@ class PanelHelper extends Helper
         return $out;
     }
 
+    /**
+     * @return null|string
+     */
     public function render()
     {
         $this->end();
@@ -204,6 +264,9 @@ class PanelHelper extends Helper
         return $html;
     }
 
+    /**
+     * Clean
+     */
     public function clean() {
         $this->end();
         $this->_id = null;

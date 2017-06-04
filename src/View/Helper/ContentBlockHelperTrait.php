@@ -1,21 +1,39 @@
 <?php
 
 namespace Bootstrap\View\Helper;
+
 use Cake\View\View;
 use Cake\View\ViewBlock;
 
 /**
  * Class ContentBlockHelperTrait
+ *
  * @package Backend\View
  * @property View $_View
  */
 trait ContentBlockHelperTrait
 {
-
+    /**
+     * @var string
+     */
     protected $_blockActive;
+
+    /**
+     * @var string
+     */
     protected $_blockId;
+
+    /**
+     * @var array
+     */
     protected $_blocks = [];
 
+    /**
+     * Start content block
+     *
+     * @param string $block
+     * @param string $mode
+     */
     public function start($block = 'body', $mode = ViewBlock::OVERRIDE)
     {
         //debug("Start ContentBlock " . $block);
@@ -31,6 +49,11 @@ trait ContentBlockHelperTrait
         $this->_blockActive = $block;
     }
 
+    /**
+     * End active block
+     *
+     * @return null
+     */
     public function end()
     {
         if (!$this->_blockActive) {
@@ -46,15 +69,24 @@ trait ContentBlockHelperTrait
         return $content;
     }
 
-    public function clean() {
+    /**
+     * Clean all content blocks
+     */
+    public function clean()
+    {
         $this->end();
         $this->_blocks = [];
     }
 
+    /**
+     * @param $block
+     * @return null
+     */
     public function getContent($block) {
         if (isset($this->_blocks[$block])) {
             return $this->_blocks[$block];
         }
+
         return null;
     }
 }

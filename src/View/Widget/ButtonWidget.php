@@ -11,7 +11,11 @@ use Cake\View\Widget\ButtonWidget as CakeButtonWidget;
  */
 class ButtonWidget extends CakeButtonWidget
 {
-
+    /**
+     * @param array $data
+     * @param ContextInterface $context
+     * @return string
+     */
     public function render(array $data, ContextInterface $context)
     {
         if (!isset($data['class'])) {
@@ -33,5 +37,4 @@ class ButtonWidget extends CakeButtonWidget
 
         return parent::render($data, $context);
     }
-
 }

@@ -3,9 +3,18 @@ namespace Bootstrap\View\Widget;
 
 use Cake\View\Form\ContextInterface;
 
+/**
+ * Class DatalistWidget
+ *
+ * @package Bootstrap\View\Widget
+ */
 class DatalistWidget extends BasicWidget
 {
-
+    /**
+     * @param array $data
+     * @param ContextInterface $context
+     * @return string
+     */
     public function render(array $data, ContextInterface $context)
     {
         $data += [
@@ -35,6 +44,10 @@ class DatalistWidget extends BasicWidget
         return $input . $datalist;
     }
 
+    /**
+     * @param $options
+     * @return string
+     */
     protected function _renderOptions($options)
     {
         $optionsHtml = "";
@@ -47,6 +60,7 @@ class DatalistWidget extends BasicWidget
                 'attrs' => $this->_templates->formatAttributes($attrs),
             ]);
         }
+
         return $optionsHtml;
     }
 }

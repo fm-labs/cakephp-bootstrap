@@ -14,6 +14,9 @@ use Cake\View\Widget\BasicWidget as CakeBasicWidget;
 class BasicWidget extends CakeBasicWidget
 {
 
+    /**
+     * @var string
+     */
     protected $_defaultTemplate = 'input';
 
     /**

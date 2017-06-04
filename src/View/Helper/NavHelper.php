@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: flow
- * Date: 11/25/16
- * Time: 7:26 PM
- */
-
 namespace Bootstrap\View\Helper;
 
 /**
@@ -15,5 +8,4 @@ namespace Bootstrap\View\Helper;
  */
 class NavHelper extends MenuHelper
 {
-
 }

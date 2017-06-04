@@ -19,12 +19,29 @@ class TabsHelper extends Helper
         ContentBlockHelperTrait::clean as cleanContent;
     }
 
+    /**
+     * @var array
+     */
     public $helpers = ['Html', 'Url'];
 
+    /**
+     * @var string
+     */
     protected $_blockNamespace = 'tabs';
+
+    /**
+     * @var array
+     */
     protected $_tabs = [];
+
+    /**
+     * @var string
+     */
     protected $_tabId;
 
+    /**
+     * @param array $options
+     */
     public function create($options = [])
     {
         $this->_tabs = [];
@@ -35,10 +52,15 @@ class TabsHelper extends Helper
      * @param array $options
      * @deprecated Use create() instead.
      */
-    public function start($options = []) {
+    public function start($options = [])
+    {
         $this->create($options);
     }
 
+    /**
+     * @param $title
+     * @param array $params
+     */
     public function add($title, $params = [])
     {
         $params = array_merge(['title' => $title, 'url' => null, 'content' => null, 'debugOnly' => false], $params);
@@ -52,6 +74,9 @@ class TabsHelper extends Helper
         $this->startContent($this->_tabId);
     }
 
+    /**
+     *
+     */
     public function end()
     {
         if ($this->_tabId) {
@@ -60,6 +85,9 @@ class TabsHelper extends Helper
         }
     }
 
+    /**
+     * @return string
+     */
     public function render()
     {
         $this->end();

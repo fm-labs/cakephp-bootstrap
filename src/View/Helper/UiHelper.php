@@ -17,6 +17,9 @@ class UiHelper extends Helper
 {
     use StringTemplateTrait;
 
+    /**
+     * @var array
+     */
     public $helpers = ['Html', 'Url', 'Bootstrap.Form',];
 
     /**
@@ -39,6 +42,12 @@ class UiHelper extends Helper
         ]
     ];
 
+    /**
+     * @param $title
+     * @param $url
+     * @param array $options
+     * @return string
+     */
     public function button($title, $url, array $options = [])
     {
         $options = $this->Html->addClass($options, 'btn');
@@ -48,6 +57,12 @@ class UiHelper extends Helper
 
     }
 
+    /**
+     * @param $title
+     * @param null $url
+     * @param array $options
+     * @return string
+     */
     public function link($title, $url = null, array $options = [])
     {
         if (isset($options['icon'])) {
@@ -59,6 +74,12 @@ class UiHelper extends Helper
         return $this->Html->link($title, $url, $options);
     }
 
+    /**
+     * @param $title
+     * @param null $url
+     * @param array $options
+     * @return string
+     */
     public function postLink($title, $url = null, array $options = [])
     {
         if (isset($options['icon'])) {
@@ -70,11 +91,23 @@ class UiHelper extends Helper
         return $this->Form->postLink($title, $url, $options);
     }
 
+    /**
+     * @param $title
+     * @param null $url
+     * @param array $options
+     * @return string
+     */
     public function deleteLink($title, $url = null, array $options = [])
     {
         return $this->postLink($title, $url, $options);
     }
 
+    /**
+     * @param $status
+     * @param array $options
+     * @param array $map
+     * @return null|string
+     */
     public function statusLabel($status, $options = [], $map = [])
     {
         $options += ['label' => null, 'class' => null, 'toggle' => null];
@@ -121,6 +154,11 @@ class UiHelper extends Helper
         return $label;
     }
 
+    /**
+     * @param $class
+     * @param array $options
+     * @return null|string
+     */
     public function icon($class, $options = [])
     {
         $options += ['tag' => 'icon', 'class' => '', 'attrs' => []];
@@ -135,6 +173,13 @@ class UiHelper extends Helper
         return $this->templater()->format($tag, $options);
     }
 
+    /**
+     * @param array $menuList
+     * @param array $menuOptions
+     * @param array $childMenuOptions
+     * @param array $itemOptions
+     * @return null|string
+     */
     public function menu($menuList = [], $menuOptions = [], $childMenuOptions = [], $itemOptions = [])
     {
         $menuOptions += [
@@ -161,6 +206,12 @@ class UiHelper extends Helper
         ]);
     }
 
+    /**
+     * @param array $item
+     * @param array $childMenuOptions
+     * @param array $itemOptions
+     * @return null|string
+     */
     public function menuItem(array $item = [], array $childMenuOptions = [], array $itemOptions = [])
     {
         $item += ['url' => null, 'children' => [], 'title' => null, 'class' => null, 'hide_in_nav' => null];

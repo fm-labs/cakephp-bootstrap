@@ -5,13 +5,32 @@ namespace Bootstrap\View\Helper;
 use Cake\View\Helper\FormHelper as CakeFormHelper;
 use Cake\View\View;
 
+/**
+ * Class FormHelper
+ *
+ * @package Bootstrap\View\Helper
+ */
 class FormHelper extends CakeFormHelper
 {
+    /**
+     * @var bool
+     */
     static public $useHorizontal = false;
 
+    /**
+     * @var bool
+     */
     protected $_horizontal;
+
+    /**
+     * @var array
+     */
     protected $_templateOriginals = [];
 
+    /**
+     * @param View $View
+     * @param array $config
+     */
     public function __construct(View $View, array $config = [])
     {
         parent::__construct($View, $config);
@@ -31,6 +50,11 @@ class FormHelper extends CakeFormHelper
         }
     }
 
+    /**
+     * @param null $model
+     * @param array $options
+     * @return string
+     */
     public function create($model = null, array $options = [])
     {
         $this->_horizontal = self::$useHorizontal;
@@ -47,12 +71,22 @@ class FormHelper extends CakeFormHelper
         return parent::create($model, $options);
     }
 
+    /**
+     * @param array $secureAttributes
+     * @return string
+     */
     public function end(array $secureAttributes = [])
     {
         $this->_horizontal = self::$useHorizontal;
         return parent::end($secureAttributes);
     }
 
+    /**
+     * @param string $fieldName
+     * @param null $text
+     * @param array $options
+     * @return string
+     */
     public function label($fieldName, $text = null, array $options = [])
     {
         if ($this->_horizontal && !isset($options['input'])) {
@@ -62,6 +96,11 @@ class FormHelper extends CakeFormHelper
         return parent::label($fieldName, $text, $options);
     }
 
+    /**
+     * @param string $fieldName
+     * @param array $options
+     * @return string
+     */
     public function input($fieldName, array $options = [])
     {
         if ($this->_horizontal) {
@@ -70,6 +109,9 @@ class FormHelper extends CakeFormHelper
         return parent::input($fieldName, $options);
     }
 
+    /**
+     * @param $template
+     */
     protected function _swapTemplate($template)
     {
         $original = $this->templater()->get($template);
@@ -81,6 +123,9 @@ class FormHelper extends CakeFormHelper
         }
     }
 
+    /**
+     * @param $template
+     */
     protected function _restoreTemplate($template)
     {
         if (isset($this->_templateOriginals[$template])) {
@@ -89,6 +134,9 @@ class FormHelper extends CakeFormHelper
         }
     }
 
+    /**
+     *
+     */
     protected function _restoreAllTemplates()
     {
         $this->templater()->add($this->_templateOriginals);

@@ -2,16 +2,23 @@
 
 namespace Bootstrap\View\Helper;
 
-
 use Cake\Routing\Router;
 use Cake\View\Helper;
 use Cake\View\StringTemplateTrait;
 
+/**
+ * Class MenuHelper
+ *
+ * @package Bootstrap\View\Helper
+ */
 class MenuHelper extends Helper
 {
-    public $helpers = ['Html'];
-
     use StringTemplateTrait;
+
+    /**
+     * @var array
+     */
+    public $helpers = ['Html'];
 
     /**
      * Default config for this class
@@ -30,10 +37,20 @@ class MenuHelper extends Helper
         ],
     ];
 
+    /**
+     * @var array
+     */
     protected $_menu;
 
+    /**
+     * @var null|callable
+     */
     protected $_urlCallback = null;
 
+    /**
+     * @param array $menu
+     * @return $this
+     */
     public function create(array $menu)
     {
         $menu += ['title' => null, 'class' => null, 'items' => null, 'trail' => true, 'active' => true, 'template' => null, 'templates' => [], 'classes' => []];
@@ -62,12 +79,19 @@ class MenuHelper extends Helper
         return $this;
     }
 
+    /**
+     * @param callable $callback
+     * @return $this
+     */
     public function setUrlCallback(callable $callback)
     {
         $this->_urlCallback = $callback;
         return $this;
     }
 
+    /**
+     * @return null|string
+     */
     public function render()
     {
         if (!$this->_menu || !$this->_menu['items']) {
@@ -77,9 +101,12 @@ class MenuHelper extends Helper
         return $this->_renderMenu($this->_menu);
     }
 
+    /**
+     * @param $menu
+     * @return null|string
+     */
     protected function _renderMenu($menu)
     {
-
         $title = null;
         if ($menu['title']) {
             $title = $this->templater()->format('navListTitle', ['content' => $menu['title']]);
@@ -93,6 +120,10 @@ class MenuHelper extends Helper
         ]);
     }
 
+    /**
+     * @param $items
+     * @return string
+     */
     protected function _renderItems(&$items)
     {
         $html = "";
@@ -102,6 +133,10 @@ class MenuHelper extends Helper
         return $html;
     }
 
+    /**
+     * @param $item
+     * @return null|string
+     */
     protected function _renderItem(&$item)
     {
         $item += ['title' => null, 'url' => null, 'children' => null];
@@ -123,11 +158,9 @@ class MenuHelper extends Helper
         //    $isActive = (in_array($item['id'], $this->_menu['active'])) ? true : false;
 
         //} else {
-
             $isOnTrail = ($this->_menu['trail'] && $this->_isUrlOnTrail($url)) ? true : false;
             $isActive = ($this->_menu['active'] && $this->_isActiveUrl($url)) ? true : false;
         //}
-
 
         $attrs = ['class' => $this->_menu['classes']['item']];
         if ($isOnTrail) {
@@ -167,6 +200,10 @@ class MenuHelper extends Helper
         ]);
     }
 
+    /**
+     * @param $item
+     * @return null|string
+     */
     protected function _renderLink(&$item)
     {
         $item['attr'] = (isset($item['attr'])) ? $item['attr'] : [];
@@ -178,6 +215,10 @@ class MenuHelper extends Helper
         ]);
     }
 
+    /**
+     * @param $item
+     * @return mixed
+     */
     protected function _getItemUrl($item) {
         if ($this->_urlCallback && is_callable($this->_urlCallback)) {
             return call_user_func($this->_urlCallback, $item);
@@ -185,11 +226,19 @@ class MenuHelper extends Helper
         return $item['url'];
     }
 
+    /**
+     * @param $url
+     * @return bool
+     */
     protected function _isActiveUrl($url)
     {
         return (Router::normalize($url) === Router::normalize($this->_View->request->url));
     }
 
+    /**
+     * @param $url
+     * @return bool
+     */
     protected function _isUrlOnTrail($url)
     {
         return false; //@TODO
