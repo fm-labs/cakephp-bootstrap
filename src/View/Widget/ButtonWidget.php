@@ -1,9 +1,14 @@
 <?php
 namespace Bootstrap\View\Widget;
 
-use Cake\View\Widget\ButtonWidget as CakeButtonWidget;
 use Cake\View\Form\ContextInterface;
+use Cake\View\Widget\ButtonWidget as CakeButtonWidget;
 
+/**
+ * Class ButtonWidget
+ *
+ * @package Bootstrap\View\Widget
+ */
 class ButtonWidget extends CakeButtonWidget
 {
 
