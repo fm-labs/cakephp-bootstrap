@@ -79,6 +79,7 @@ class BasicWidget extends CakeBasicWidget
         if (!isset($data['name']) || $data['name'] === '') {
             return [];
         }
+
         return [$data['name']];
     }
 }

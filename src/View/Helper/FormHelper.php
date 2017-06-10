@@ -78,6 +78,7 @@ class FormHelper extends CakeFormHelper
     public function end(array $secureAttributes = [])
     {
         $this->_horizontal = self::$useHorizontal;
+
         return parent::end($secureAttributes);
     }
 
@@ -93,6 +94,7 @@ class FormHelper extends CakeFormHelper
         //    $options = $this->addClass($options, 'col-sm-3');
             $options = $this->addClass($options, 'control-label');
         }
+
         return parent::label($fieldName, $text, $options);
     }
 

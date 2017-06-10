@@ -37,7 +37,6 @@ class TextareaWidget extends CakeTextareaWidget
             'templateVars' => []
         ];
 
-
         if (!isset($data['class'])) {
             $data['class'] = 'form-control';
         }

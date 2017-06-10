@@ -22,13 +22,12 @@ class ButtonWidget extends CakeButtonWidget
             $data['class'] = '';
         }
 
-        $class = array_map(function($val) {
+        $class = array_map(function ($val) {
             if (in_array($val, ['default', 'success', 'danger', 'info', 'warning'])) {
                 return 'btn-'.$val;
             }
 
             return $val;
-
         }, explode(' ', $data['class']));
 
         $class = array_merge(['btn'], $class);

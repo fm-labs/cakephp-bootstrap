@@ -20,7 +20,7 @@ class UiHelper extends Helper
     /**
      * @var array
      */
-    public $helpers = ['Html', 'Url', 'Bootstrap.Form',];
+    public $helpers = ['Html', 'Url', 'Bootstrap.Form', ];
 
     /**
      * Default config for this class
@@ -54,7 +54,6 @@ class UiHelper extends Helper
         //if ($url) {
             return $this->link($title, $url, $options);
         //}
-
     }
 
     /**
@@ -71,6 +70,7 @@ class UiHelper extends Helper
             $options['escape'] = false;
             unset($options['icon']);
         }
+
         return $this->Html->link($title, $url, $options);
     }
 
@@ -88,6 +88,7 @@ class UiHelper extends Helper
             $options['escape'] = false;
             unset($options['icon']);
         }
+
         return $this->Form->postLink($title, $url, $options);
     }
 
@@ -123,7 +124,7 @@ class UiHelper extends Helper
         }
 
         if (!$label) {
-            $label = (string) $status;
+            $label = (string)$status;
         }
 
         if (!$class) {
@@ -131,7 +132,7 @@ class UiHelper extends Helper
         }
 
         if (!is_string($status)) {
-            $status = (int) $status;
+            $status = (int)$status;
         }
 
         if (array_key_exists($status, $map)) {
@@ -143,7 +144,6 @@ class UiHelper extends Helper
             if (is_array($stat) && count($stat) == 2) {
                 list($label, $class) = $stat;
             }
-
         }
 
         $label = $this->templater()->format('label', [
@@ -151,6 +151,7 @@ class UiHelper extends Helper
             'label' => $label,
             'attrs' => $this->templater()->formatAttributes($options, ['toggle', 'class', 'label', 'map'])
         ]);
+
         return $label;
     }
 
@@ -191,7 +192,6 @@ class UiHelper extends Helper
         $items = "";
 
         foreach ($menuList as $alias => $item) {
-
             if (is_object($item) && $item instanceof EntityTrait) {
                 $item = $item->toArray();
             }
@@ -217,7 +217,7 @@ class UiHelper extends Helper
         $item += ['url' => null, 'children' => [], 'title' => null, 'class' => null, 'hide_in_nav' => null];
 
         // workaround
-        if ( $item['hide_in_nav']) {
+        if ($item['hide_in_nav']) {
             return '';
         }
 
@@ -241,10 +241,8 @@ class UiHelper extends Helper
         $item['title'] = ($item['title']) ?: $this->Url->build($url);
         $item['itemprop'] = 'url';
 
-
         // build item
         if (!empty($children)) {
-
             $ddAttrs = [
                 //'data-toggle' => ($url) ? "dropdown disabled" : "drowdown",
                 'data-toggle' => 'dropdown',

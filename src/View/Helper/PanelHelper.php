@@ -97,6 +97,7 @@ class PanelHelper extends Helper
     {
         if ($content === null) {
             $this->start('heading');
+
             return;
         }
 
@@ -115,6 +116,7 @@ class PanelHelper extends Helper
 
         if ($content === null) {
             $this->start('body');
+
             return;
         }
 
@@ -261,13 +263,15 @@ class PanelHelper extends Helper
         ]);
 
         $this->clean();
+
         return $html;
     }
 
     /**
      * Clean
      */
-    public function clean() {
+    public function clean()
+    {
         $this->end();
         $this->_id = null;
         $this->_params = [];

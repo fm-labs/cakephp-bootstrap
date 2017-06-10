@@ -101,7 +101,6 @@ class TabsHelper extends Helper
         // render tab menu
         $menuClass = "nav nav-tabs";
         foreach ($this->_tabs as $tabId => $item) {
-
             if ($item['debugOnly'] === true && $debugEnabled !== true) {
                 continue;
             }
@@ -140,10 +139,8 @@ class TabsHelper extends Helper
             //}
 
             $tabs .= $this->Html->div($class, $item['content'], $attrs);
-
         }
         $tabs = $this->Html->div('tab-content', $tabs);
-
 
         //$script = sprintf("$(document).ready(function() { %s });", $js);
         $script = "";

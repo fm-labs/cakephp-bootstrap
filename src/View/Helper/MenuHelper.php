@@ -86,6 +86,7 @@ class MenuHelper extends Helper
     public function setUrlCallback(callable $callback)
     {
         $this->_urlCallback = $callback;
+
         return $this;
     }
 
@@ -113,6 +114,7 @@ class MenuHelper extends Helper
         }
 
         $template = ($menu['template']) ?: 'navList';
+
         return $this->templater()->format($template, [
             'class' => $menu['class'],
             'title' => $title,
@@ -130,6 +132,7 @@ class MenuHelper extends Helper
         foreach ($items as $item) {
             $html .= $this->_renderItem($item);
         }
+
         return $html;
     }
 
@@ -150,7 +153,6 @@ class MenuHelper extends Helper
         $template = 'navListItem';
 
         $url = $this->_getItemUrl($item);
-
 
         //if (is_array($this->_menu['active'])) {
         //
@@ -219,10 +221,12 @@ class MenuHelper extends Helper
      * @param $item
      * @return mixed
      */
-    protected function _getItemUrl($item) {
+    protected function _getItemUrl($item)
+    {
         if ($this->_urlCallback && is_callable($this->_urlCallback)) {
             return call_user_func($this->_urlCallback, $item);
         }
+
         return $item['url'];
     }
 

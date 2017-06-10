@@ -66,6 +66,7 @@ trait ContentBlockHelperTrait
         $this->_View->Blocks->set($this->_blockId, null);
         $this->_blockActive = null;
         $this->_blockId = null;
+
         return $content;
     }
 
@@ -82,7 +83,8 @@ trait ContentBlockHelperTrait
      * @param $block
      * @return null
      */
-    public function getContent($block) {
+    public function getContent($block)
+    {
         if (isset($this->_blocks[$block])) {
             return $this->_blocks[$block];
         }
