@@ -36,5 +36,5 @@ return [
     'submitContainer' => '<div class="submit">{{content}}</div>',
 
     // Custom
-    'inputHidden' => '<input type="hidden" name="{{name}}"{{attrs}}/>',
+    'inputHidden' => '<input type="hidden" name="{{name}}"{{attrs}} />',
 ];

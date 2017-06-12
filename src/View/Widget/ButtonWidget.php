@@ -23,7 +23,7 @@ class ButtonWidget extends CakeButtonWidget
         }
 
         $class = array_map(function ($val) {
-            if (in_array($val, ['default', 'success', 'danger', 'info', 'warning'])) {
+            if (in_array($val, ['default', 'success', 'danger', 'info', 'warning', 'link'])) {
                 return 'btn-'.$val;
             }
 
@@ -32,7 +32,7 @@ class ButtonWidget extends CakeButtonWidget
 
         $class = array_merge(['btn'], $class);
         $class = array_unique($class);
-        $data['class'] = join(' ', $class);
+        $data['class'] = trim(join(' ', $class));
 
         return parent::render($data, $context);
     }

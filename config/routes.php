@@ -2,5 +2,5 @@
 /**
  * Bootstrap Plugin routes
  *
- * This plugin does not need any routes
+ * This plugin does not have any routes
  */

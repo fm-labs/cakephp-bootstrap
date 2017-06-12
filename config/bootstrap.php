@@ -1,6 +1,6 @@
 <?php
 /**
- * Bootstrap plugin bootstrap stub
+ * Bootstrap plugin
  *
  * This plugin does not require any bootstrap code
  */
