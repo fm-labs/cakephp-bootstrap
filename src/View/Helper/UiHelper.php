@@ -10,8 +10,11 @@ use Cake\View\StringTemplateTrait;
  *
  * @package Backend\View\Helper
  * @property \Cake\View\Helper\HtmlHelper $Html
- * @property \Cake\View\Helper\FormHelper $Form
  * @property \Cake\View\Helper\UrlHelper $Url
+ * @property \Bootstrap\View\Helper\FormHelper $Form
+ * @property \Bootstrap\View\Helper\ButtonHelper $Button
+ * @property \Bootstrap\View\Helper\IconHelper $Icon
+ * @property \Bootstrap\View\Helper\LabelHelper $Label
  */
 class UiHelper extends Helper
 {
@@ -20,7 +23,7 @@ class UiHelper extends Helper
     /**
      * @var array
      */
-    public $helpers = ['Html', 'Url', 'Bootstrap.Form', ];
+    public $helpers = ['Html', 'Url', 'Bootstrap.Form', 'Bootstrap.Button', 'Bootstrap.Icon', 'Bootstrap.Label'];
 
     /**
      * Default config for this class
@@ -29,16 +32,13 @@ class UiHelper extends Helper
      */
     protected $_defaultConfig = [
         'templates' => [
-            // 'icon' => '<span class="glyphicon glyphicon-{{class}}"{{attrs}}></span>', #bootstrap style
-            'icon' => '<i class="fa fa-{{class}}"{{attrs}}></i>', # fontawesome style
             'modal' => '<div class="modal"></div>',
-            'label' => '<span class="label label-{{class}}"{{attrs}}>{{label}}</span>',
             'menu' => '<ul{{attrs}}>{{items}}</ul>',
             'menuItem' => '<li{{attrs}}>{{content}}</li>',
             'menuItemDropdown' => '<li class="dropdown"{{attrs}}>{{content}}{{children}}</li>',
             'menuDropdownButton' => '<a{{attrs}}>{{title}} <span class="caret"></span></a>',
             'menuLink' => '<a{{attrs}}>{{title}}</a>',
-            //'button' => '<button{{attrs}}>{{content}}</button>'
+            //'button' => '<button{{attrs}}>{{content}}</button>',
         ]
     ];
 
@@ -50,10 +50,7 @@ class UiHelper extends Helper
      */
     public function button($title, $url, array $options = [])
     {
-        $options = $this->Html->addClass($options, 'btn');
-        //if ($url) {
-            return $this->link($title, $url, $options);
-        //}
+        return $this->Button->link($title, $url, $options);
     }
 
     /**
@@ -111,49 +108,9 @@ class UiHelper extends Helper
      */
     public function statusLabel($status, $options = [], $map = [])
     {
-        $options += ['label' => null, 'class' => null, 'toggle' => null];
-        $label = $toggle = $class = null;
-        #$map = [];
-        extract($options, EXTR_IF_EXISTS);
-
-        if (empty($map)) {
-            $map = [
-                0 => [__('No'), 'danger'],
-                1 => [__('Yes'), 'success']
-            ];
-        }
-
-        if (!$label) {
-            $label = (string)$status;
-        }
-
-        if (!$class) {
-            $class = 'default';
-        }
-
-        if (!is_string($status)) {
-            $status = (int)$status;
-        }
-
-        if (array_key_exists($status, $map)) {
-            $stat = $map[$status];
-            if (is_string($stat)) {
-                $stat = [$status, $stat];
-            }
-
-            if (is_array($stat) && count($stat) == 2) {
-                list($label, $class) = $stat;
-            }
-        }
-
-        $label = $this->templater()->format('label', [
-            'class' => $class,
-            'label' => $label,
-            'attrs' => $this->templater()->formatAttributes($options, ['toggle', 'class', 'label', 'map'])
-        ]);
-
-        return $label;
+        return $this->Label->status($status, $options, $map);
     }
+
 
     /**
      * @param $class
@@ -162,16 +119,7 @@ class UiHelper extends Helper
      */
     public function icon($class, $options = [])
     {
-        $options += ['tag' => 'icon', 'class' => '', 'attrs' => []];
-
-        $tag = $options['tag'];
-        unset($options['tag']);
-
-        if (isset($options['class'])) {
-            $options['class'] = sprintf("%s %s", $class, $options['class']);
-        }
-
-        return $this->templater()->format($tag, $options);
+        return $this->Icon->create($class, $options);
     }
 
     /**
