@@ -6,7 +6,7 @@ use Cake\View\Helper;
 
 abstract class BaseHelper extends Helper
 {
-    public static $defaultItemSize = "default";
+    public static $defaultItemSize = "default"; // @TODO Use Helper config to assign default size
 
     protected function _mapSizeClass($size, $prefix = "")
     {

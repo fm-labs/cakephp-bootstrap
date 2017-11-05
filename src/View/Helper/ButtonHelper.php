@@ -9,7 +9,8 @@ class ButtonHelper extends BaseHelper
 
     protected $_defaultConfig = [
         'templates' => [
-            'button' => '<button class="{{class}}" {{attrs}}>{{label}}</button>',
+            'button' => '<button class="{{class}}"{{attrs}}>{{label}}</button>',
+            //'buttonLink' => '<a class="btn btn-{{class}}"{{attrs}}>{{label}}</a>',
             'buttonGroup' => '<div class="btn-group {{class}}" {{attrs}}>{{content}}</div>',
             'buttonDropdown' => '
                 <button class="{{class}} dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -86,6 +87,17 @@ class ButtonHelper extends BaseHelper
             return $this->group($btn);
         }
 
+        if ($options['url']) {
+            $btnAttrs['class'] = $options['class'];
+
+            if ($iconHtml) {
+                $label = $iconHtml . " " . $label;
+                $btnAttrs['escape'] = false;
+            }
+
+            return $this->Html->link($label, $options['url'], $btnAttrs);
+        }
+
         $html = $this->templater()->format('button', [
             'class' => $options['class'],
             'icon' => $iconHtml,
@@ -117,16 +129,32 @@ class ButtonHelper extends BaseHelper
      */
     public function link($title, $url, array $options = [])
     {
-        $options = $this->Html->addClass($options, 'btn');
+        $options += ['url' => $url];
+        return $this->create($title, $options);
+    }
 
-        if (isset($options['icon'])) {
-            $title = $this->Icon->create($options['icon']) . " " . $title;
+    public function primary($label, array $options)
+    {
+        $options += ['type' => 'primary'];
+        return $this->create($label, $options);
+    }
 
-            $options['escape'] = false;
-            unset($options['icon']);
-        }
+    public function info($label, array $options)
+    {
+        $options += ['type' => 'info'];
+        return $this->create($label, $options);
+    }
 
-        return $this->Html->link($title, $url, $options);
+    public function warning($label, array $options)
+    {
+        $options += ['type' => 'warning'];
+        return $this->create($label, $options);
+    }
+
+    public function danger($label, array $options)
+    {
+        $options += ['type' => 'danger'];
+        return $this->create($label, $options);
     }
 
 }
