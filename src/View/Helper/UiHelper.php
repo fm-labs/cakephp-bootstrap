@@ -189,6 +189,12 @@ class UiHelper extends Helper
         $item['title'] = ($item['title']) ?: $this->Url->build($url);
         $item['itemprop'] = 'url';
 
+        if (isset($item['attr'])) {
+            $itemAttr = $item['attr'];
+            unset($item['attr']);
+            $item = array_merge($item, $itemAttr);
+        }
+
         // build item
         if (!empty($children)) {
             $ddAttrs = [
