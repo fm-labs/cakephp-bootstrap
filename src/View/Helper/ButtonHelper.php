@@ -1,6 +1,7 @@
 <?php
 namespace Bootstrap\View\Helper;
 
+use Cake\Utility\Hash;
 use Cake\View\StringTemplateTrait;
 
 class ButtonHelper extends BaseHelper
@@ -34,11 +35,13 @@ class ButtonHelper extends BaseHelper
      */
     public function create($label, array $options = [])
     {
-        $options += [
+        $defaultOptions = [
             'class' => null, 'icon' => null, 'type' => null, 'size' => null, 'url' => null,
             'split' => null, 'dropdown' => null
         ];
 
+
+        $options += $defaultOptions;
         $options = $this->Html->addClass($options, 'btn');
         $options = $this->Html->addClass($options, $this->_mapTypeClass($options['type'], 'btn'));
         $options = $this->Html->addClass($options, $this->_mapSizeClass($options['size'], 'btn'));
@@ -88,14 +91,18 @@ class ButtonHelper extends BaseHelper
         }
 
         if ($options['url']) {
+            $url = $options['url'];
+            unset($options['url']);
+            $btnAttrs = array_diff($defaultOptions, $options);
             $btnAttrs['class'] = $options['class'];
+            $btnAttrs['data-icon'] = (isset($options['data-icon'])) ? $options['data-icon'] : $options['icon'];
 
             if ($iconHtml) {
-                $label = $iconHtml . " " . $label;
+                $label = $iconHtml . "&nbsp" . $label;
                 $btnAttrs['escape'] = false;
             }
 
-            return $this->Html->link($label, $options['url'], $btnAttrs);
+            return $this->Html->link($label, $url, $btnAttrs);
         }
 
         $html = $this->templater()->format('button', [

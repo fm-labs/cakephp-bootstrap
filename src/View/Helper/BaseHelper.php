@@ -20,7 +20,7 @@ abstract class BaseHelper extends Helper
                 break;
         }
 
-        return ($prefix) ? $prefix . "-" . $size : $size;
+        return ($prefix && $size) ? $prefix . "-" . $size : $size;
     }
 
     protected function _mapTypeClass($type, $prefix = "")
