@@ -93,9 +93,8 @@ class ButtonHelper extends BaseHelper
         if ($options['url']) {
             $url = $options['url'];
             unset($options['url']);
-            $btnAttrs = array_diff($defaultOptions, $options);
+            $btnAttrs = array_diff_key($options, $defaultOptions);
             $btnAttrs['class'] = $options['class'];
-            $btnAttrs['data-icon'] = (isset($options['data-icon'])) ? $options['data-icon'] : $options['icon'];
 
             if ($iconHtml) {
                 $label = $iconHtml . "&nbsp" . $label;
