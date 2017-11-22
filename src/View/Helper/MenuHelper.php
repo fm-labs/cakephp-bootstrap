@@ -2,6 +2,7 @@
 
 namespace Bootstrap\View\Helper;
 
+use Banana\Menu\MenuItem;
 use Cake\Routing\Router;
 use Cake\View\Helper;
 use Cake\View\StringTemplateTrait;
@@ -126,7 +127,7 @@ class MenuHelper extends Helper
      * @param $items
      * @return string
      */
-    protected function _renderItems(&$items)
+    protected function _renderItems($items)
     {
         $html = "";
         foreach ($items as $item) {
@@ -140,15 +141,15 @@ class MenuHelper extends Helper
      * @param $item
      * @return null|string
      */
-    protected function _renderItem(&$item)
+    protected function _renderItem(MenuItem $item)
     {
-        $item += ['title' => null, 'url' => null, 'children' => null];
+        //$item += ['title' => null, 'url' => null, 'children' => null];
 
         // legacy support
-        if (empty($item['children']) && isset($item['_children'])) {
-            $item['children'] = $item['_children'];
-            unset($item['_children']);
-        }
+        //if (empty($item['children']) && isset($item['_children'])) {
+        //    $item['children'] = $item['_children'];
+        //    unset($item['_children']);
+        //}
 
         $template = 'navListItem';
 

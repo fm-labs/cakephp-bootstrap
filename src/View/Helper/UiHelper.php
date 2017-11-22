@@ -1,6 +1,7 @@
 <?php
 namespace Bootstrap\View\Helper;
 
+use Banana\Menu\MenuItem;
 use Cake\Datasource\EntityTrait;
 use Cake\View\Helper;
 use Cake\View\StringTemplateTrait;
@@ -140,7 +141,7 @@ class UiHelper extends Helper
         $items = "";
 
         foreach ($menuList as $alias => $item) {
-            if (is_object($item) && $item instanceof EntityTrait) {
+            if (is_object($item) && ($item instanceof EntityTrait || $item instanceof MenuItem)) {
                 $item = $item->toArray();
             }
 
