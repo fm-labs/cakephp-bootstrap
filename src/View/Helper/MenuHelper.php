@@ -61,6 +61,7 @@ class MenuHelper extends Helper
             'submenuItem' => '',
             'submenu' => '',
             'item' => '',
+            'itemWithChildren' => '',
             'activeMenu' => 'active',
             'activeItem' => 'active',
             'trailMenu' => 'trail',
@@ -152,6 +153,7 @@ class MenuHelper extends Helper
         //}
 
         $template = 'navListItem';
+        $hasChildren = (count($item['children']) > 0) ? true : false;
 
         $url = $this->_getItemUrl($item);
 
@@ -166,6 +168,7 @@ class MenuHelper extends Helper
         //}
 
         $attrs = ['class' => $this->_menu['classes']['item']];
+
         if ($isOnTrail) {
             $attrs = $this->Html->addClass($attrs, $this->_menu['classes']['trailItem']);
         }
@@ -176,7 +179,13 @@ class MenuHelper extends Helper
         }
 
         $submenu = null;
-        if ($item['children']) {
+        if ($hasChildren) {
+
+            $item['attr'] = $this->Html->addClass($item['attr'], $this->_menu['classes']['itemWithChildren']);
+            // set the data-toggle attr by default. this is bootstrap specific.
+            $item['attr'] = $this->Html->addClass($item['attr'], 'dropdown', 'data-toggle');
+
+            // render the submenu
             $submenuTemplate = 'navSubmenuList'; // ($isOnTrail || $isActive) ? 'navSubmenuListTrail' : 'navSubmenuList';
             $_menu = ['title' => null, 'class' => $this->_menu['classes']['submenu'], 'items' => $item['children'], 'template' => $submenuTemplate];
 
@@ -190,13 +199,15 @@ class MenuHelper extends Helper
             $submenu = $this->_renderMenu($_menu);
 
             $template = 'navListItemSubmenu';
+            //debug($item['attr']);
         }
 
-        $class = $attrs['class'];
-        unset($attrs['class']);
+        //$class = $attrs['class'];
+        //debug($class);
+        //unset($attrs['class']);
 
         return $this->templater()->format($template, [
-            'class' => $class,
+            //'class' => $class,
             'attrs' => $this->templater()->formatAttributes($attrs),
             'link' => $this->_renderLink($item),
             'submenu' => $submenu,
@@ -207,9 +218,10 @@ class MenuHelper extends Helper
      * @param $item
      * @return null|string
      */
-    protected function _renderLink(&$item)
+    protected function _renderLink($item)
     {
         $item['attr'] = (isset($item['attr'])) ? $item['attr'] : [];
+        //debug($item['attr']);
 
         return $this->templater()->format('navLink', [
             'url' => $this->Html->Url->build($this->_getItemUrl($item)),
