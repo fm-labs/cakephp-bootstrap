@@ -141,6 +141,7 @@ class MenuHelper extends Helper
     /**
      * @param $item
      * @return null|string
+     * @todo refactor with options argument to override option params per item
      */
     protected function _renderItem(MenuItem $item)
     {
@@ -180,10 +181,11 @@ class MenuHelper extends Helper
 
         $submenu = null;
         if ($hasChildren) {
+            $attrs = $this->Html->addClass($attrs, $this->_menu['classes']['submenuItem']);
 
             $item['attr'] = $this->Html->addClass($item['attr'], $this->_menu['classes']['itemWithChildren']);
             // set the data-toggle attr by default. this is bootstrap specific.
-            $item['attr'] = $this->Html->addClass($item['attr'], 'dropdown', 'data-toggle');
+            //$item['attr'] = $this->Html->addClass($item['attr'], 'dropdown', 'data-toggle');
 
             // render the submenu
             $submenuTemplate = 'navSubmenuList'; // ($isOnTrail || $isActive) ? 'navSubmenuListTrail' : 'navSubmenuList';
