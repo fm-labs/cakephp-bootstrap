@@ -172,9 +172,7 @@ class MenuHelper extends Helper
 
         if ($isOnTrail) {
             $attrs = $this->Html->addClass($attrs, $this->_menu['classes']['trailItem']);
-        }
-
-        if ($isActive) {
+        } elseif ($isActive) {
             $attrs = $this->Html->addClass($attrs, $this->_menu['classes']['activeItem']);
             $item['title'] = sprintf('[%s]', $item['title']);
         }
@@ -191,12 +189,12 @@ class MenuHelper extends Helper
             $submenuTemplate = 'navSubmenuList'; // ($isOnTrail || $isActive) ? 'navSubmenuListTrail' : 'navSubmenuList';
             $_menu = ['title' => null, 'class' => $this->_menu['classes']['submenu'], 'items' => $item['children'], 'template' => $submenuTemplate];
 
-            if ($isOnTrail) {
-                $_menu = $this->Html->addClass($_menu, $this->_menu['classes']['trailItem']);
-            }
-            if ($isActive) {
-                $_menu = $this->Html->addClass($_menu, $this->_menu['classes']['activeItem']);
-            }
+//            if ($isOnTrail) {
+//                $_menu = $this->Html->addClass($_menu, $this->_menu['classes']['trailItem']);
+//            }
+//            if ($isActive) {
+//                $_menu = $this->Html->addClass($_menu, $this->_menu['classes']['activeItem']);
+//            }
 
             $submenu = $this->_renderMenu($_menu);
 
@@ -260,6 +258,12 @@ class MenuHelper extends Helper
      */
     protected function _isUrlOnTrail($url)
     {
-        return false; //@TODO
+        $request = $this->_View->request;
+        if (is_array($url)) {
+            if ($url['plugin'] == $request->params['plugin']) {
+                return true;
+            }
+        }
+        return false;
     }
 }

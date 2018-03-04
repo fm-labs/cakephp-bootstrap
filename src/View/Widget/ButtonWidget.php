@@ -22,15 +22,20 @@ class ButtonWidget extends CakeButtonWidget
             $data['class'] = '';
         }
 
+        if ($data['type'] == 'submit') {
+            $data['class'] .= ' primary';
+        }
+
+        $classParts = explode(' ', trim($data['class']));
         $class = array_map(function ($val) {
-            if (in_array($val, ['default', 'success', 'danger', 'info', 'warning', 'link'])) {
+            if (in_array($val, ['default', 'success', 'danger', 'info', 'warning', 'link', 'primary'])) {
                 return 'btn-'.$val;
             }
 
             return $val;
-        }, explode(' ', $data['class']));
+        }, $classParts);
 
-        $class = array_merge(['btn'], $class);
+        array_unshift($class, 'btn');
         $class = array_unique($class);
         $data['class'] = trim(join(' ', $class));
 
