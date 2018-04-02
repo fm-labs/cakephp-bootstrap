@@ -258,12 +258,12 @@ class MenuHelper extends Helper
      */
     protected function _isUrlOnTrail($url)
     {
-        $request = $this->_View->request;
-        if (is_array($url)) {
-            if ($url['plugin'] == $request->params['plugin']) {
-                return true;
-            }
-        }
+//        $request = $this->_View->request;
+//        if (is_array($url)) {
+//            if ($url['plugin'] == $request->params['plugin']) {
+//                return true;
+//            }
+//        }
         return false;
     }
 }
