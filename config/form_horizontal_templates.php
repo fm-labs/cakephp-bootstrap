@@ -1,4 +1,7 @@
 <?php
+// deprectated
+// only kept as backup
+return [];
 return [
     //'input' => 'input type="{{type}}" name="{{name}}"{{attrs}}/>',
     //'select' => '<select name="{{name}}"{{attrs}}>{{content}}</select>',

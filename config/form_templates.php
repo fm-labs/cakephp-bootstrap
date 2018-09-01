@@ -1,4 +1,7 @@
 <?php
+// deprectated
+// only kept as backup
+return [];
 return [
     'button' => '<button{{attrs}}>{{text}}</button>',
     'checkbox' => '<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>',
