@@ -76,7 +76,7 @@ class FormHelper extends CakeFormHelper
             'radio' => '<input type="radio" name="{{name}}" value="{{value}}"{{attrs}}>',
             'radioWrapper' => '{{label}}',
             'textarea' => '<textarea name="{{name}}"{{attrs}}>{{value}}</textarea>',
-            'submitContainer' => '<div class="submit">{{content}}</div>',
+            'submitContainer' => '<div class="form-group"><div class="submit">{{content}}</div></div>',
 
             // Custom
             'inputHidden' => '<input type="hidden" name="{{name}}"{{attrs}} />',
