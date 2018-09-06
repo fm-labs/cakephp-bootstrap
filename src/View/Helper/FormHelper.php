@@ -276,6 +276,23 @@ class FormHelper extends CakeFormHelper
     }
 
     /**
+     * @param string $caption
+     * @param array $options
+     * @return string
+     */
+    public function submit($caption = null, array $options = [])
+    {
+        if (!isset($options['class'])) {
+            $options = $this->addClass($options, 'btn');
+            if (!isset($options['type']) || $options['type'] == 'submit') {
+                $options = $this->addClass($options, 'btn-primary');
+            }
+        }
+
+        return parent::submit($caption, $options);
+    }
+
+    /**
      * @deprecated
      * @param $template
      */
