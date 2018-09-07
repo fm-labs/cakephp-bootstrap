@@ -120,7 +120,9 @@ class FormHelper extends CakeFormHelper
             //'input' => 'input type="{{type}}" name="{{name}}"{{attrs}}/>',
             //'select' => '<select name="{{name}}"{{attrs}}>{{content}}</select>',
 
-            'formGroup' => '<div class="col-sm-3 col-md-3 col-lg-3">{{label}}</div><div class="col-sm-9 col-md-9 col-lg-9">{{input}}</div>',
+            'inputContainerError' => '<div class="form-group has-error input-{{type}}{{required}}">{{content}}</div>',
+
+            'formGroup' => '<div class="col-sm-3 col-md-3 col-lg-3">{{label}}</div><div class="col-sm-9 col-md-9 col-lg-9">{{input}}{{error}}</div>',
 
             'submitContainer' => '<div class="form-group"><div class="col-sm-offset-3 col-md-offset-3 col-lg-offset-3 col-sm-9 col-md-9 col-lg-9"><div class="submit">{{content}}</div></div></div>',
 
