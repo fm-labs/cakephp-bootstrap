@@ -18,6 +18,10 @@ class ButtonWidget extends CakeButtonWidget
      */
     public function render(array $data, ContextInterface $context)
     {
+        $data += [
+            'type' => null,
+        ];
+
         if (!isset($data['class'])) {
             $data['class'] = '';
         }
