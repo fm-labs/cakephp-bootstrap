@@ -77,4 +77,28 @@ class LabelHelper extends BaseHelper
 
         return $label;
     }
+
+    public function success($label, $options = [])
+    {
+        $options['class'] = __FUNCTION__;
+        return $this->create($label, $options);
+    }
+
+    public function danger($label, $options = [])
+    {
+        $options['class'] = __FUNCTION__;
+        return $this->create($label, $options);
+    }
+
+    public function info($label, $options = [])
+    {
+        $options['class'] = __FUNCTION__;
+        return $this->create($label, $options);
+    }
+
+    public function warning($label, $options = [])
+    {
+        $options['class'] = __FUNCTION__;
+        return $this->create($label, $options);
+    }
 }
