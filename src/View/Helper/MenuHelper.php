@@ -174,7 +174,6 @@ class MenuHelper extends Helper
             $attrs = $this->Html->addClass($attrs, $this->_menu['classes']['trailItem']);
         } elseif ($isActive) {
             $attrs = $this->Html->addClass($attrs, $this->_menu['classes']['activeItem']);
-            $item['title'] = sprintf('[%s]', $item['title']);
         }
 
         $submenu = null;
