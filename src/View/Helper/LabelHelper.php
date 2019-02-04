@@ -46,36 +46,34 @@ class LabelHelper extends BaseHelper
             ];
         }
 
-        if (!$label) {
-            $label = (string)$status;
-        }
-
         if (!$class) {
             $class = 'default';
         }
 
-        if (!is_string($status)) {
+        if (is_bool($status)) {
             $status = (int)$status;
         }
 
         if (array_key_exists($status, $map)) {
-            $stat = $map[$status];
-            if (is_string($stat)) {
-                $stat = [$status, $stat];
-            }
-
-            if (is_array($stat) && count($stat) == 2) {
-                list($label, $class) = $stat;
+            $mapped = $map[$status];
+            if (is_string($mapped)) {
+                $label = $mapped;
+            } elseif (is_array($mapped) && count($mapped) == 2) {
+                list($label, $class) = $mapped;
             }
         }
 
-        $label = $this->templater()->format('label', [
+        if (!$label) {
+            $label = (string)$status;
+        }
+
+        $out = $this->templater()->format('label', [
             'class' => $class,
             'label' => $label,
             'attrs' => $this->templater()->formatAttributes($options, ['toggle', 'class', 'label'])
         ]);
 
-        return $label;
+        return $out;
     }
 
     public function success($label, $options = [])
