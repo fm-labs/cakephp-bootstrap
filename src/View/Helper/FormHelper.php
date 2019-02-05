@@ -27,60 +27,59 @@ class FormHelper extends CakeFormHelper
      */
     protected $_templateOriginals = [];
 
-
     /**
      * Default config for the helper.
      *
      * @var array
      */
-    protected $_defaultConfig = [
-        'idPrefix' => null,
-        'errorClass' => 'form-error',
-        'typeMap' => [
-            'string' => 'text', 'datetime' => 'datetime', 'boolean' => 'checkbox',
-            'timestamp' => 'datetime', 'text' => 'textarea', 'time' => 'time',
-            'date' => 'date', 'float' => 'number', 'integer' => 'number',
-            'decimal' => 'number', 'binary' => 'file', 'uuid' => 'string'
-        ],
-        'templates' => [
-            'button' => '<button{{attrs}}>{{text}}</button>',
-            'checkbox' => '<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>',
-            'checkboxFormGroup' => '{{label}}',
-            'checkboxWrapper' => '<div class="checkbox">{{label}}</div>',
-            'dateWidget' => '{{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}',
-            //'error' => '<div class="error-message">{{content}}</div>',
-            'error' => '<span class="help-block">{{content}}</span>',
-            'errorList' => '<ul>{{content}}</ul>',
-            'errorItem' => '<li>{{text}}</li>',
-            'file' => '<input type="file" name="{{name}}"{{attrs}}>',
-            'fieldset' => '<fieldset{{attrs}}>{{content}}</fieldset>',
-            'formStart' => '<form{{attrs}}>',
-            'formEnd' => '</form>',
-            'formGroup' => '{{label}}{{input}}',
-            'hiddenBlock' => '<div style="display:none;">{{content}}</div>',
-            'input' => '<input type="{{type}}" name="{{name}}"{{attrs}}/>',
-            'inputSubmit' => '<input type="{{type}}"{{attrs}}/>',
-            //'inputContainer' => '<div class="input {{type}}{{required}}">{{content}}</div>',
-            'inputContainer' => '<div class="form-group input-{{type}}{{required}}">{{content}}</div>',
-            //'inputContainerError' => '<div class="input {{type}}{{required}} error">{{content}}{{error}}</div>',
-            'inputContainerError' => '<div class="form-group has-error input-{{type}}{{required}}">{{content}}{{error}}</div>',
-            'label' => '<label{{attrs}}>{{text}}</label>',
-            'nestingLabel' => '{{hidden}}<label{{attrs}}>{{input}}{{text}}</label>',
-            'legend' => '<legend>{{text}}</legend>',
-            'multicheckboxTitle' => '<legend>{{text}}</legend>',
-            'multicheckboxWrapper' => '<fieldset{{attrs}}>{{content}}</fieldset>',
-            'option' => '<option value="{{value}}"{{attrs}}>{{text}}</option>',
-            'optgroup' => '<optgroup label="{{label}}"{{attrs}}>{{content}}</optgroup>',
-            'select' => '<select name="{{name}}"{{attrs}}>{{content}}</select>',
-            'selectMultiple' => '<select name="{{name}}[]" multiple="multiple"{{attrs}}>{{content}}</select>',
-            'radio' => '<input type="radio" name="{{name}}" value="{{value}}"{{attrs}}>',
-            'radioWrapper' => '{{label}}',
-            'textarea' => '<textarea name="{{name}}"{{attrs}}>{{value}}</textarea>',
-            'submitContainer' => '<div class="form-group"><div class="submit">{{content}}</div></div>',
-
-            // Custom
-            'inputHidden' => '<input type="hidden" name="{{name}}"{{attrs}} />',
-
+//    protected $_defaultConfig = [
+//        'idPrefix' => null,
+//        'errorClass' => 'form-error',
+//        'typeMap' => [
+//            'string' => 'text', 'datetime' => 'datetime', 'boolean' => 'checkbox',
+//            'timestamp' => 'datetime', 'text' => 'textarea', 'time' => 'time',
+//            'date' => 'date', 'float' => 'number', 'integer' => 'number',
+//            'decimal' => 'number', 'binary' => 'file', 'uuid' => 'string'
+//        ],
+//        'templates' => [
+//            'button' => '<button{{attrs}}>{{text}}</button>',
+//            'checkbox' => '<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>',
+//            'checkboxFormGroup' => '{{label}}',
+//            'checkboxWrapper' => '<div class="checkbox">{{label}}</div>',
+//            'dateWidget' => '{{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}',
+//            //'error' => '<div class="error-message">{{content}}</div>',
+//            'errorList' => '<ul>{{content}}</ul>',
+//            'errorItem' => '<li>{{text}}</li>',
+//            'file' => '<input type="file" name="{{name}}"{{attrs}}>',
+//            'fieldset' => '<fieldset{{attrs}}>{{content}}</fieldset>',
+//            'formStart' => '<form{{attrs}}>',
+//            'formEnd' => '</form>',
+//            'formGroup' => '{{label}}{{input}}',
+//            'hiddenBlock' => '<div style="display:none;">{{content}}</div>',
+//            'input' => '<input type="{{type}}" name="{{name}}"{{attrs}}/>',
+//            'inputSubmit' => '<input type="{{type}}"{{attrs}}/>',
+//            //'inputContainer' => '<div class="input {{type}}{{required}}">{{content}}</div>',
+//            //'inputContainerError' => '<div class="input {{type}}{{required}} error">{{content}}{{error}}</div>',
+//            'label' => '<label{{attrs}}>{{text}}</label>',
+//            'nestingLabel' => '{{hidden}}<label{{attrs}}>{{input}}{{text}}</label>',
+//            'legend' => '<legend>{{text}}</legend>',
+//            'multicheckboxTitle' => '<legend>{{text}}</legend>',
+//            'multicheckboxWrapper' => '<fieldset{{attrs}}>{{content}}</fieldset>',
+//            'option' => '<option value="{{value}}"{{attrs}}>{{text}}</option>',
+//            'optgroup' => '<optgroup label="{{label}}"{{attrs}}>{{content}}</optgroup>',
+//            'select' => '<select name="{{name}}"{{attrs}}>{{content}}</select>',
+//            'selectMultiple' => '<select name="{{name}}[]" multiple="multiple"{{attrs}}>{{content}}</select>',
+//            'radio' => '<input type="radio" name="{{name}}" value="{{value}}"{{attrs}}>',
+//            'radioWrapper' => '{{label}}',
+//            'textarea' => '<textarea name="{{name}}"{{attrs}}>{{value}}</textarea>',
+//            'submitContainer' => '<div class="form-group"><div class="submit">{{content}}</div></div>',
+//
+//            // Custom
+//            'inputHidden' => '<input type="hidden" name="{{name}}"{{attrs}} />',
+//            'inputContainer' => '<div class="form-group input-{{type}}{{required}}">{{content}}</div>',
+//            'inputContainerError' => '<div class="form-group has-error input-{{type}}{{required}}">{{content}}{{error}}</div>',
+//            'error' => '<span class="help-block">{{content}}</span>',
+//
 
 // Original templates as of CakePHP 3.3
 //            'button' => '<button{{attrs}}>{{text}}</button>',
@@ -114,9 +113,54 @@ class FormHelper extends CakeFormHelper
 //            'radioWrapper' => '{{label}}',
 //            'textarea' => '<textarea name="{{name}}"{{attrs}}>{{value}}</textarea>',
 //            'submitContainer' => '<div class="submit">{{content}}</div>',
-        ],
+//        ],
+//
+//        'templatesHorizontal' => [
+//            //'input' => 'input type="{{type}}" name="{{name}}"{{attrs}}/>',
+//            //'select' => '<select name="{{name}}"{{attrs}}>{{content}}</select>',
+//
+//            'inputContainerError' => '<div class="form-group has-error input-{{type}}{{required}}">{{content}}</div>',
+//
+//            'formGroup' => '<div class="col-sm-3 col-md-3 col-lg-3">{{label}}</div><div class="col-sm-9 col-md-9 col-lg-9">{{input}}{{error}}</div>',
+//
+//            'submitContainer' => '<div class="form-group"><div class="col-sm-offset-3 col-md-offset-3 col-lg-offset-3 col-sm-9 col-md-9 col-lg-9"><div class="submit">{{content}}</div></div></div>',
+//
+//            'checkbox' => '<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>',
+//            'checkboxFormGroup' => '{{label}}',
+//            'checkboxWrapper' => '<div class="checkbox-wrapper">{{label}}</div>',
+//            'nestingLabel' => '<div class="col-sm-3 col-md-3 col-lg-3">{{hidden}}<label{{attrs}}>{{text}}</label></div><div class="col-sm-9 col-md-9 col-lg-9">{{input}}</div>',
+//
+//            'radioContainer' => '<div class="form-group input-radio">{{content}}',
+//            'radioFormGroup' => '{{label}}<div class="col-sm-9 col-md-9 col-lg-9">{{input}}</div>',
+//            'radioWrapper' => '<div class="radio">{{label}}</div>',
+//
+//            'multicheckboxContainer' => '<div class="form-group {{required}}">{{content}}</div>',
+//            'multicheckboxFormGroup' => '{{label}}<div class="multicheckbox-formgroup col-sm-9 col-md-9 col-lg-9">{{input}}</div>'
+//        ]
+//    ];
 
-        'templatesHorizontal' => [
+    /**
+     * @param View $View The view
+     * @param array $config Helper config
+     */
+    public function __construct(View $View, array $config = [])
+    {
+        $this->_defaultWidgets['button'] = ['Bootstrap\View\Widget\ButtonWidget'];
+        $this->_defaultWidgets['textarea'] = ['Bootstrap\View\Widget\TextareaWidget'];
+        $this->_defaultWidgets['datalist'] = ['Bootstrap\View\Widget\DatalistWidget'];
+        $this->_defaultWidgets['hidden'] = ['Bootstrap\View\Widget\HiddenWidget'];
+        $this->_defaultWidgets['_default'] = ['Bootstrap\View\Widget\BasicWidget', 'datalist'];
+
+        // custom
+        $this->_defaultConfig['templates']['inputHidden'] = '<input type="hidden" name="{{name}}"{{attrs}} />';
+        //overrides
+        $this->_defaultConfig['templates']['inputHidden'] = '<input type="hidden" name="{{name}}"{{attrs}} />';
+        $this->_defaultConfig['templates']['inputContainer'] = '<div class="form-group input-{{type}}{{required}}">{{content}}</div>';
+        $this->_defaultConfig['templates']['inputContainerError'] = '<div class="form-group has-error input-{{type}}{{required}}">{{content}}{{error}}</div>';
+        $this->_defaultConfig['templates']['error'] = '<span class="help-block">{{content}}</span>';
+
+        // horizontal
+        $this->_defaultConfig['templatesHorizontal'] = [
             //'input' => 'input type="{{type}}" name="{{name}}"{{attrs}}/>',
             //'select' => '<select name="{{name}}"{{attrs}}>{{content}}</select>',
 
@@ -137,46 +181,8 @@ class FormHelper extends CakeFormHelper
 
             'multicheckboxContainer' => '<div class="form-group {{required}}">{{content}}</div>',
             'multicheckboxFormGroup' => '{{label}}<div class="multicheckbox-formgroup col-sm-9 col-md-9 col-lg-9">{{input}}</div>'
-        ]
-    ];
+        ];
 
-    /**
-     * Default widgets
-     *
-     * @var array
-     */
-    protected $_defaultWidgets = [
-        // bootstrap cake-default overrides
-        'button' => ['Bootstrap\View\Widget\ButtonWidget'],
-        'textarea' => ['Bootstrap\View\Widget\TextareaWidget'],
-        '_default' => ['Bootstrap\View\Widget\BasicWidget', 'datalist'],
-
-        // bootstrap widgets
-        'datalist' => ['Bootstrap\View\Widget\DatalistWidget'],
-        'hidden' => ['Bootstrap\View\Widget\HiddenWidget'],
-
-        // cake-default
-        'checkbox' => ['Checkbox'],
-        'file' => ['File'],
-        'label' => ['Label'],
-        'nestingLabel' => ['NestingLabel'],
-        'multicheckbox' => ['MultiCheckbox', 'nestingLabel'],
-        'radio' => ['Radio', 'nestingLabel'],
-        'select' => ['SelectBox'],
-        'datetime' => ['DateTime', 'select'],
-        //'textarea' => ['Textarea'],
-        //'button' => ['Button'],
-        //'_default' => ['Basic'],
-
-    ];
-
-
-    /**
-     * @param View $View
-     * @param array $config
-     */
-    public function __construct(View $View, array $config = [])
-    {
         parent::__construct($View, $config);
     }
 
@@ -187,7 +193,6 @@ class FormHelper extends CakeFormHelper
      */
     public function create($model = null, array $options = [])
     {
-
         $this->_horizontal = self::$useHorizontal;
         if (isset($options['horizontal'])) {
             $this->_horizontal = $options['horizontal'];
@@ -201,7 +206,6 @@ class FormHelper extends CakeFormHelper
 
         return parent::create($model, $options);
     }
-
 
 //    /**
 //     * Load custom override templates
