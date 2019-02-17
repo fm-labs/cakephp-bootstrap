@@ -112,7 +112,6 @@ class UiHelper extends Helper
         return $this->Label->status($status, $options, $map);
     }
 
-
     /**
      * @param $class
      * @param array $options

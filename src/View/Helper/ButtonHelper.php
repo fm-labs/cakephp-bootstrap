@@ -40,7 +40,6 @@ class ButtonHelper extends BaseHelper
             'split' => null, 'dropdown' => null
         ];
 
-
         $options += $defaultOptions;
         $options = $this->Html->addClass($options, 'btn');
         $options = $this->Html->addClass($options, $this->_mapTypeClass($options['type'], 'btn'));
@@ -54,13 +53,12 @@ class ButtonHelper extends BaseHelper
         $btnAttrs = $this->templater()->formatAttributes($options, ['class', 'icon', 'size', 'type', 'url', 'dropdown', 'split']);
 
         if (is_array($options['dropdown'])) {
-
             $ddHtml = "";
             foreach ($options['dropdown'] as $ddItem) {
                 $title = $url = $attrs = null;
                 extract($ddItem, EXTR_IF_EXISTS);
                 $ddHtml .= $this->templater()->format('buttonDropdownItem', [
-                    'link' => $this->Html->link($title, $url, (array) $attrs)
+                    'link' => $this->Html->link($title, $url, (array)$attrs)
                 ]);
             }
 
@@ -77,6 +75,7 @@ class ButtonHelper extends BaseHelper
                     'dropdown' => $ddHtml,
                     'attrs' => $btnAttrs
                 ]);
+
                 return $this->group($btn . $btndd);
             }
 
@@ -87,6 +86,7 @@ class ButtonHelper extends BaseHelper
                 'dropdown' => $ddHtml,
                 'attrs' => $btnAttrs
             ]);
+
             return $this->group($btn);
         }
 
@@ -136,31 +136,35 @@ class ButtonHelper extends BaseHelper
     public function link($title, $url, array $options = [])
     {
         $options += ['url' => $url];
+
         return $this->create($title, $options);
     }
 
     public function primary($label, array $options)
     {
         $options += ['type' => 'primary'];
+
         return $this->create($label, $options);
     }
 
     public function info($label, array $options)
     {
         $options += ['type' => 'info'];
+
         return $this->create($label, $options);
     }
 
     public function warning($label, array $options)
     {
         $options += ['type' => 'warning'];
+
         return $this->create($label, $options);
     }
 
     public function danger($label, array $options)
     {
         $options += ['type' => 'danger'];
+
         return $this->create($label, $options);
     }
-
 }

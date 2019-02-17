@@ -27,19 +27,25 @@ abstract class BaseHelper extends Helper
     {
         switch ($type) {
             case "success":
-                $type = "success"; break;
+                $type = "success";
+                break;
             case "error":
             case "danger":
-                $type = "danger"; break;
+                $type = "danger";
+                break;
             case "warn":
             case "warning":
-                $type = "warning"; break;
+                $type = "warning";
+                break;
             case "info":
-                $type = "info"; break;
+                $type = "info";
+                break;
             case "primary":
-                $type = "primary"; break;
+                $type = "primary";
+                break;
             default:
-                $type = ($type === null) ? "default" : $type; break;
+                $type = ($type === null) ? "default" : $type;
+                break;
                 break;
         }
 

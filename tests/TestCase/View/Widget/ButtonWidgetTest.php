@@ -24,7 +24,6 @@ class ButtonWidgetTest extends TestCase
      */
     public $context;
 
-
     /**
      * {@inheritDoc}
      */
