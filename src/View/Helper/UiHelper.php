@@ -44,9 +44,9 @@ class UiHelper extends Helper
     ];
 
     /**
-     * @param $title
-     * @param $url
-     * @param array $options
+     * @param string $title Title
+     * @param string|array $url URL
+     * @param array $options Additional options
      * @return string
      */
     public function button($title, $url, array $options = [])
@@ -55,9 +55,9 @@ class UiHelper extends Helper
     }
 
     /**
-     * @param $title
-     * @param null $url
-     * @param array $options
+     * @param string $title Title
+     * @param string|array $url URL
+     * @param array $options Additional options
      * @return string
      */
     public function link($title, $url = null, array $options = [])
@@ -73,9 +73,9 @@ class UiHelper extends Helper
     }
 
     /**
-     * @param $title
-     * @param null $url
-     * @param array $options
+     * @param string $title Title
+     * @param string|array $url URL
+     * @param array $options Additional options
      * @return string
      */
     public function postLink($title, $url = null, array $options = [])
@@ -91,9 +91,9 @@ class UiHelper extends Helper
     }
 
     /**
-     * @param $title
-     * @param null $url
-     * @param array $options
+     * @param string $title Title
+     * @param string|array $url URL
+     * @param array $options Additional options
      * @return string
      */
     public function deleteLink($title, $url = null, array $options = [])
@@ -102,9 +102,9 @@ class UiHelper extends Helper
     }
 
     /**
-     * @param $status
-     * @param array $options
-     * @param array $map
+     * @param string|int $status Status value
+     * @param array $options Additional options
+     * @param array $map Status map
      * @return null|string
      */
     public function statusLabel($status, $options = [], $map = [])
@@ -113,8 +113,8 @@ class UiHelper extends Helper
     }
 
     /**
-     * @param $class
-     * @param array $options
+     * @param string $class Icon class
+     * @param array $options Additional options
      * @return null|string
      */
     public function icon($class, $options = [])
@@ -123,10 +123,10 @@ class UiHelper extends Helper
     }
 
     /**
-     * @param array $menuList
-     * @param array $menuOptions
-     * @param array $childMenuOptions
-     * @param array $itemOptions
+     * @param array $menuList List of menu items
+     * @param array $menuOptions Menu options
+     * @param array $childMenuOptions Child menu options
+     * @param array $itemOptions Item options
      * @return null|string
      */
     public function menu($menuList = [], $menuOptions = [], $childMenuOptions = [], $itemOptions = [])
@@ -155,9 +155,9 @@ class UiHelper extends Helper
     }
 
     /**
-     * @param array $item
-     * @param array $childMenuOptions
-     * @param array $itemOptions
+     * @param array $item Menu item
+     * @param array $childMenuOptions Child menu options
+     * @param array $itemOptions Item options
      * @return null|string
      */
     public function menuItem(array $item = [], array $childMenuOptions = [], array $itemOptions = [])

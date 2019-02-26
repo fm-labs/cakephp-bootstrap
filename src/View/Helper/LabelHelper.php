@@ -27,9 +27,9 @@ class LabelHelper extends BaseHelper
     }
 
     /**
-     * @param $status
-     * @param array $options
-     * @param array $map
+     * @param string|int $status Status value
+     * @param array $options Additional options
+     * @param array $map Status map
      * @return null|string
      */
     public function status($status, $options = [], $map = [])
@@ -41,8 +41,8 @@ class LabelHelper extends BaseHelper
 
         if (empty($map)) {
             $map = [
-                0 => [__('No'), 'danger'],
-                1 => [__('Yes'), 'success']
+                0 => [__('No'), 'default'],
+                1 => [__('Yes'), 'primary']
             ];
         }
 

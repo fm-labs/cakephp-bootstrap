@@ -140,8 +140,7 @@ class FormHelper extends CakeFormHelper
 //    ];
 
     /**
-     * @param View $View The view
-     * @param array $config Helper config
+     * {@inheritDoc}
      */
     public function __construct(View $View, array $config = [])
     {
@@ -152,12 +151,12 @@ class FormHelper extends CakeFormHelper
         $this->_defaultWidgets['_default'] = ['Bootstrap\View\Widget\BasicWidget', 'datalist'];
 
         // custom
-        $this->_defaultConfig['templates']['inputHidden'] = '<input type="hidden" name="{{name}}"{{attrs}} />';
+        $this->_defaultConfig['templates']['help'] = '<span class="control-help help-block">{{content}}</span>';
         //overrides
         $this->_defaultConfig['templates']['inputHidden'] = '<input type="hidden" name="{{name}}"{{attrs}} />';
         $this->_defaultConfig['templates']['inputContainer'] = '<div class="form-group input-{{type}}{{required}}">{{content}}</div>';
         $this->_defaultConfig['templates']['inputContainerError'] = '<div class="form-group has-error input-{{type}}{{required}}">{{content}}{{error}}</div>';
-        $this->_defaultConfig['templates']['error'] = '<span class="help-block">{{content}}</span>';
+        $this->_defaultConfig['templates']['error'] = '<span class="control-error help-block">{{content}}</span>';
 
         // horizontal
         $this->_defaultConfig['templatesHorizontal'] = [
@@ -166,7 +165,7 @@ class FormHelper extends CakeFormHelper
 
             'inputContainerError' => '<div class="form-group has-error input-{{type}}{{required}}">{{content}}</div>',
 
-            'formGroup' => '<div class="col-sm-3 col-md-3 col-lg-3">{{label}}</div><div class="col-sm-9 col-md-9 col-lg-9">{{input}}{{error}}</div>',
+            'formGroup' => '<div class="col-sm-3 col-md-3 col-lg-3">{{label}}{{help}}</div><div class="col-sm-9 col-md-9 col-lg-9">{{input}}{{error}}</div>',
 
             'submitContainer' => '<div class="form-group"><div class="col-sm-offset-3 col-md-offset-3 col-lg-offset-3 col-sm-9 col-md-9 col-lg-9"><div class="submit">{{content}}</div></div></div>',
 
@@ -187,9 +186,7 @@ class FormHelper extends CakeFormHelper
     }
 
     /**
-     * @param null $model
-     * @param array $options
-     * @return string
+     * {@inheritDoc}
      */
     public function create($model = null, array $options = [])
     {
@@ -242,8 +239,7 @@ class FormHelper extends CakeFormHelper
 //    }
 
     /**
-     * @param array $secureAttributes
-     * @return string
+     * {@inheritDoc}
      */
     public function end(array $secureAttributes = [])
     {
@@ -253,15 +249,15 @@ class FormHelper extends CakeFormHelper
     }
 
     /**
-     * @param string $fieldName
-     * @param null $text
-     * @param array $options
+     * @param string $fieldName Field name
+     * @param null $text Label text
+     * @param array $options Additional options
      * @return string
      */
     public function label($fieldName, $text = null, array $options = [])
     {
         if ($this->_horizontal /*&& !isset($options['input'])*/) {
-        //    $options = $this->addClass($options, 'col-sm-3');
+            //    $options = $this->addClass($options, 'col-sm-3');
             $options = $this->addClass($options, 'control-label');
         }
 
@@ -269,8 +265,8 @@ class FormHelper extends CakeFormHelper
     }
 
     /**
-     * @param string $fieldName
-     * @param array $options
+     * @param string $fieldName Field name
+     * @param array $options Control options
      * @return string
      */
     public function input($fieldName, array $options = [])
@@ -278,12 +274,31 @@ class FormHelper extends CakeFormHelper
         if ($this->_horizontal) {
         }
 
+        if (isset($options['help'])) {
+            $templateVars = (isset($options['templateVars'])) ? $options['templateVars'] : [];
+            $templateVars['help'] = $this->helpText($fieldName, $options['help']);
+            $options['templateVars'] = $templateVars;
+            unset($options['help']);
+        }
+
         return parent::input($fieldName, $options);
     }
 
     /**
-     * @param string $caption
-     * @param array $options
+     * @param string $fieldName Field name
+     * @param string $content Help text
+     * @return string
+     */
+    public function helpText($fieldName, $content = "")
+    {
+        return $this->templater()->format('help', [
+            'content' => $content
+        ]);
+    }
+
+    /**
+     * @param string $caption Caption
+     * @param array $options Control options
      * @return string
      */
     public function submit($caption = null, array $options = [])
@@ -299,8 +314,9 @@ class FormHelper extends CakeFormHelper
     }
 
     /**
+     * @param string $template Template name
+     * @return void
      * @deprecated
-     * @param $template
      */
     protected function _swapTemplate($template)
     {
@@ -314,8 +330,9 @@ class FormHelper extends CakeFormHelper
     }
 
     /**
+     * @param string $template Template name
+     * @return void
      * @deprecated
-     * @param $template
      */
     protected function _restoreTemplate($template)
     {
@@ -326,6 +343,7 @@ class FormHelper extends CakeFormHelper
     }
 
     /**
+     * @return void
      * @deprecated
      */
     protected function _restoreAllTemplates()
