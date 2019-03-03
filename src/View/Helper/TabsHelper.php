@@ -9,6 +9,7 @@ use Cake\View\Helper;
  * Class TabsHelper
  * @package Bootstrap\View\Helper
  *
+ * @property \Cake\View\Helper\HtmlHelper $Html
  * @TODO Refactor with StringTemplater
  */
 class TabsHelper extends Helper
@@ -40,7 +41,8 @@ class TabsHelper extends Helper
     protected $_tabId;
 
     /**
-     * @param array $options
+     * @param array $options Tabs options
+     * @return void
      */
     public function create($options = [])
     {
@@ -49,7 +51,8 @@ class TabsHelper extends Helper
     }
 
     /**
-     * @param array $options
+     * @param array $options Tabs options
+     * @return void
      * @deprecated Use create() instead.
      */
     public function start($options = [])
@@ -58,8 +61,11 @@ class TabsHelper extends Helper
     }
 
     /**
-     * @param $title
-     * @param array $params
+     * Start a new tab block
+     *
+     * @param string $title Tab title
+     * @param array $params Additional tab params
+     * @return void
      */
     public function add($title, $params = [])
     {
@@ -75,7 +81,9 @@ class TabsHelper extends Helper
     }
 
     /**
+     * Close active tab block
      *
+     * @return void
      */
     public function end()
     {
@@ -95,7 +103,7 @@ class TabsHelper extends Helper
 
         $debugEnabled = Configure::read('debug');
         $tabs = "";
-        $js = "";
+        //$js = "";
         $menuItems = "";
 
         // render tab menu
