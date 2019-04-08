@@ -2,14 +2,12 @@
 namespace Bootstrap\View\Helper;
 
 use Cake\View\Helper;
-use Cake\View\View;
 
 /**
  * Bootstrap helper
  */
 class BootstrapHelper extends Helper
 {
-
     /**
      * Default configuration.
      *
@@ -17,12 +15,14 @@ class BootstrapHelper extends Helper
      */
     protected $_defaultConfig = [];
 
+    public $helpers = ['Html', 'Form' => ['className' => 'Bootstrap.Form']];
+
     /**
      * {@inheritDoc}
      */
     public function initialize(array $config)
     {
-        //$this->_View->Html->css();
-        //$this->_View->Html->script();
+        $this->_View->Html->css('Bootstrap.bootstrap.min', ['block' => true]);
+        $this->_View->Html->script('Bootstrap.bootstrap.min', ['block' => true]);
     }
 }

@@ -20,6 +20,11 @@ class FormHelper extends CakeFormHelper
     /**
      * @var bool
      */
+    static public $useNovalidate = false;
+
+    /**
+     * @var bool
+     */
     protected $_horizontal;
 
     /**
@@ -200,6 +205,8 @@ class FormHelper extends CakeFormHelper
             $options = $this->addClass($options, 'form-horizontal');
             $options['templates'] = $this->config('templatesHorizontal');
         }
+
+        $options['novalidate'] = !self::$useNovalidate;
 
         return parent::create($model, $options);
     }
