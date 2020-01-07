@@ -158,6 +158,7 @@ class FormHelper extends CakeFormHelper
         // custom
         $this->_defaultConfig['templates']['help'] = '<span class="control-help help-block">{{content}}</span>';
         //overrides
+        $this->_defaultConfig['templates']['label'] = '<label class="control-label"{{attrs}}>{{text}}</label>';
         $this->_defaultConfig['templates']['inputHidden'] = '<input type="hidden" name="{{name}}"{{attrs}} />';
         $this->_defaultConfig['templates']['inputContainer'] = '<div class="form-group input-{{type}}{{required}}">{{content}}</div>';
         $this->_defaultConfig['templates']['inputContainerError'] = '<div class="form-group has-error input-{{type}}{{required}}">{{content}}{{error}}</div>';
@@ -175,16 +176,15 @@ class FormHelper extends CakeFormHelper
             'submitContainer' => '<div class="form-group"><div class="col-sm-offset-3 col-md-offset-3 col-lg-offset-3 col-sm-9 col-md-9 col-lg-9"><div class="submit">{{content}}</div></div></div>',
 
             'checkbox' => '<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>',
-            'checkboxFormGroup' => '{{label}}',
+            'checkboxFormGroup' => '<div class="col-sm-3 col-md-3 col-lg-3">{{label}}</div><div class="col-sm-9 col-md-9 col-lg-9">{{input}}{{help}}{{error}}</div>',
             'checkboxWrapper' => '<div class="checkbox-wrapper">{{label}}</div>',
-            'nestingLabel' => '<div class="col-sm-3 col-md-3 col-lg-3">{{hidden}}<label{{attrs}}>{{text}}</label></div><div class="col-sm-9 col-md-9 col-lg-9">{{input}}</div>',
+            //'nestingLabel' => '<div class="col-sm-3 col-md-3 col-lg-3"><div class="control-label">{{text}}</div></div><div class="col-sm-9 col-md-9 col-lg-9">{{input}}</div>',
+            //'nestingLabel' => '<div class="col-sm-3 col-md-3 col-lg-3"><div class="control-label">{{text}}</div></div><div class="col-sm-9 col-md-9 col-lg-9">{{input}}</div>',
+            'nestingLabel' => '{{hidden}}<label{{attrs}}>{{input}}{{text}}</label>',
 
             'radioContainer' => '<div class="form-group input-radio">{{content}}',
             'radioFormGroup' => '{{label}}<div class="col-sm-9 col-md-9 col-lg-9">{{input}}</div>',
             'radioWrapper' => '<div class="radio">{{label}}</div>',
-
-            'multicheckboxContainer' => '<div class="form-group {{required}}">{{content}}</div>',
-            'multicheckboxFormGroup' => '{{label}}<div class="multicheckbox-formgroup col-sm-9 col-md-9 col-lg-9">{{input}}</div>'
         ];
 
         parent::__construct($View, $config);
@@ -265,7 +265,7 @@ class FormHelper extends CakeFormHelper
     {
         if ($this->_horizontal /*&& !isset($options['input'])*/) {
             //    $options = $this->addClass($options, 'col-sm-3');
-            $options = $this->addClass($options, 'control-label');
+            //$options = $this->addClass($options, 'control-label');
         }
 
         return parent::label($fieldName, $text, $options);
@@ -289,6 +289,18 @@ class FormHelper extends CakeFormHelper
         }
 
         return parent::input($fieldName, $options);
+    }
+
+    protected function _magicOptions($fieldName, $options, $allowOverride)
+    {
+        $options = parent::_magicOptions($fieldName, $options, $allowOverride);
+
+        // we do not want a nested input for 'checkbox' controls by default
+        if ($options['type'] == 'checkbox' && !isset($options['nestedInput'])) {
+            $options['nestedInput'] = false;
+        }
+
+        return $options;
     }
 
     /**

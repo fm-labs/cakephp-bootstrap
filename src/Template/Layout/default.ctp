@@ -1,4 +1,3 @@
-<?php //$this->loadHelper('Bootstrap.Bootstrap'); ?>
 <!DOCTYPE html>
 <html lang="<?= Cake\I18n\I18n::locale(); ?>">
 <head>
@@ -13,20 +12,22 @@
     <?= $this->fetch('headjs') ?>
 </head>
 <body>
-<header>
-</header>
-<div id="page">
-    <div id="flash" class="container">
-        <?= $this->Flash->render(); ?>
-        <?= $this->Flash->render('auth'); ?>
-        <?= $this->fetch('flash') ?>
+    <div id="page">
+        <header id="header" class="container">
+            <?= $this->fetch('header') ?>
+        </header>
+        <div id="flash" class="container">
+            <?= $this->Flash->render(); ?>
+            <?= $this->Flash->render('auth'); ?>
+            <?= $this->fetch('flash') ?>
+        </div>
+        <main id="content" class="container">
+            <?= $this->fetch('content') ?>
+        </main>
+        <footer id="footer" class="container">
+            <?= $this->fetch('footer') ?>
+        </footer>
     </div>
-    <main id="content" class="container">
-        <?= $this->fetch('content') ?>
-    </main>
-    <footer class="container">
-    </footer>
-</div>
-<?= $this->fetch('script') ?>
+    <?= $this->fetch('script') ?>
 </body>
 </html>

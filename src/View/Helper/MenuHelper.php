@@ -56,7 +56,7 @@ class MenuHelper extends Helper
     {
         $menu += ['title' => null, 'class' => null, 'items' => null, 'trail' => true, 'active' => true, 'template' => null, 'templates' => [], 'classes' => []];
 
-        $defaultClasses =  [
+        $defaultClasses = [
             'menu' => '',
             'submenuItem' => '',
             'submenu' => '',
@@ -143,7 +143,7 @@ class MenuHelper extends Helper
      * @return null|string
      * @todo refactor with options argument to override option params per item
      */
-    protected function _renderItem(MenuItem $item)
+    protected function _renderItem(/*MenuItem */$item)
     {
         //$item += ['title' => null, 'url' => null, 'children' => null];
 
@@ -152,9 +152,8 @@ class MenuHelper extends Helper
         //    $item['children'] = $item['_children'];
         //    unset($item['_children']);
         //}
-
         $template = 'navListItem';
-        $hasChildren = (count($item['children']) > 0) ? true : false;
+        $hasChildren = (isset($item['children']) && count($item['children']) > 0) ? true : false;
 
         $url = $this->_getItemUrl($item);
 
