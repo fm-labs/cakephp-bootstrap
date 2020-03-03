@@ -153,7 +153,7 @@ class MenuHelper extends Helper
         //    unset($item['_children']);
         //}
         $template = 'navListItem';
-        $hasChildren = (isset($item['children']) && count($item['children']) > 0) ? true : false;
+        $hasChildren = (isset($item['children']) && is_array($item['children']) && count($item['children']) > 0) ? true : false;
 
         $url = $this->_getItemUrl($item);
 
