@@ -63,7 +63,7 @@ trait ContentBlockHelperTrait
         //debug("End ContentBlock " . $this->_blockActive);
         $this->_View->Blocks->end();
         $content = $this->_blocks[$this->_blockActive] = $this->_View->Blocks->get($this->_blockId);
-        $this->_View->Blocks->set($this->_blockId, null);
+        $this->_View->assign($this->_blockId, null);
         $this->_blockActive = null;
         $this->_blockId = null;
 

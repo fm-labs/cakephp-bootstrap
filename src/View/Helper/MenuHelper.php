@@ -98,7 +98,7 @@ class MenuHelper extends Helper
     public function render()
     {
         if (!$this->_menu || !$this->_menu['items']) {
-            return 'No Menu';
+            return '';
         }
 
         return $this->_renderMenu($this->_menu);
@@ -132,7 +132,11 @@ class MenuHelper extends Helper
     {
         $html = "";
         foreach ($items as $item) {
-            $html .= $this->_renderItem($item);
+            try {
+                $html .= $this->_renderItem($item);
+            } catch (\Exception $ex) {
+                debug($ex->getMessage());
+            }
         }
 
         return $html;
@@ -153,7 +157,7 @@ class MenuHelper extends Helper
         //    unset($item['_children']);
         //}
         $template = 'navListItem';
-        $hasChildren = (isset($item['children']) && is_array($item['children']) && count($item['children']) > 0) ? true : false;
+        $hasChildren = (isset($item['children']) && count($item['children']) > 0) ? true : false;
 
         $url = $this->_getItemUrl($item);
 
@@ -247,7 +251,7 @@ class MenuHelper extends Helper
      */
     protected function _isActiveUrl($url)
     {
-        return (Router::normalize($url) === Router::normalize($this->_View->request->url));
+        return (Router::normalize($url) === Router::normalize($this->_View->request->getPath()));
     }
 
     /**
@@ -258,7 +262,7 @@ class MenuHelper extends Helper
     {
 //        $request = $this->_View->request;
 //        if (is_array($url)) {
-//            if ($url['plugin'] == $request->params['plugin']) {
+//            if ($url['plugin'] == $request->getParam('plugin')) {
 //                return true;
 //            }
 //        }

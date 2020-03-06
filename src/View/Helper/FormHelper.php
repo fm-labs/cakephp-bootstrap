@@ -203,7 +203,7 @@ class FormHelper extends CakeFormHelper
 
         if ($this->_horizontal === true) {
             $options = $this->addClass($options, 'form-horizontal');
-            $options['templates'] = $this->config('templatesHorizontal');
+            $options['templates'] = $this->getConfig('templatesHorizontal');
         }
 
         $options['novalidate'] = !self::$useNovalidate;
@@ -216,7 +216,7 @@ class FormHelper extends CakeFormHelper
 //     */
 //    protected function _loadCustomTemplates()
 //    {
-//        $templates = $this->config('templatesCustom');
+//        $templates = $this->getConfig('templatesCustom');
 //        if (!$templates) {
 //            return;
 //        }
@@ -233,7 +233,7 @@ class FormHelper extends CakeFormHelper
 //     */
 //    protected function _loadHorizontalTemplates()
 //    {
-//        $templates = $this->config('templatesHorizontal');
+//        $templates = $this->getConfig('templatesHorizontal');
 //        if (!$templates) {
 //            return;
 //        }

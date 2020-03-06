@@ -157,7 +157,7 @@ class PanelHelper extends Helper
             $this->_contents[$this->_currentBlock] = $content;
         }
 
-        $this->_View->Blocks->set($blockId, null);
+        $this->_View->assign($blockId, null);
         $this->_currentBlock = null;
     }
 
