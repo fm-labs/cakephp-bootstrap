@@ -251,7 +251,7 @@ class MenuHelper extends Helper
      */
     protected function _isActiveUrl($url)
     {
-        return (Router::normalize($url) === Router::normalize($this->_View->request->getPath()));
+        return (Router::normalize($url) === Router::normalize($this->getView()->getRequest()->getPath()));
     }
 
     /**
