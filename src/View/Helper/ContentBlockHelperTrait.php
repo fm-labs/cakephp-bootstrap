@@ -32,9 +32,8 @@ trait ContentBlockHelperTrait
      * Start content block
      *
      * @param string $block
-     * @param string $mode
      */
-    public function start($block = 'body', $mode = ViewBlock::OVERRIDE)
+    public function start($block = 'body')
     {
         //debug("Start ContentBlock " . $block);
         if ($this->_blockActive) {
@@ -45,7 +44,7 @@ trait ContentBlockHelperTrait
         $namespace = (isset($this->_blockNamespace)) ? $this->_blockNamespace : uniqid('block');
 
         $this->_blockId = $namespace . '-' . $block;
-        $this->_View->Blocks->start($this->_blockId, $mode);
+        $this->_View->start($this->_blockId);
         $this->_blockActive = $block;
     }
 
@@ -61,8 +60,8 @@ trait ContentBlockHelperTrait
         }
 
         //debug("End ContentBlock " . $this->_blockActive);
-        $this->_View->Blocks->end();
-        $content = $this->_blocks[$this->_blockActive] = $this->_View->Blocks->get($this->_blockId);
+        $this->_View->end();
+        $content = $this->_blocks[$this->_blockActive] = $this->_View->fetch($this->_blockId);
         $this->_View->assign($this->_blockId, null);
         $this->_blockActive = null;
         $this->_blockId = null;
