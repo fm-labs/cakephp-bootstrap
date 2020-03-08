@@ -40,7 +40,7 @@ class UiHelper extends Helper
             'menuDropdownButton' => '<a{{attrs}}>{{title}} <span class="caret"></span></a>',
             'menuLink' => '<a{{attrs}}>{{title}}</a>',
             //'button' => '<button{{attrs}}>{{content}}</button>',
-        ]
+        ],
     ];
 
     /**
@@ -134,7 +134,7 @@ class UiHelper extends Helper
         $menuOptions += [
             'class' => null,
             'itemscope' => 'itemscope',
-            'itemtype' => 'http://www.schema.org/SiteNavigationElement'
+            'itemtype' => 'http://www.schema.org/SiteNavigationElement',
         ];
 
         $items = "";
@@ -209,7 +209,7 @@ class UiHelper extends Helper
             $ddAttrs += $item;
             $ddLink = $this->templater()->format('menuDropdownButton', [
                 'attrs' => $this->templater()->formatAttributes($ddAttrs, ['requireRoot', 'data-icon']),
-                'title' => $item['title']
+                'title' => $item['title'],
             ]);
 
             $link = $ddLink;
@@ -224,7 +224,7 @@ class UiHelper extends Helper
         return $this->templater()->format($tag, [
             'attrs' => $this->templater()->formatAttributes($itemOptions),
             'content' => $link,
-            'children' => $children
+            'children' => $children,
         ]);
     }
 }

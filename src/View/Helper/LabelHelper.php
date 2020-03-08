@@ -10,7 +10,7 @@ class LabelHelper extends BaseHelper
     protected $_defaultConfig = [
         'templates' => [
             'label' => '<span class="label label-{{class}}"{{attrs}}>{{label}}</span>',
-        ]
+        ],
     ];
 
     public function create($label, $options = [])
@@ -20,7 +20,7 @@ class LabelHelper extends BaseHelper
         $label = $this->templater()->format('label', [
             'class' => $options['class'],
             'label' => $label,
-            'attrs' => $this->templater()->formatAttributes($options, ['class'])
+            'attrs' => $this->templater()->formatAttributes($options, ['class']),
         ]);
 
         return $label;
@@ -42,7 +42,7 @@ class LabelHelper extends BaseHelper
         if (empty($map)) {
             $map = [
                 0 => [__('No'), 'default'],
-                1 => [__('Yes'), 'primary']
+                1 => [__('Yes'), 'primary'],
             ];
         }
 
@@ -70,7 +70,7 @@ class LabelHelper extends BaseHelper
         $out = $this->templater()->format('label', [
             'class' => $class,
             'label' => $label,
-            'attrs' => $this->templater()->formatAttributes($options, ['toggle', 'class', 'label'])
+            'attrs' => $this->templater()->formatAttributes($options, ['toggle', 'class', 'label']),
         ]);
 
         return $out;

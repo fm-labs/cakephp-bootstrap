@@ -51,7 +51,7 @@ class BasicWidgetTest extends TestCase
         $text = new BasicWidget($this->templates);
         $result = $text->render([
             'name' => 'my_input',
-            'val' => 'foo'
+            'val' => 'foo',
         ], $this->context);
 
         $expected = '<input type="text" name="my_input" class="form-control" value="foo">';
@@ -69,7 +69,7 @@ class BasicWidgetTest extends TestCase
         $result = $text->render([
             'name' => 'my_input',
             'class' => 'danger',
-            'required' => true
+            'required' => true,
         ], $this->context);
 
         $expected = '<input type="text" name="my_input" class="form-control danger" required="required">';

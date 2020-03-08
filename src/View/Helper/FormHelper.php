@@ -15,12 +15,12 @@ class FormHelper extends CakeFormHelper
     /**
      * @var bool
      */
-    static public $useHorizontal = false;
+    public static $useHorizontal = false;
 
     /**
      * @var bool
      */
-    static public $useNovalidate = false;
+    public static $useNovalidate = false;
 
     /**
      * @var bool
@@ -32,11 +32,11 @@ class FormHelper extends CakeFormHelper
      */
     protected $_templateOriginals = [];
 
-    /**
-     * Default config for the helper.
-     *
-     * @var array
-     */
+/**
+ * Default config for the helper.
+ *
+ * @var array
+ */
 //    protected $_defaultConfig = [
 //        'idPrefix' => null,
 //        'errorClass' => 'form-error',
@@ -311,7 +311,7 @@ class FormHelper extends CakeFormHelper
     public function helpText($fieldName, $content = "")
     {
         return $this->templater()->format('help', [
-            'content' => $content
+            'content' => $content,
         ]);
     }
 

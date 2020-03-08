@@ -33,7 +33,7 @@ class ButtonWidget extends CakeButtonWidget
         $classParts = explode(' ', trim($data['class']));
         $class = array_map(function ($val) {
             if (in_array($val, ['default', 'success', 'danger', 'info', 'warning', 'link', 'primary'])) {
-                return 'btn-'.$val;
+                return 'btn-' . $val;
             }
 
             return $val;

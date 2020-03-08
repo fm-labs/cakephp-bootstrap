@@ -119,7 +119,7 @@ class TabsHelper extends Helper
             // build tab link
             $tabLinkAttrs = [
                 'role' => 'presentation',
-                'id' => $tabMenuId
+                'id' => $tabMenuId,
             ];
 
             if ($item['url']) {

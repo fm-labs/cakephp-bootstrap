@@ -43,7 +43,7 @@ class PanelHelper extends Helper
     protected $_defaultParams = [
         'id' => null,
         'title' => null,
-        'class' => 'panel-primary'
+        'class' => 'panel-primary',
     ];
 
     /**
@@ -187,7 +187,7 @@ class PanelHelper extends Helper
         }
 
         return $this->templater()->format('panelHeading', [
-            'content' => $content
+            'content' => $content,
         ]);
     }
 
@@ -200,7 +200,7 @@ class PanelHelper extends Helper
 
         foreach ($this->_contents['body'] as $content) {
             $out .= $this->templater()->format('panelBody', [
-                'content' => $content
+                'content' => $content,
             ]);
         }
 
@@ -223,7 +223,7 @@ class PanelHelper extends Helper
         }
 
         return $this->templater()->format('panelFooter', [
-            'actions' => $this->renderActions()
+            'actions' => $this->renderActions(),
         ]);
     }
 
@@ -236,12 +236,12 @@ class PanelHelper extends Helper
 
         foreach ($this->_actions as $action) {
             $items .= $this->templater()->format('panelActionListItem', [
-                'link' => $this->Html->link($action['title'], $action['url'], $action['attrs'])
+                'link' => $this->Html->link($action['title'], $action['url'], $action['attrs']),
             ]);
         }
 
         $out = $this->templater()->format('panelActionList', [
-            'items' => $items
+            'items' => $items,
         ]);
 
         return $out;
@@ -259,7 +259,7 @@ class PanelHelper extends Helper
             'body' => $this->renderBody(),
             'footer' => $this->renderFooter(),
             'class' => $this->_params['class'],
-            'attrs' => $this->templater()->formatAttributes($this->_params, ['class'])
+            'attrs' => $this->templater()->formatAttributes($this->_params, ['class']),
         ]);
 
         $this->clean();

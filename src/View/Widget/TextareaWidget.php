@@ -34,7 +34,7 @@ class TextareaWidget extends CakeTextareaWidget
             'name' => '',
             'escape' => true,
             'rows' => 5,
-            'templateVars' => []
+            'templateVars' => [],
         ];
 
         if (!isset($data['class'])) {

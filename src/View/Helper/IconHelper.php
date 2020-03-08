@@ -12,7 +12,7 @@ class IconHelper extends Helper
         'templates' => [
             // 'icon' => '<span class="glyphicon glyphicon-{{class}}"{{attrs}}></span>', #bootstrap style
             'icon' => '<i class="fa fa-{{class}}"{{attrs}}></i>', # fontawesome style
-        ]
+        ],
     ];
 
     public $helpers = ['Html'];

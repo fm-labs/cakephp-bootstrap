@@ -2,6 +2,7 @@
 // deprectated
 // only kept as backup
 return [];
+
 return [
     //'input' => 'input type="{{type}}" name="{{name}}"{{attrs}}/>',
     //'select' => '<select name="{{name}}"{{attrs}}>{{content}}</select>',
@@ -18,5 +19,5 @@ return [
     'radioWrapper' => '<div class="radio">{{label}}</div>',
 
     'multicheckboxContainer' => '<div class="form-group {{required}}">{{content}}</div>',
-    'multicheckboxFormGroup' => '{{label}}<div class="multicheckbox-formgroup col-sm-9 col-md-8 col-lg-8">{{input}}</div>'
+    'multicheckboxFormGroup' => '{{label}}<div class="multicheckbox-formgroup col-sm-9 col-md-8 col-lg-8">{{input}}</div>',
 ];

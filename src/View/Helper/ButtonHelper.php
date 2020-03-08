@@ -22,8 +22,8 @@ class ButtonHelper extends BaseHelper
                      {{dropdown}}
                 </ul>
             ',
-            'buttonDropdownItem' => '<li>{{link}}</li>'
-        ]
+            'buttonDropdownItem' => '<li>{{link}}</li>',
+        ],
     ];
 
     public $helpers = ['Html', 'Bootstrap.Icon'];
@@ -37,7 +37,7 @@ class ButtonHelper extends BaseHelper
     {
         $defaultOptions = [
             'class' => null, 'icon' => null, 'type' => null, 'size' => null, 'url' => null,
-            'split' => null, 'dropdown' => null
+            'split' => null, 'dropdown' => null,
         ];
 
         $options += $defaultOptions;
@@ -58,7 +58,7 @@ class ButtonHelper extends BaseHelper
                 $title = $url = $attrs = null;
                 extract($ddItem, EXTR_IF_EXISTS);
                 $ddHtml .= $this->templater()->format('buttonDropdownItem', [
-                    'link' => $this->Html->link($title, $url, (array)$attrs)
+                    'link' => $this->Html->link($title, $url, (array)$attrs),
                 ]);
             }
 
@@ -73,7 +73,7 @@ class ButtonHelper extends BaseHelper
                     'icon' => $iconHtml,
                     'label' => "",
                     'dropdown' => $ddHtml,
-                    'attrs' => $btnAttrs
+                    'attrs' => $btnAttrs,
                 ]);
 
                 return $this->group($btn . $btndd);
@@ -84,7 +84,7 @@ class ButtonHelper extends BaseHelper
                 'icon' => $iconHtml,
                 'label' => $label,
                 'dropdown' => $ddHtml,
-                'attrs' => $btnAttrs
+                'attrs' => $btnAttrs,
             ]);
 
             return $this->group($btn);
@@ -108,7 +108,7 @@ class ButtonHelper extends BaseHelper
             'class' => $options['class'],
             'icon' => $iconHtml,
             'label' => $label,
-            'attrs' => $btnAttrs
+            'attrs' => $btnAttrs,
         ]);
 
         return $html;
@@ -121,7 +121,7 @@ class ButtonHelper extends BaseHelper
         $html = $this->templater()->format('buttonGroup', [
             'class' => $options['class'],
             'content' => $content,
-            'attrs' => $this->templater()->formatAttributes($options, ['class'])
+            'attrs' => $this->templater()->formatAttributes($options, ['class']),
         ]);
 
         return $html;

@@ -65,7 +65,7 @@ class MenuHelper extends Helper
             'activeMenu' => 'active',
             'activeItem' => 'active',
             'trailMenu' => 'trail',
-            'trailItem' => 'trail'
+            'trailItem' => 'trail',
         ];
         $menu['classes'] = array_merge($defaultClasses, $menu['classes']);
 
@@ -120,7 +120,7 @@ class MenuHelper extends Helper
         return $this->templater()->format($template, [
             'class' => $menu['class'],
             'title' => $title,
-            'items' => $this->_renderItems($menu['items'])
+            'items' => $this->_renderItems($menu['items']),
         ]);
     }
 

@@ -21,19 +21,19 @@ class DatalistWidget extends BasicWidget
             'name' => null,
             'options' => [],
             'escape' => true,
-            'templateVars' => []
+            'templateVars' => [],
         ];
 
         $this->_templates->add([
             'datalist' => '<datalist id="{{id}}">{{options}}</datalist>',
-            'datalistOption' => '<option{{attrs}}>'
+            'datalistOption' => '<option{{attrs}}>',
         ]);
 
         $datalistId = uniqid('datalist');
         $datalist = $this->_templates->format('datalist', [
             //'templateVars' => $data['templateVars'],
             'id' => $datalistId,
-            'options' => $this->_renderOptions($data['options'])
+            'options' => $this->_renderOptions($data['options']),
         ]);
         unset($data['options']);
 
@@ -53,7 +53,7 @@ class DatalistWidget extends BasicWidget
         $optionsHtml = "";
         foreach ($options as $option) {
             $attrs = [
-                'value' => $option
+                'value' => $option,
             ];
 
             $optionsHtml .= $this->_templates->format('datalistOption', [
