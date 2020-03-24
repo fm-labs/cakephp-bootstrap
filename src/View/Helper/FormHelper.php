@@ -263,11 +263,6 @@ class FormHelper extends CakeFormHelper
      */
     public function label($fieldName, $text = null, array $options = [])
     {
-        if ($this->_horizontal /*&& !isset($options['input'])*/) {
-            //    $options = $this->addClass($options, 'col-sm-3');
-            //$options = $this->addClass($options, 'control-label');
-        }
-
         return parent::label($fieldName, $text, $options);
     }
 
@@ -276,11 +271,8 @@ class FormHelper extends CakeFormHelper
      * @param array $options Control options
      * @return string
      */
-    public function input($fieldName, array $options = [])
+    public function control($fieldName, array $options = [])
     {
-        if ($this->_horizontal) {
-        }
-
         if (isset($options['help'])) {
             $templateVars = (isset($options['templateVars'])) ? $options['templateVars'] : [];
             $templateVars['help'] = $this->helpText($fieldName, $options['help']);
@@ -288,7 +280,7 @@ class FormHelper extends CakeFormHelper
             unset($options['help']);
         }
 
-        return parent::input($fieldName, $options);
+        return parent::control($fieldName, $options);
     }
 
     protected function _magicOptions($fieldName, $options, $allowOverride)
