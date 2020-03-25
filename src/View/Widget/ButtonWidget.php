@@ -18,7 +18,7 @@ class ButtonWidget extends CakeButtonWidget
      * @param \Cake\View\Form\ContextInterface $context
      * @return string
      */
-    public function render(array $data, ContextInterface $context)
+    public function render(array $data, ContextInterface $context): string
     {
         $data += [
             'type' => null,

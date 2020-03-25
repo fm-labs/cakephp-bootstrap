@@ -192,7 +192,7 @@ class FormHelper extends CakeFormHelper
     /**
      * {@inheritDoc}
      */
-    public function create($model = null, array $options = [])
+    public function create($context = null, array $options = []): string
     {
         $this->_horizontal = self::$useHorizontal;
         if (isset($options['horizontal'])) {
@@ -207,7 +207,7 @@ class FormHelper extends CakeFormHelper
 
         $options['novalidate'] = !self::$useNovalidate;
 
-        return parent::create($model, $options);
+        return parent::create($context, $options);
     }
 
 //    /**
@@ -247,7 +247,7 @@ class FormHelper extends CakeFormHelper
     /**
      * {@inheritDoc}
      */
-    public function end(array $secureAttributes = [])
+    public function end(array $secureAttributes = []): string
     {
         $this->_horizontal = self::$useHorizontal;
 
@@ -260,7 +260,7 @@ class FormHelper extends CakeFormHelper
      * @param array $options Additional options
      * @return string
      */
-    public function label($fieldName, $text = null, array $options = [])
+    public function label(string $fieldName, ?string $text = null, array $options = []): string
     {
         return parent::label($fieldName, $text, $options);
     }
@@ -270,7 +270,7 @@ class FormHelper extends CakeFormHelper
      * @param array $options Control options
      * @return string
      */
-    public function control($fieldName, array $options = [])
+    public function control(string $fieldName, array $options = []): string
     {
         if (isset($options['help'])) {
             $templateVars = $options['templateVars'] ?? [];
@@ -282,7 +282,7 @@ class FormHelper extends CakeFormHelper
         return parent::control($fieldName, $options);
     }
 
-    protected function _magicOptions($fieldName, $options, $allowOverride)
+    protected function _magicOptions(string $fieldName, array $options, bool $allowOverride): array
     {
         $options = parent::_magicOptions($fieldName, $options, $allowOverride);
 
@@ -311,7 +311,7 @@ class FormHelper extends CakeFormHelper
      * @param array $options Control options
      * @return string
      */
-    public function submit($caption = null, array $options = [])
+    public function submit(?string $caption = null, array $options = []): string
     {
         if (!isset($options['class'])) {
             $options = $this->addClass($options, 'btn');

@@ -17,7 +17,7 @@ class DatalistWidget extends BasicWidget
      * @param \Cake\View\Form\ContextInterface $context
      * @return string
      */
-    public function render(array $data, ContextInterface $context)
+    public function render(array $data, ContextInterface $context): string
     {
         $data += [
             'name' => null,
