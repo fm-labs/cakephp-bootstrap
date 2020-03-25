@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace Bootstrap\View\Helper;
 
 use Banana\Menu\MenuItem;
@@ -176,7 +178,7 @@ class UiHelper extends Helper
             $url = $item['view_url'];
             unset($item['view_url']);
         }
-        $children = (isset($item['children'])) ? $item['children'] : [];
+        $children = $item['children'] ?? [];
         unset($item['children']);
 
         // legacy support
@@ -186,7 +188,7 @@ class UiHelper extends Helper
             unset($item['_children']);
         }
 
-        $item['title'] = ($item['title']) ?: $this->Url->build($url);
+        $item['title'] = $item['title'] ?: $this->Url->build($url);
         $item['itemprop'] = 'url';
 
         if (isset($item['attr'])) {
@@ -204,7 +206,7 @@ class UiHelper extends Helper
                 'aria-haspopup' => "true",
                 'aria-expanded' => "false",
                 'href' => '#',
-                'data-href' => ($url) ? $this->Url->build($url) : null,
+                'data-href' => $url ? $this->Url->build($url) : null,
             ];
             $ddAttrs += $item;
             $ddLink = $this->templater()->format('menuDropdownButton', [

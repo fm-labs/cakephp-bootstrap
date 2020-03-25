@@ -1,15 +1,13 @@
 <?php
+declare(strict_types=1);
 
 namespace Bootstrap\View\Helper;
-
-use Cake\View\View;
-use Cake\View\ViewBlock;
 
 /**
  * Class ContentBlockHelperTrait
  *
  * @package Backend\View
- * @property View $_View
+ * @property \Cake\View\View $_View
  */
 trait ContentBlockHelperTrait
 {
@@ -41,7 +39,7 @@ trait ContentBlockHelperTrait
             $this->end();
         }
 
-        $namespace = (isset($this->_blockNamespace)) ? $this->_blockNamespace : uniqid('block');
+        $namespace = $this->_blockNamespace ?? uniqid('block');
 
         $this->_blockId = $namespace . '-' . $block;
         $this->_View->start($this->_blockId);

@@ -1,7 +1,8 @@
 <?php
+declare(strict_types=1);
+
 namespace Bootstrap\View\Helper;
 
-use Cake\Utility\Hash;
 use Cake\View\StringTemplateTrait;
 
 class ButtonHelper extends BaseHelper

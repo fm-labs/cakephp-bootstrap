@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace Bootstrap\Test\TestCase\View\Helper;
 
 use Bootstrap\View\Helper\BootstrapHelper;
@@ -10,7 +12,6 @@ use Cake\View\View;
  */
 class BootstrapHelperTest extends TestCase
 {
-
     /**
      * Test subject
      *

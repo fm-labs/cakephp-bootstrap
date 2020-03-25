@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace Bootstrap\View\Widget;
 
 use Cake\View\Form\ContextInterface;
@@ -13,7 +15,6 @@ use Cake\View\Widget\BasicWidget as CakeBasicWidget;
  */
 class BasicWidget extends CakeBasicWidget
 {
-
     /**
      * @var string
      */

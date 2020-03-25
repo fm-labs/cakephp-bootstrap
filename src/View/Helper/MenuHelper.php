@@ -1,8 +1,8 @@
 <?php
+declare(strict_types=1);
 
 namespace Bootstrap\View\Helper;
 
-use Banana\Menu\MenuItem;
 use Cake\Routing\Router;
 use Cake\View\Helper;
 use Cake\View\StringTemplateTrait;
@@ -115,7 +115,7 @@ class MenuHelper extends Helper
             $title = $this->templater()->format('navListTitle', ['content' => $menu['title']]);
         }
 
-        $template = ($menu['template']) ?: 'navList';
+        $template = $menu['template'] ?: 'navList';
 
         return $this->templater()->format($template, [
             'class' => $menu['class'],
@@ -157,7 +157,7 @@ class MenuHelper extends Helper
         //    unset($item['_children']);
         //}
         $template = 'navListItem';
-        $hasChildren = (isset($item['children']) && count($item['children']) > 0) ? true : false;
+        $hasChildren = isset($item['children']) && count($item['children']) > 0 ? true : false;
 
         $url = $this->_getItemUrl($item);
 
@@ -167,8 +167,8 @@ class MenuHelper extends Helper
         //    $isActive = (in_array($item['id'], $this->_menu['active'])) ? true : false;
 
         //} else {
-            $isOnTrail = ($this->_menu['trail'] && $this->_isUrlOnTrail($url)) ? true : false;
-            $isActive = ($this->_menu['active'] && $this->_isActiveUrl($url)) ? true : false;
+            $isOnTrail = $this->_menu['trail'] && $this->_isUrlOnTrail($url) ? true : false;
+            $isActive = $this->_menu['active'] && $this->_isActiveUrl($url) ? true : false;
         //}
 
         $attrs = ['class' => $this->_menu['classes']['item']];
@@ -222,7 +222,7 @@ class MenuHelper extends Helper
      */
     protected function _renderLink($item)
     {
-        $item['attr'] = (isset($item['attr'])) ? $item['attr'] : [];
+        $item['attr'] = $item['attr'] ?? [];
         //debug($item['attr']);
 
         return $this->templater()->format('navLink', [
@@ -251,7 +251,7 @@ class MenuHelper extends Helper
      */
     protected function _isActiveUrl($url)
     {
-        return (Router::normalize($url) === Router::normalize($this->getView()->getRequest()->getPath()));
+        return Router::normalize($url) === Router::normalize($this->getView()->getRequest()->getPath());
     }
 
     /**

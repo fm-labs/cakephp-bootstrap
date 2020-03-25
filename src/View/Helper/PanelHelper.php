@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace Bootstrap\View\Helper;
 
 use Cake\View\Helper;
@@ -87,7 +89,7 @@ class PanelHelper extends Helper
         $params['title'] = $title;
 
         $this->_params = $params + $this->_defaultParams;
-        $this->_id = ($this->_params['id']) ?: uniqid('panel');
+        $this->_id = $this->_params['id'] ?: uniqid('panel');
     }
 
     /**

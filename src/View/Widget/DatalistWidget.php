@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace Bootstrap\View\Widget;
 
 use Cake\View\Form\ContextInterface;
@@ -12,7 +14,7 @@ class DatalistWidget extends BasicWidget
 {
     /**
      * @param array $data
-     * @param ContextInterface $context
+     * @param \Cake\View\Form\ContextInterface $context
      * @return string
      */
     public function render(array $data, ContextInterface $context)

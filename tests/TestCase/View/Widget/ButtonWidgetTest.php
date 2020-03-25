@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Bootstrap\Test\TestCase\View\Widget;
 
@@ -13,7 +14,6 @@ use Cake\View\StringTemplate;
  */
 class ButtonWidgetTest extends TestCase
 {
-
     /**
      * @var StringTemplate
      */

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Bootstrap\View\Helper;
 
@@ -84,8 +85,6 @@ class FormHelper extends CakeFormHelper
 //            'inputContainer' => '<div class="form-group input-{{type}}{{required}}">{{content}}</div>',
 //            'inputContainerError' => '<div class="form-group has-error input-{{type}}{{required}}">{{content}}{{error}}</div>',
 //            'error' => '<span class="help-block">{{content}}</span>',
-//
-
 // Original templates as of CakePHP 3.3
 //            'button' => '<button{{attrs}}>{{text}}</button>',
 //            'checkbox' => '<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>',
@@ -274,7 +273,7 @@ class FormHelper extends CakeFormHelper
     public function control($fieldName, array $options = [])
     {
         if (isset($options['help'])) {
-            $templateVars = (isset($options['templateVars'])) ? $options['templateVars'] : [];
+            $templateVars = $options['templateVars'] ?? [];
             $templateVars['help'] = $this->helpText($fieldName, $options['help']);
             $options['templateVars'] = $templateVars;
             unset($options['help']);

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Bootstrap\View\Helper;
 
@@ -20,7 +21,7 @@ abstract class BaseHelper extends Helper
                 break;
         }
 
-        return ($prefix && $size) ? $prefix . "-" . $size : $size;
+        return $prefix && $size ? $prefix . "-" . $size : $size;
     }
 
     protected function _mapTypeClass($type, $prefix = "")
@@ -44,11 +45,11 @@ abstract class BaseHelper extends Helper
                 $type = "primary";
                 break;
             default:
-                $type = ($type === null) ? "default" : $type;
+                $type = $type ?? "default";
                 break;
                 break;
         }
 
-        return ($prefix) ? $prefix . "-" . $type : $type;
+        return $prefix ? $prefix . "-" . $type : $type;
     }
 }

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Bootstrap\Test\TestCase\View\Widget;
 
@@ -13,7 +14,6 @@ use PHPUnit\Framework\TestCase;
  */
 class BasicWidgetTest extends TestCase
 {
-
     /**
      * {@inheritDoc}
      */

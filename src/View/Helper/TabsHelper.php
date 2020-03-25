@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Bootstrap\View\Helper;
 
@@ -139,7 +140,7 @@ class TabsHelper extends Helper
         $tabClass = "tab-pane";
         $i = 0;
         foreach ($this->_tabs as $tabId => $item) {
-            $class = ($i++ > 0) ? $tabClass : $tabClass . " active";
+            $class = $i++ > 0 ? $tabClass : $tabClass . " active";
 
             $attrs = ['id' => $tabId, 'role' => 'tabpanel'];
             //if ($item['url']) {

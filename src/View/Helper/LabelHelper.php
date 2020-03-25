@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace Bootstrap\View\Helper;
 
 use Cake\View\StringTemplateTrait;
@@ -59,7 +61,7 @@ class LabelHelper extends BaseHelper
             if (is_string($mapped)) {
                 $label = $mapped;
             } elseif (is_array($mapped) && count($mapped) == 2) {
-                list($label, $class) = $mapped;
+                [$label, $class] = $mapped;
             }
         }
 
