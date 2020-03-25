@@ -20,7 +20,7 @@ class BootstrapHelper extends Helper
     /**
      * {@inheritDoc}
      */
-    public function initialize(array $config)
+    public function initialize(array $config): void
     {
         $this->_View->Html->css('Bootstrap.bootstrap.min', ['block' => true]);
         $this->_View->Html->script('Bootstrap.bootstrap.min', ['block' => true]);

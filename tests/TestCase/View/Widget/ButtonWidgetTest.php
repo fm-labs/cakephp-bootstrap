@@ -20,14 +20,14 @@ class ButtonWidgetTest extends TestCase
     public $templates;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var \PHPUnit\Framework\MockObject\MockObject
      */
     public $context;
 
     /**
      * {@inheritDoc}
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $templates = [

@@ -138,9 +138,6 @@ class PanelHelper extends Helper
         $this->_currentBlock = $block;
     }
 
-    /**
-     *
-     */
     public function end()
     {
         if (!$this->_currentBlock) {
