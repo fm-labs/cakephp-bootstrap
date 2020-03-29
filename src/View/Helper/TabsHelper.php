@@ -124,7 +124,7 @@ class TabsHelper extends Helper
             ];
 
             if ($item['url']) {
-                $tabLinkAttrs['data-url'] = $this->Url->build($item['url'], true);
+                $tabLinkAttrs['data-url'] = $this->Url->build($item['url'], ['fullBase' => true]);
                 //$tabLinkAttrs['data-target'] = $tabId;
             }
             $tabLink = $this->Html->link($item['title'], $href, $tabLinkAttrs);
