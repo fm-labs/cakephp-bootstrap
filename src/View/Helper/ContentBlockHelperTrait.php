@@ -6,7 +6,7 @@ namespace Bootstrap\View\Helper;
 /**
  * Class ContentBlockHelperTrait
  *
- * @package Backend\View
+ * @package Admin\View
  * @property \Cake\View\View $_View
  */
 trait ContentBlockHelperTrait

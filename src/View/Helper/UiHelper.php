@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Bootstrap\View\Helper;
 
-use Banana\Menu\MenuItem;
+use Cupcake\Menu\MenuItem;
 use Cake\Datasource\EntityTrait;
 use Cake\View\Helper;
 use Cake\View\StringTemplateTrait;
@@ -11,7 +11,7 @@ use Cake\View\StringTemplateTrait;
 /**
  * Class UiHelper
  *
- * @package Backend\View\Helper
+ * @package Admin\View\Helper
  * @property \Cake\View\Helper\HtmlHelper $Html
  * @property \Cake\View\Helper\UrlHelper $Url
  * @property \Bootstrap\View\Helper\FormHelper $Form
