@@ -8,8 +8,8 @@ use Cake\View\Helper;
 
 /**
  * Class TabsHelper
- * @package Bootstrap\View\Helper
  *
+ * @package Bootstrap\View\Helper
  * @property \Cake\View\Helper\HtmlHelper $Html
  * @TODO Refactor with StringTemplater
  */
@@ -76,7 +76,7 @@ class TabsHelper extends Helper
             $this->end();
         }
 
-        $this->_tabId = uniqid('tab');
+        $this->_tabId = uniqid('t');
         $this->_tabs[$this->_tabId] = $params;
         $this->startContent($this->_tabId);
     }
@@ -106,6 +106,7 @@ class TabsHelper extends Helper
         $tabs = "";
         //$js = "";
         $menuItems = "";
+        $domId = uniqid('tabs');
 
         // render tab menu
         $menuClass = "nav nav-tabs";
@@ -132,9 +133,12 @@ class TabsHelper extends Helper
             // build tab menu item
             $menuItems .= $this->Html->tag('li', $tabLink, ['role' => 'tab', 'aria-controls' => $tabId]);
 
+            //$tabParams = [];
             //$js .= sprintf("$('#%s').tab(%s); ", $tabMenuId, json_encode($tabParams));
         }
-        $menu = $this->Html->tag('ul', $menuItems, ['class' => $menuClass, 'role' => 'tablist']);
+        $menuList = $this->Html->tag('ul', $menuItems, ['class' => $menuClass, 'role' => 'tablist']);
+        $menuContainer = $this->Html->tag('div', $menuList/*, ['class' => 'container']*/);
+        $menu = $this->Html->tag('div', $menuContainer, ['class' => 'tab-nav']);
 
         // render tab contents
         $tabClass = "tab-pane";
@@ -152,8 +156,56 @@ class TabsHelper extends Helper
         $tabs = $this->Html->div('tab-content', $tabs);
 
         //$script = sprintf("$(document).ready(function() { %s });", $js);
-        $script = "";
+        //$script = "";
+        $scriptTemplate = <<<SCRIPT
+    $('#%s .tab-nav a').on('click', function (ev) {
 
-        return $this->Html->div('tabs', $menu . $tabs . $this->Html->scriptBlock($script, ['safe' => false]));
+        var tabLink = $(ev.target);
+        var url = tabLink.attr("data-url");
+
+        //AdminJs.Console.log('tabs nav link clicked: ' + this.hash, url);
+
+        if (typeof url !== "undefined" && !tabLink.hasClass('tab-loaded') && !tabLink.hasClass('tab-loading')) {
+            var target = this.hash;
+            var tab = $(target);
+            if (!tab.length) {
+                console.error("Tab content area with ID " + target + " not found");
+                return;
+            }
+
+            // ajax load from data-url
+            tab.html("Loading ...");
+            tabLink.addClass('tab-loading').tab('show');
+            var jqxhr = $.get(url, {}, function() {
+                console.log("tab loading success");
+            })
+            .fail(function() {
+                console.error("Tab load failed");
+                tab.html("Failed to load tab");
+            })
+            .done(function(data) {
+                console.log("Tab " + target + " loaded");
+                tab.html(data);
+                //tabLink.tab('show');
+            })
+            .then(function() {
+                console.log("After loading");
+                tabLink.addClass('tab-loaded');
+                tabLink.removeClass('tab-loading');
+            });
+        } else {
+            tabLink.tab('show');
+        }
+
+        tabLink.closest('.tabs').addClass('tabs-init');
+        ev.preventDefault();
+        ev.stopPropagation();
+        return false;
+    });
+SCRIPT;
+        $script = sprintf($scriptTemplate, $domId);
+        $this->Html->scriptBlock($script, ['safe' => false, 'block' => true]);
+
+        return $this->Html->div('tabs', $menu . $tabs, ['id' => $domId]);
     }
 }

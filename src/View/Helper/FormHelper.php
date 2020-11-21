@@ -144,7 +144,7 @@ class FormHelper extends CakeFormHelper
 //    ];
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function __construct(View $View, array $config = [])
     {
@@ -157,13 +157,17 @@ class FormHelper extends CakeFormHelper
         // custom
         $this->_defaultConfig['templates']['help'] = '<span class="control-help help-block">{{content}}</span>';
         //overrides
-        $this->_defaultConfig['templates']['label'] = '<label class="control-label"{{attrs}}>{{text}}</label>';
+        $this->_defaultConfig['templates']['formGroup'] = '{{label}}{{help}}{{input}}';
         $this->_defaultConfig['templates']['inputHidden'] = '<input type="hidden" name="{{name}}"{{attrs}} />';
+        $this->_defaultConfig['templates']['label'] = '<label class="control-label"{{attrs}}>{{text}}</label>';
         $this->_defaultConfig['templates']['inputContainer'] = '<div class="form-group input-{{type}}{{required}}">{{content}}</div>';
         $this->_defaultConfig['templates']['inputContainerError'] = '<div class="form-group has-error input-{{type}}{{required}}">{{content}}{{error}}</div>';
         $this->_defaultConfig['templates']['error'] = '<span class="control-error help-block">{{content}}</span>';
 
-        // horizontal
+        $this->_defaultConfig['templates']['radioWrapper'] = '<div class="radio-wrapper">{{label}}</div>';
+        $this->_defaultConfig['templates']['radioFormGroup'] = '{{label}}{{input}}{{error}}{{help}}';
+
+            // horizontal
         $this->_defaultConfig['templatesHorizontal'] = [
             //'input' => 'input type="{{type}}" name="{{name}}"{{attrs}}/>',
             //'select' => '<select name="{{name}}"{{attrs}}>{{content}}</select>',
@@ -175,22 +179,24 @@ class FormHelper extends CakeFormHelper
             'submitContainer' => '<div class="form-group"><div class="col-sm-offset-3 col-md-offset-3 col-lg-offset-3 col-sm-9 col-md-9 col-lg-9"><div class="submit">{{content}}</div></div></div>',
 
             'checkbox' => '<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>',
-            'checkboxFormGroup' => '<div class="col-sm-3 col-md-3 col-lg-3">{{label}}</div><div class="col-sm-9 col-md-9 col-lg-9">{{input}}{{help}}{{error}}</div>',
+            'checkboxFormGroup' => '<div class="col-sm-3 col-md-3 col-lg-3">{{help}}</div><div class="col-sm-9 col-md-9 col-lg-9">{{label}}{{input}}{{error}}</div>',
             'checkboxWrapper' => '<div class="checkbox-wrapper">{{label}}</div>',
             //'nestingLabel' => '<div class="col-sm-3 col-md-3 col-lg-3"><div class="control-label">{{text}}</div></div><div class="col-sm-9 col-md-9 col-lg-9">{{input}}</div>',
             //'nestingLabel' => '<div class="col-sm-3 col-md-3 col-lg-3"><div class="control-label">{{text}}</div></div><div class="col-sm-9 col-md-9 col-lg-9">{{input}}</div>',
-            'nestingLabel' => '{{hidden}}<label{{attrs}}>{{input}}{{text}}</label>',
+            //'nestingLabel' => '{{hidden}}<label{{attrs}}>{{input}}{{text}}</label>',
 
-            'radioContainer' => '<div class="form-group input-radio">{{content}}',
-            'radioFormGroup' => '{{label}}<div class="col-sm-9 col-md-9 col-lg-9">{{input}}</div>',
-            'radioWrapper' => '<div class="radio">{{label}}</div>',
+            //'radioContainer' => '<div class="form-group input-radio">{{content}}',
+            //'radioFormGroup' => '{{label}}<div class="col-sm-9 col-md-9 col-lg-9">{{input}}</div>',
+            //'radioWrapper' => '<div class="radio">{{label}}</div>',
+            'radioFormGroup' => '<div class="col-sm-3 col-md-3 col-lg-3">{{label}}{{help}}</div><div class="col-sm-9 col-md-9 col-lg-9">{{input}}{{error}}</div>',
+            //'radioWrapper' => '<span class="radio-wrapper radio-wrapper-h">{{label}}</span>',
         ];
 
         parent::__construct($View, $config);
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function create($context = null, array $options = []): string
     {
@@ -245,7 +251,7 @@ class FormHelper extends CakeFormHelper
 //    }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function end(array $secureAttributes = []): string
     {
@@ -279,17 +285,20 @@ class FormHelper extends CakeFormHelper
             unset($options['help']);
         }
 
-        return parent::control($fieldName, $options);
+        $control = parent::control($fieldName, $options);
+        //debug($control);
+        return $control;
     }
 
+    /**
+     * @param string $fieldName
+     * @param array $options
+     * @param bool $allowOverride
+     * @return array
+     */
     protected function _magicOptions(string $fieldName, array $options, bool $allowOverride): array
     {
         $options = parent::_magicOptions($fieldName, $options, $allowOverride);
-
-        // we do not want a nested input for 'checkbox' controls by default
-        if ($options['type'] == 'checkbox' && !isset($options['nestedInput'])) {
-            $options['nestedInput'] = false;
-        }
 
         return $options;
     }
