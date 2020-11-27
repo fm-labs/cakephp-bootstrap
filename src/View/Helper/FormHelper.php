@@ -125,21 +125,21 @@ class FormHelper extends CakeFormHelper
 //
 //            'inputContainerError' => '<div class="form-group has-error input-{{type}}{{required}}">{{content}}</div>',
 //
-//            'formGroup' => '<div class="col-sm-3 col-md-3 col-lg-3">{{label}}</div><div class="col-sm-9 col-md-9 col-lg-9">{{input}}{{error}}</div>',
+//            'formGroup' => '<div class="col-sm-3 col-md-4 col-lg-4">{{label}}</div><div class="col-sm-9 col-md-8 col-lg-8">{{input}}{{error}}</div>',
 //
-//            'submitContainer' => '<div class="form-group"><div class="col-sm-offset-3 col-md-offset-3 col-lg-offset-3 col-sm-9 col-md-9 col-lg-9"><div class="submit">{{content}}</div></div></div>',
+//            'submitContainer' => '<div class="form-group"><div class="col-sm-offset-3 col-md-offset-3 col-lg-offset-3 col-sm-9 col-md-8 col-lg-8"><div class="submit">{{content}}</div></div></div>',
 //
 //            'checkbox' => '<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>',
 //            'checkboxFormGroup' => '{{label}}',
 //            'checkboxWrapper' => '<div class="checkbox-wrapper">{{label}}</div>',
-//            'nestingLabel' => '<div class="col-sm-3 col-md-3 col-lg-3">{{hidden}}<label{{attrs}}>{{text}}</label></div><div class="col-sm-9 col-md-9 col-lg-9">{{input}}</div>',
+//            'nestingLabel' => '<div class="col-sm-3 col-md-4 col-lg-4">{{hidden}}<label{{attrs}}>{{text}}</label></div><div class="col-sm-9 col-md-8 col-lg-8">{{input}}</div>',
 //
 //            'radioContainer' => '<div class="form-group input-radio">{{content}}',
-//            'radioFormGroup' => '{{label}}<div class="col-sm-9 col-md-9 col-lg-9">{{input}}</div>',
+//            'radioFormGroup' => '{{label}}<div class="col-sm-9 col-md-8 col-lg-8">{{input}}</div>',
 //            'radioWrapper' => '<div class="radio">{{label}}</div>',
 //
 //            'multicheckboxContainer' => '<div class="form-group {{required}}">{{content}}</div>',
-//            'multicheckboxFormGroup' => '{{label}}<div class="multicheckbox-formgroup col-sm-9 col-md-9 col-lg-9">{{input}}</div>'
+//            'multicheckboxFormGroup' => '{{label}}<div class="multicheckbox-formgroup col-sm-9 col-md-8 col-lg-8">{{input}}</div>'
 //        ]
 //    ];
 
@@ -174,21 +174,21 @@ class FormHelper extends CakeFormHelper
 
             'inputContainerError' => '<div class="form-group has-error input-{{type}}{{required}}">{{content}}</div>',
 
-            'formGroup' => '<div class="col-sm-3 col-md-3 col-lg-3">{{label}}{{help}}</div><div class="col-sm-9 col-md-9 col-lg-9">{{input}}{{error}}</div>',
+            'formGroup' => '<div class="col-xs-12 col-sm-3 col-md-4 col-lg-4">{{label}}{{help}}</div><div class="col-xs-12 col-sm-9 col-md-8 col-lg-8">{{input}}{{error}}</div>',
 
-            'submitContainer' => '<div class="form-group"><div class="col-sm-offset-3 col-md-offset-3 col-lg-offset-3 col-sm-9 col-md-9 col-lg-9"><div class="submit">{{content}}</div></div></div>',
+            'submitContainer' => '<div class="form-group"><div class="col-xs-12 col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-4 col-lg-8 col-lg-offset-4"><div class="submit">{{content}}</div></div></div>',
 
             'checkbox' => '<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>',
-            'checkboxFormGroup' => '<div class="col-sm-3 col-md-3 col-lg-3">{{help}}</div><div class="col-sm-9 col-md-9 col-lg-9">{{label}}{{input}}{{error}}</div>',
+            'checkboxFormGroup' => '<div class="col-xs-12 col-sm-3 col-md-4 col-lg-4">{{help}}</div><div class="col-xs-12 col-sm-9 col-md-8 col-lg-8">{{label}}{{input}}{{error}}</div>',
             'checkboxWrapper' => '<div class="checkbox-wrapper">{{label}}</div>',
-            //'nestingLabel' => '<div class="col-sm-3 col-md-3 col-lg-3"><div class="control-label">{{text}}</div></div><div class="col-sm-9 col-md-9 col-lg-9">{{input}}</div>',
-            //'nestingLabel' => '<div class="col-sm-3 col-md-3 col-lg-3"><div class="control-label">{{text}}</div></div><div class="col-sm-9 col-md-9 col-lg-9">{{input}}</div>',
+            //'nestingLabel' => '<div class="col-sm-3 col-md-4 col-lg-4"><div class="control-label">{{text}}</div></div><div class="col-sm-9 col-md-8 col-lg-8">{{input}}</div>',
+            //'nestingLabel' => '<div class="col-sm-3 col-md-4 col-lg-4"><div class="control-label">{{text}}</div></div><div class="col-sm-9 col-md-8 col-lg-8">{{input}}</div>',
             //'nestingLabel' => '{{hidden}}<label{{attrs}}>{{input}}{{text}}</label>',
 
             //'radioContainer' => '<div class="form-group input-radio">{{content}}',
-            //'radioFormGroup' => '{{label}}<div class="col-sm-9 col-md-9 col-lg-9">{{input}}</div>',
+            //'radioFormGroup' => '{{label}}<div class="col-sm-9 col-md-8 col-lg-8">{{input}}</div>',
             //'radioWrapper' => '<div class="radio">{{label}}</div>',
-            'radioFormGroup' => '<div class="col-sm-3 col-md-3 col-lg-3">{{label}}{{help}}</div><div class="col-sm-9 col-md-9 col-lg-9">{{input}}{{error}}</div>',
+            'radioFormGroup' => '<div class="col-xs-12 col-sm-3 col-md-4 col-lg-4">{{label}}{{help}}</div><div class="col-xs-12 col-sm-9 col-md-8 col-lg-8">{{input}}{{error}}</div>',
             //'radioWrapper' => '<span class="radio-wrapper radio-wrapper-h">{{label}}</span>',
         ];
 
