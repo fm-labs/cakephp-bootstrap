@@ -18,7 +18,7 @@ abstract class BaseHelper extends Helper
             case "lg":
                 break;
             default:
-                break;
+                return "";
         }
 
         return $prefix && $size ? $prefix . "-" . $size : $size;

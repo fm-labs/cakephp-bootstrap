@@ -20,7 +20,7 @@ class BootstrapHelper extends Helper
     public $helpers = ['Html', 'Form' => ['className' => 'Bootstrap.Form']];
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function initialize(array $config): void
     {

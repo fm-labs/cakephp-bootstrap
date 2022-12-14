@@ -20,6 +20,11 @@ class BootstrapHelperTest extends TestCase
     public $Bootstrap;
 
     /**
+     * @var View
+     */
+    public $view;
+
+    /**
      * setUp method
      *
      * @return void
@@ -27,8 +32,8 @@ class BootstrapHelperTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $view = new View();
-        $this->Bootstrap = new BootstrapHelper($view);
+        $this->view = new View();
+        $this->Bootstrap = new BootstrapHelper($this->view);
     }
 
     /**
@@ -50,6 +55,7 @@ class BootstrapHelperTest extends TestCase
      */
     public function testInitialization()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->assertTextContains('bootstrap.min.css', $this->view->fetch('css'));
+        $this->assertTextContains('bootstrap.min.js', $this->view->fetch('script'));
     }
 }

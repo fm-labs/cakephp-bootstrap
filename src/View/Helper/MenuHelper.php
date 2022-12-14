@@ -54,7 +54,16 @@ class MenuHelper extends Helper
      */
     public function create(array $menu)
     {
-        $menu += ['title' => null, 'class' => null, 'items' => null, 'trail' => true, 'active' => true, 'template' => null, 'templates' => [], 'classes' => []];
+        $menu += [
+            'title' => null,
+            'class' => null,
+            'items' => null,
+            'trail' => true,
+            'active' => true,
+            'template' => null,
+            'templates' => [],
+            'classes' => [],
+        ];
 
         $defaultClasses = [
             'menu' => '',
