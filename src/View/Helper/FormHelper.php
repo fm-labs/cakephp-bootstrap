@@ -206,10 +206,10 @@ class FormHelper extends CakeFormHelper
             unset($options['horizontal']);
         }
 
-        if ($this->_horizontal === true) {
-            $options = $this->addClass($options, 'form-horizontal');
-            $options['templates'] = $this->getConfig('templatesHorizontal');
-        }
+//        if ($this->_horizontal === true) {
+//            $options = $this->addClass($options, 'form-horizontal');
+//            $options['templates'] = $this->getConfig('templatesHorizontal');
+//        }
 
         $options['novalidate'] = !self::$useNovalidate;
 

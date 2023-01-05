@@ -165,6 +165,7 @@ class UiHelper extends Helper
     public function menuItem(array $item = [], array $childMenuOptions = [], array $itemOptions = [])
     {
         $item += ['url' => null, 'children' => [], 'title' => null, 'class' => null, 'hide_in_nav' => null];
+        $item['class'] = $item['class'] ?? 'nav-link';
 
         // workaround
         if ($item['hide_in_nav']) {
