@@ -68,8 +68,13 @@ class TabsHelper extends Helper
      * @param array $params Additional tab params
      * @return void
      */
-    public function add($title, $params = [])
+    public function add($title, $content = null, $params = [])
     {
+        if (is_array($content)) {
+            $params = $content;
+            $content = null;
+        }
+
         $params = array_merge(['title' => $title, 'url' => null, 'content' => null, 'debugOnly' => false], $params);
 
         if ($this->_tabId) {
@@ -79,6 +84,11 @@ class TabsHelper extends Helper
         $this->_tabId = uniqid('t');
         $this->_tabs[$this->_tabId] = $params;
         $this->startContent($this->_tabId);
+
+        if ($content != null) {
+            echo $content;
+            $this->end();
+        }
     }
 
     /**
@@ -110,28 +120,45 @@ class TabsHelper extends Helper
 
         // render tab menu
         $menuClass = "nav nav-tabs";
+        $i = 0;
         foreach ($this->_tabs as $tabId => $item) {
             if ($item['debugOnly'] === true && $debugEnabled !== true) {
                 continue;
             }
 
-            $tabMenuId = $tabId . '-menu';
+            $class = "nav-link";
+            $selected = "false";
+            if ($i++ === 0) {
+                $class .= ' active';
+                $selected = "true";
+            }
+
+            $tabLinkId = $tabId . '-tab';
+            $tabPaneId = $tabId . '-pane';
             $href = '#' . $tabId;
 
             // build tab link
             $tabLinkAttrs = [
-                'role' => 'presentation',
-                'id' => $tabMenuId,
+                'role' => 'tab',
+                'id' => $tabLinkId,
+                'data-bs-toggle' => 'tab',
+                'data-bs-target' => '#' . $tabPaneId,
+                'type' => 'button',
+                'aria-controls' => $tabPaneId,
+                'aria-selected' => $selected,
+                'class' => $class,
             ];
 
             if ($item['url']) {
                 $tabLinkAttrs['data-url'] = $this->Url->build($item['url'], ['fullBase' => true]);
                 //$tabLinkAttrs['data-target'] = $tabId;
             }
-            $tabLink = $this->Html->link($item['title'], $href, $tabLinkAttrs);
+            //$tabLink = $this->Html->link($item['title'], $href, $tabLinkAttrs);
+            //     <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Home</button>
+            $tabLink = $this->Html->tag('button', $item['title'], $tabLinkAttrs);
 
             // build tab menu item
-            $menuItems .= $this->Html->tag('li', $tabLink, ['role' => 'tab', 'aria-controls' => $tabId]);
+            $menuItems .= $this->Html->tag('li', $tabLink, ['class' => 'nav-item', 'role' => 'presentation']);
 
             //$tabParams = [];
             //$js .= sprintf("$('#%s').tab(%s); ", $tabMenuId, json_encode($tabParams));
@@ -144,14 +171,22 @@ class TabsHelper extends Helper
         $tabClass = "tab-pane";
         $i = 0;
         foreach ($this->_tabs as $tabId => $item) {
-            $class = $i++ > 0 ? $tabClass : $tabClass . " active";
+            $tabLinkId = $tabId . '-tab';
+            $tabPaneId = $tabId . '-pane';
+            $class = $tabClass . " fade";
+            if ($i++ === 0) {
+                $class .= ' show active';
+            }
 
-            $attrs = ['id' => $tabId, 'role' => 'tabpanel'];
-            //if ($item['url']) {
-            //    $attrs['data-tab-url'] = $this->Url->build($item['url']);
-            //}
+            $attrs = ['id' => $tabPaneId, 'role' => 'tabpanel'];
+            $content = $item['content'] ?? 'NO-CONTENT';
+            if ($item['url']) {
+                //$attrs['data-tab-url'] = $this->Url->build($item['url']);
+                $url = $this->Url->build($item['url']);
+                $content = sprintf("Loading content from %s ...", $url);
+            }
 
-            $tabs .= $this->Html->div($class, $item['content'], $attrs);
+            $tabs .= $this->Html->div($class, $content, $attrs);
         }
         $tabs = $this->Html->div('tab-content', $tabs);
 
@@ -203,8 +238,8 @@ class TabsHelper extends Helper
         return false;
     });
 SCRIPT;
-        $script = sprintf($scriptTemplate, $domId);
-        $this->Html->scriptBlock($script, ['safe' => false, 'block' => true]);
+        //$script = sprintf($scriptTemplate, $domId);
+        //$this->Html->scriptBlock($script, ['safe' => false, 'block' => true]);
 
         return $this->Html->div('tabs', $menu . $tabs, ['id' => $domId]);
     }

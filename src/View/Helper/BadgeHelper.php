@@ -5,16 +5,13 @@ namespace Bootstrap\View\Helper;
 
 use Cake\View\StringTemplateTrait;
 
-/**
- * @deprecated Use BadgeHelper instead.
- */
-class LabelHelper extends BaseHelper
+class BadgeHelper extends BaseHelper
 {
     use StringTemplateTrait;
 
     protected $_defaultConfig = [
         'templates' => [
-            'label' => '<span class="label label-{{class}}"{{attrs}}>{{label}}</span>',
+            'badge' => '<span class="badge text-bg-{{class}}"{{attrs}}>{{label}}</span>',
         ],
     ];
 
@@ -22,7 +19,7 @@ class LabelHelper extends BaseHelper
     {
         $options += ['class' => null];
 
-        $label = $this->templater()->format('label', [
+        $label = $this->templater()->format('badge', [
             'class' => $options['class'],
             'label' => $label,
             'attrs' => $this->templater()->formatAttributes($options, ['class']),
