@@ -45,8 +45,7 @@ abstract class BaseHelper extends Helper
                 $type = "primary";
                 break;
             default:
-                $type = $type ?? "default";
-                break;
+                $type = $type ?? "outline-secondary";
                 break;
         }
 

@@ -4,29 +4,39 @@ declare(strict_types=1);
 namespace Bootstrap\View\Helper;
 
 use Cake\View\StringTemplateTrait;
+use Cake\View\View;
 
-class LabelHelper extends BaseHelper
+/**
+ * @deprecated Use BadgeHelper instead.
+ */
+class LabelHelper extends BadgeHelper
 {
+    public function initialize(array $config): void
+    {
+        deprecationWarning("LabelHelper is deprecated. Use BadgeHelper instead");
+        parent::initialize($config);
+    }
+
     use StringTemplateTrait;
 
     protected $_defaultConfig = [
         'templates' => [
-            'label' => '<span class="label label-{{class}}"{{attrs}}>{{label}}</span>',
+            'label' => '<span class="badge text-bg-{{class}}"{{attrs}}>{{label}}</span>',
         ],
     ];
 
-    public function create($label, $options = [])
-    {
-        $options += ['class' => null];
-
-        $label = $this->templater()->format('label', [
-            'class' => $options['class'],
-            'label' => $label,
-            'attrs' => $this->templater()->formatAttributes($options, ['class']),
-        ]);
-
-        return $label;
-    }
+//    public function create($label, $options = [])
+//    {
+//        $options += ['class' => null];
+//
+//        $label = $this->templater()->format('label', [
+//            'class' => $options['class'],
+//            'label' => $label,
+//            'attrs' => $this->templater()->formatAttributes($options, ['class']),
+//        ]);
+//
+//        return $label;
+//    }
 
     /**
      * @param string|int $status Status value
@@ -36,6 +46,12 @@ class LabelHelper extends BaseHelper
      */
     public function status($status, $options = [], $map = [])
     {
+        deprecationWarning("LabelHelper is deprecated. Use BadgeHelper instead");
+        if (\Cake\Core\Plugin::isLoaded('Cupcake')) {
+            $StatusHelper = $this->_View->loadHelper('Cupcake.Status');
+            return $StatusHelper->boolean((bool) $status);
+        }
+
         $options += ['label' => null, 'class' => null, 'toggle' => null];
         $label = $toggle = $class = null;
         #$map = [];
@@ -78,31 +94,31 @@ class LabelHelper extends BaseHelper
         return $out;
     }
 
-    public function success($label, $options = [])
-    {
-        $options['class'] = __FUNCTION__;
-
-        return $this->create($label, $options);
-    }
-
-    public function danger($label, $options = [])
-    {
-        $options['class'] = __FUNCTION__;
-
-        return $this->create($label, $options);
-    }
-
-    public function info($label, $options = [])
-    {
-        $options['class'] = __FUNCTION__;
-
-        return $this->create($label, $options);
-    }
-
-    public function warning($label, $options = [])
-    {
-        $options['class'] = __FUNCTION__;
-
-        return $this->create($label, $options);
-    }
+//    public function success($label, $options = [])
+//    {
+//        $options['class'] = __FUNCTION__;
+//
+//        return $this->create($label, $options);
+//    }
+//
+//    public function danger($label, $options = [])
+//    {
+//        $options['class'] = __FUNCTION__;
+//
+//        return $this->create($label, $options);
+//    }
+//
+//    public function info($label, $options = [])
+//    {
+//        $options['class'] = __FUNCTION__;
+//
+//        return $this->create($label, $options);
+//    }
+//
+//    public function warning($label, $options = [])
+//    {
+//        $options['class'] = __FUNCTION__;
+//
+//        return $this->create($label, $options);
+//    }
 }
