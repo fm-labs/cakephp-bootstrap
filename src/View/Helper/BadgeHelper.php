@@ -28,56 +28,6 @@ class BadgeHelper extends BaseHelper
         return $label;
     }
 
-    /**
-     * @param string|int $status Status value
-     * @param array $options Additional options
-     * @param array $map Status map
-     * @return null|string
-     */
-    public function status($status, $options = [], $map = [])
-    {
-        $options += ['label' => null, 'class' => null, 'toggle' => null];
-        $label = $toggle = $class = null;
-        #$map = [];
-        extract($options, EXTR_IF_EXISTS);
-
-        if (empty($map)) {
-            $map = [
-                0 => [__('No'), 'default'],
-                1 => [__('Yes'), 'primary'],
-            ];
-        }
-
-        if (!$class) {
-            $class = 'default';
-        }
-
-        if (is_bool($status)) {
-            $status = (int)$status;
-        }
-
-        if (array_key_exists($status, $map)) {
-            $mapped = $map[$status];
-            if (is_string($mapped)) {
-                $label = $mapped;
-            } elseif (is_array($mapped) && count($mapped) == 2) {
-                [$label, $class] = $mapped;
-            }
-        }
-
-        if (!$label) {
-            $label = (string)$status;
-        }
-
-        $out = $this->templater()->format('label', [
-            'class' => $class,
-            'label' => $label,
-            'attrs' => $this->templater()->formatAttributes($options, ['toggle', 'class', 'label']),
-        ]);
-
-        return $out;
-    }
-
     public function success($label, $options = [])
     {
         $options['class'] = __FUNCTION__;

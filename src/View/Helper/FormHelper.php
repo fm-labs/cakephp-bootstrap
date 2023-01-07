@@ -155,14 +155,14 @@ class FormHelper extends CakeFormHelper
         $this->_defaultWidgets['_default'] = ['Bootstrap\View\Widget\BasicWidget', 'datalist'];
 
         // custom
-        $this->_defaultConfig['templates']['help'] = '<span class="control-help help-block">{{content}}</span>';
+        $this->_defaultConfig['templates']['help'] = '<div class="control-help help-block text-muted">{{content}}</div>';
         //overrides
-        $this->_defaultConfig['templates']['formGroup'] = '{{label}}{{help}}{{input}}';
+        $this->_defaultConfig['templates']['formGroup'] = '{{label}}{{input}}{{help}}';
         $this->_defaultConfig['templates']['inputHidden'] = '<input type="hidden" name="{{name}}"{{attrs}} />';
-        $this->_defaultConfig['templates']['label'] = '<label class="control-label"{{attrs}}>{{text}}</label>';
+        $this->_defaultConfig['templates']['label'] = '<label class="form-label"{{attrs}}>{{text}}</label>';
         $this->_defaultConfig['templates']['inputContainer'] = '<div class="form-group input-{{type}}{{required}}">{{content}}</div>';
         $this->_defaultConfig['templates']['inputContainerError'] = '<div class="form-group has-error input-{{type}}{{required}}">{{content}}{{error}}</div>';
-        $this->_defaultConfig['templates']['error'] = '<span class="control-error help-block">{{content}}</span>';
+        $this->_defaultConfig['templates']['error'] = '<div class="control-error help-block text-danger">{{content}}</div>';
 
         $this->_defaultConfig['templates']['radioWrapper'] = '<div class="radio-wrapper">{{label}}</div>';
         $this->_defaultConfig['templates']['radioFormGroup'] = '{{label}}{{input}}{{error}}{{help}}';
@@ -172,14 +172,17 @@ class FormHelper extends CakeFormHelper
             //'input' => 'input type="{{type}}" name="{{name}}"{{attrs}}/>',
             //'select' => '<select name="{{name}}"{{attrs}}>{{content}}</select>',
 
-            'inputContainerError' => '<div class="form-group has-error input-{{type}}{{required}}">{{content}}</div>',
+            'label' => '<span{{attrs}}>{{text}}</span>',
 
-            'formGroup' => '<div class="col-xs-12 col-sm-3 col-md-4 col-lg-4">{{label}}{{help}}</div><div class="col-xs-12 col-sm-9 col-md-8 col-lg-8">{{input}}{{error}}</div>',
+            'inputContainer' => '<div class="row mb-3 input-{{type}}{{required}}">{{content}}</div>',
+            'inputContainerError' => '<div class="row mb-3 has-error input-{{type}}{{required}}">{{content}}</div>',
+
+            'formGroup' => '<div class="col-xs-12 col-sm-3 col-md-4 col-lg-4">{{label}}</div><div class="col-xs-12 col-sm-9 col-md-8 col-lg-8">{{input}}{{help}}{{error}}</div>',
 
             'submitContainer' => '<div class="form-group"><div class="col-xs-12 col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-4 col-lg-8 col-lg-offset-4"><div class="submit">{{content}}</div></div></div>',
 
             'checkbox' => '<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>',
-            'checkboxFormGroup' => '<div class="col-xs-12 col-sm-3 col-md-4 col-lg-4">{{help}}</div><div class="col-xs-12 col-sm-9 col-md-8 col-lg-8">{{label}}{{input}}{{error}}</div>',
+            'checkboxFormGroup' => '<div class="col-xs-12 col-sm-3 col-md-4 col-lg-4"></div><div class="col-xs-12 col-sm-9 col-md-8 col-lg-8">{{label}}{{input}}{{help}}{{error}}</div>',
             'checkboxWrapper' => '<div class="checkbox-wrapper">{{label}}</div>',
             //'nestingLabel' => '<div class="col-sm-3 col-md-4 col-lg-4"><div class="control-label">{{text}}</div></div><div class="col-sm-9 col-md-8 col-lg-8">{{input}}</div>',
             //'nestingLabel' => '<div class="col-sm-3 col-md-4 col-lg-4"><div class="control-label">{{text}}</div></div><div class="col-sm-9 col-md-8 col-lg-8">{{input}}</div>',
@@ -206,10 +209,10 @@ class FormHelper extends CakeFormHelper
             unset($options['horizontal']);
         }
 
-//        if ($this->_horizontal === true) {
-//            $options = $this->addClass($options, 'form-horizontal');
-//            $options['templates'] = $this->getConfig('templatesHorizontal');
-//        }
+        if ($this->_horizontal === true) {
+            $options = $this->addClass($options, 'form-horizontal');
+            $options['templates'] = $this->getConfig('templatesHorizontal');
+        }
 
         $options['novalidate'] = !self::$useNovalidate;
 

@@ -17,14 +17,14 @@ class LabelHelper extends BadgeHelper
         parent::initialize($config);
     }
 
-//    use StringTemplateTrait;
-//
-//    protected $_defaultConfig = [
-//        'templates' => [
-//            'label' => '<span class="label label-{{class}}"{{attrs}}>{{label}}</span>',
-//        ],
-//    ];
-//
+    use StringTemplateTrait;
+
+    protected $_defaultConfig = [
+        'templates' => [
+            'label' => '<span class="badge text-bg-{{class}}"{{attrs}}>{{label}}</span>',
+        ],
+    ];
+
 //    public function create($label, $options = [])
 //    {
 //        $options += ['class' => null];
@@ -37,57 +37,63 @@ class LabelHelper extends BadgeHelper
 //
 //        return $label;
 //    }
-//
-//    /**
-//     * @param string|int $status Status value
-//     * @param array $options Additional options
-//     * @param array $map Status map
-//     * @return null|string
-//     */
-//    public function status($status, $options = [], $map = [])
-//    {
-//        $options += ['label' => null, 'class' => null, 'toggle' => null];
-//        $label = $toggle = $class = null;
-//        #$map = [];
-//        extract($options, EXTR_IF_EXISTS);
-//
-//        if (empty($map)) {
-//            $map = [
-//                0 => [__('No'), 'default'],
-//                1 => [__('Yes'), 'primary'],
-//            ];
-//        }
-//
-//        if (!$class) {
-//            $class = 'default';
-//        }
-//
-//        if (is_bool($status)) {
-//            $status = (int)$status;
-//        }
-//
-//        if (array_key_exists($status, $map)) {
-//            $mapped = $map[$status];
-//            if (is_string($mapped)) {
-//                $label = $mapped;
-//            } elseif (is_array($mapped) && count($mapped) == 2) {
-//                [$label, $class] = $mapped;
-//            }
-//        }
-//
-//        if (!$label) {
-//            $label = (string)$status;
-//        }
-//
-//        $out = $this->templater()->format('label', [
-//            'class' => $class,
-//            'label' => $label,
-//            'attrs' => $this->templater()->formatAttributes($options, ['toggle', 'class', 'label']),
-//        ]);
-//
-//        return $out;
-//    }
-//
+
+    /**
+     * @param string|int $status Status value
+     * @param array $options Additional options
+     * @param array $map Status map
+     * @return null|string
+     */
+    public function status($status, $options = [], $map = [])
+    {
+        deprecationWarning("LabelHelper is deprecated. Use BadgeHelper instead");
+        if (\Cake\Core\Plugin::isLoaded('Cupcake')) {
+            $StatusHelper = $this->_View->loadHelper('Cupcake.Status');
+            return $StatusHelper->boolean((bool) $status);
+        }
+
+        $options += ['label' => null, 'class' => null, 'toggle' => null];
+        $label = $toggle = $class = null;
+        #$map = [];
+        extract($options, EXTR_IF_EXISTS);
+
+        if (empty($map)) {
+            $map = [
+                0 => [__('No'), 'default'],
+                1 => [__('Yes'), 'primary'],
+            ];
+        }
+
+        if (!$class) {
+            $class = 'default';
+        }
+
+        if (is_bool($status)) {
+            $status = (int)$status;
+        }
+
+        if (array_key_exists($status, $map)) {
+            $mapped = $map[$status];
+            if (is_string($mapped)) {
+                $label = $mapped;
+            } elseif (is_array($mapped) && count($mapped) == 2) {
+                [$label, $class] = $mapped;
+            }
+        }
+
+        if (!$label) {
+            $label = (string)$status;
+        }
+
+        $out = $this->templater()->format('label', [
+            'class' => $class,
+            'label' => $label,
+            'attrs' => $this->templater()->formatAttributes($options, ['toggle', 'class', 'label']),
+        ]);
+
+        return $out;
+    }
+
 //    public function success($label, $options = [])
 //    {
 //        $options['class'] = __FUNCTION__;
