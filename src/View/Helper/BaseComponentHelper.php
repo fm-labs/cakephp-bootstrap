@@ -5,7 +5,12 @@ namespace Bootstrap\View\Helper;
 
 use Cake\View\Helper;
 
-abstract class BaseHelper extends Helper
+/**
+ * BaseComponentHelper
+ *
+ * @todo Refactor as Util class
+ */
+abstract class BaseComponentHelper extends Helper
 {
     public static $defaultItemSize = "default"; // @TODO Use Helper config to assign default size
 

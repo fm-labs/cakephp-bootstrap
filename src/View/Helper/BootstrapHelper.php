@@ -7,32 +7,24 @@ use Cake\View\Helper;
 
 /**
  * Bootstrap helper
+ *
+ * @property \Cake\View\Helper\HtmlHelper $Html
+ * @property \Bootstrap\View\Helper\FormHelper $Form
  */
-class BootstrapHelper extends Helper
+class BootstrapHelper extends Bootstrap5Helper
 {
-    /**
-     * Default configuration.
-     *
-     * @var array
-     */
-    protected $_defaultConfig = [
-        'scriptUrl' => 'Bootstrap.bootstrap3/bootstrap.min',
-        'scriptBlock' => true,
-        'cssUrl' => 'Bootstrap.bootstrap3/bootstrap.min',
-        'cssBlock' => true,
+    public $helpers = [
+        'Html',
+        'Form' => ['className' => 'Bootstrap.Form'],
+//        'Bootstrap.Button',
+//        'Bootstrap.Dropdown',
+//        'Bootstrap.Form',
+//        'Bootstrap.Icon',
+//        'Bootstrap.Menu',
+//        'Bootstrap.Navbar',
+//        'Bootstrap.Nav',
+//        'Bootstrap.Panel',
+//        'Bootstrap.Tabs',
+//        'Bootstrap.Ui'
     ];
-
-    public $helpers = ['Html', 'Form' => ['className' => 'Bootstrap.Form']];
-
-    /**
-     * @inheritDoc
-     */
-    public function initialize(array $config): void
-    {
-        $this->_View->Html->css($this->getConfig('cssUrl'),
-            ['block' => $this->getConfig('cssBlock')]);
-
-        $this->_View->Html->script($this->getConfig('scriptUrl'),
-            ['block' => $this->getConfig('scriptBlock')]);
-    }
 }

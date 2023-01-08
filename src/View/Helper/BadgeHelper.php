@@ -5,7 +5,7 @@ namespace Bootstrap\View\Helper;
 
 use Cake\View\StringTemplateTrait;
 
-class BadgeHelper extends BaseHelper
+class BadgeHelper extends BaseComponentHelper
 {
     use StringTemplateTrait;
 

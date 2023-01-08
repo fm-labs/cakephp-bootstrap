@@ -3,12 +3,10 @@ declare(strict_types=1);
 
 namespace Bootstrap\View\Helper;
 
-use Cake\View\Helper;
-
 /**
- * Bootstrap helper
+ * Bootstrap v5 helper
  */
-class Bootstrap5Helper extends BootstrapHelper
+class Bootstrap5Helper extends BaseBootstrapHelper
 {
     /**
      * Default configuration.

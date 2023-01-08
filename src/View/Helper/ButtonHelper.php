@@ -5,7 +5,7 @@ namespace Bootstrap\View\Helper;
 
 use Cake\View\StringTemplateTrait;
 
-class ButtonHelper extends BaseHelper
+class ButtonHelper extends BaseComponentHelper
 {
     use StringTemplateTrait;
 
