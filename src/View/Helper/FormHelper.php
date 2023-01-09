@@ -160,8 +160,8 @@ class FormHelper extends CakeFormHelper
         $this->_defaultConfig['templates']['formGroup'] = '{{label}}{{input}}{{help}}';
         $this->_defaultConfig['templates']['inputHidden'] = '<input type="hidden" name="{{name}}"{{attrs}} />';
         $this->_defaultConfig['templates']['label'] = '<label class="form-label"{{attrs}}>{{text}}</label>';
-        $this->_defaultConfig['templates']['inputContainer'] = '<div class="form-group input-{{type}}{{required}}">{{content}}</div>';
-        $this->_defaultConfig['templates']['inputContainerError'] = '<div class="form-group has-error input-{{type}}{{required}}">{{content}}{{error}}</div>';
+        $this->_defaultConfig['templates']['inputContainer'] = '<div class="form-group input-{{type}}{{required}} mb-2">{{content}}</div>';
+        $this->_defaultConfig['templates']['inputContainerError'] = '<div class="form-group has-error input-{{type}}{{required}} mb-2">{{content}}{{error}}</div>';
         $this->_defaultConfig['templates']['error'] = '<div class="control-error help-block text-danger">{{content}}</div>';
 
         $this->_defaultConfig['templates']['radioWrapper'] = '<div class="radio-wrapper">{{label}}</div>';
