@@ -207,8 +207,9 @@ class UiHelper extends Helper
                 'role' => "button",
                 'aria-haspopup' => "true",
                 'aria-expanded' => "false",
-                'href' => '#',
-                'data-href' => $url ? $this->Url->build($url) : null,
+                //'href' => '#',
+                //'data-href' => $url ? $this->Url->build($url) : null,
+                'href' => $url ? $this->Url->build($url) : '#',
             ];
             $ddAttrs += $item;
             $ddLink = $this->templater()->format('menuDropdownButton', [
