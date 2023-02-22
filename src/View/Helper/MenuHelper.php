@@ -48,6 +48,8 @@ class MenuHelper extends Helper
      */
     protected $_urlCallback = null;
 
+    protected $_currentDepth = 0;
+
     /**
      * @param array $menu
      * @return $this
@@ -63,6 +65,7 @@ class MenuHelper extends Helper
             'template' => null,
             'templates' => [],
             'classes' => [],
+            'maxDepth' => null
         ];
 
         $defaultClasses = [
@@ -81,6 +84,9 @@ class MenuHelper extends Helper
         $this->_menu = $menu;
         if (!$this->_menu['class']) {
             $this->_menu['class'] = $this->_menu['classes']['menu'];
+        }
+        if ($this->_menu['maxDepth'] === null) {
+            $this->_menu['maxDepth'] = -1;
         }
 
         if ($menu['templates']) {
@@ -106,6 +112,7 @@ class MenuHelper extends Helper
      */
     public function render()
     {
+        $this->_currentDepth = 0;
         if (!$this->_menu || !$this->_menu['items']) {
             return '';
         }
@@ -190,7 +197,8 @@ class MenuHelper extends Helper
         }
 
         $submenu = null;
-        if ($hasChildren) {
+        $isMaxDepth = ($this->_menu['maxDepth'] >= 0 && $this->_currentDepth >= $this->_menu['maxDepth']);
+        if ($hasChildren && !$isMaxDepth) {
             //$attrs = $this->Html->addClass($attrs, $this->_menu['classes']['submenuItem']);
 
             $itemAttrs = $this->Html->addClass($itemAttrs, $this->_menu['classes']['itemWithChildren']);
@@ -213,7 +221,9 @@ class MenuHelper extends Helper
 //                $_menu = $this->Html->addClass($_menu, $this->_menu['classes']['activeItem']);
 //            }
 
+            $this->_currentDepth++;
             $submenu = $this->_renderMenu($_menu);
+            $this->_currentDepth--;
 
             $template = 'navListItemSubmenu';
             //debug($item['attr']);
