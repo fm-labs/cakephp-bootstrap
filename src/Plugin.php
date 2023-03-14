@@ -3,20 +3,11 @@ declare(strict_types=1);
 
 namespace Bootstrap;
 
-use Cake\Core\BasePlugin;
-
 /**
- * Plugin for Bootstrap
+ * Plugin for Bootstrap.
+ *
+ * @deprecated Use BootstrapPlugin class instead.
  */
-class Plugin extends BasePlugin
+class Plugin extends BootstrapPlugin
 {
-    /**
-     * @var bool
-     */
-    public $routesEnabled = false;
-
-    /**
-     * @var bool
-     */
-    public $bootstrapEnabled = false;
 }
