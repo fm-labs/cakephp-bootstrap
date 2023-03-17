@@ -214,7 +214,9 @@ class FormHelper extends CakeFormHelper
             $options['templates'] = $this->getConfig('templatesHorizontal');
         }
 
-        $options['novalidate'] = !self::$useNovalidate;
+        if (!isset($options['novalidate'])) {
+            $options['novalidate'] = !self::$useNovalidate;
+        }
 
         return parent::create($context, $options);
     }
