@@ -179,7 +179,7 @@ class FormHelper extends CakeFormHelper
 
             'formGroup' => '<div class="col-xs-12 col-sm-3 col-md-4 col-lg-4">{{label}}</div><div class="col-xs-12 col-sm-9 col-md-8 col-lg-8">{{input}}{{help}}{{error}}</div>',
 
-            'submitContainer' => '<div class="form-group"><div class="col-xs-12 col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-4 col-lg-8 col-lg-offset-4"><div class="submit">{{content}}</div></div></div>',
+            'submitContainer' => '<div class="row"><div class="col-xs-12 col-sm-9 offset-sm-3 col-md-8 offset-md-4 col-lg-8 offset-lg-4"><div class="submit">{{content}}</div></div></div>',
 
             'checkbox' => '<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>',
             'checkboxFormGroup' => '<div class="col-xs-12 col-sm-3 col-md-4 col-lg-4"></div><div class="col-xs-12 col-sm-9 col-md-8 col-lg-8">{{label}}{{input}}{{help}}{{error}}</div>',
