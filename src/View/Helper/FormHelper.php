@@ -181,9 +181,17 @@ class FormHelper extends CakeFormHelper
 
             'submitContainer' => '<div class="row"><div class="col-xs-12 col-sm-9 offset-sm-3 col-md-8 offset-md-4 col-lg-8 offset-lg-4"><div class="submit">{{content}}</div></div></div>',
 
+            //'checkbox' => '<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>',
+            //'checkboxFormGroup' => '<div class="col-xs-12 col-sm-3 col-md-4 col-lg-4"></div><div class="col-xs-12 col-sm-9 col-md-8 col-lg-8">{{label}}{{input}}{{help}}{{error}}</div>',
+            //'checkboxWrapper' => '<div class="checkbox-wrapper">{{label}}</div>',
+
+
             'checkbox' => '<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>',
-            'checkboxFormGroup' => '<div class="col-xs-12 col-sm-3 col-md-4 col-lg-4"></div><div class="col-xs-12 col-sm-9 col-md-8 col-lg-8">{{label}}{{input}}{{help}}{{error}}</div>',
+            'checkboxFormGroup' => '{{label}}{{error}}',
             'checkboxWrapper' => '<div class="checkbox-wrapper">{{label}}</div>',
+            'nestingLabel' => '<div class="col-xs-12 col-sm-3 col-md-4 col-lg-4">{{text}}</div><div class="col-xs-12 col-sm-9 col-md-8 col-lg-8">{{hidden}}<label{{attrs}}>{{input}}{{help}}{{error}}</label></div>',
+
+
             //'nestingLabel' => '<div class="col-sm-3 col-md-4 col-lg-4"><div class="control-label">{{text}}</div></div><div class="col-sm-9 col-md-8 col-lg-8">{{input}}</div>',
             //'nestingLabel' => '<div class="col-sm-3 col-md-4 col-lg-4"><div class="control-label">{{text}}</div></div><div class="col-sm-9 col-md-8 col-lg-8">{{input}}</div>',
             //'nestingLabel' => '{{hidden}}<label{{attrs}}>{{input}}{{text}}</label>',
