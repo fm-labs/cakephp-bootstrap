@@ -14,7 +14,7 @@ class Bootstrap3Helper extends BaseBootstrapHelper
      *
      * @var array
      */
-    protected $_defaultConfig = [
+    protected array $_defaultConfig = [
         'scriptUrl' => 'Bootstrap.bootstrap3/bootstrap.min',
         'scriptBlock' => true,
         'cssUrl' => 'Bootstrap.bootstrap3/bootstrap.min',

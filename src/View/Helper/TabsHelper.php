@@ -24,7 +24,7 @@ class TabsHelper extends Helper
     /**
      * @var array
      */
-    public $helpers = ['Html', 'Url'];
+    public array $helpers = ['Html', 'Url'];
 
     /**
      * @var string

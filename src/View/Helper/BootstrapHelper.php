@@ -13,7 +13,7 @@ use Cake\View\Helper;
  */
 class BootstrapHelper extends Bootstrap5Helper
 {
-    public $helpers = [
+    public array $helpers = [
         'Html',
         'Form' => ['className' => 'Bootstrap.Form'],
 //        'Bootstrap.Button',

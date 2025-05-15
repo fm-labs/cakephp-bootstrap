@@ -18,14 +18,14 @@ class PanelHelper extends Helper
     /**
      * @var array
      */
-    public $helpers = ['Html'];
+    public array $helpers = ['Html'];
 
     /**
      * Default config for this class
      *
      * @var array
      */
-    protected $_defaultConfig = [
+    protected array $_defaultConfig = [
         'templates' => [
             'panel' => '<div class="panel panel-default {{class}}" {{attrs}}>{{heading}}{{body}}{{footer}}</div>',
             'panelHeading' => '<div class="panel-heading">{{content}}</div>',

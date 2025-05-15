@@ -9,7 +9,7 @@ class ButtonHelper extends BaseComponentHelper
 {
     use StringTemplateTrait;
 
-    protected $_defaultConfig = [
+    protected array $_defaultConfig = [
         'templates' => [
             'button' => '<button class="{{class}}"{{attrs}}>{{label}}</button>',
             //'buttonLink' => '<a class="btn btn-{{class}}"{{attrs}}>{{label}}</a>',
@@ -27,7 +27,7 @@ class ButtonHelper extends BaseComponentHelper
         ],
     ];
 
-    public $helpers = ['Html', 'Bootstrap.Icon'];
+    public array $helpers = ['Html', 'Bootstrap.Icon'];
 
     /**
      * @param $title

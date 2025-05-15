@@ -18,7 +18,7 @@ class Bootstrap4Helper extends BaseBootstrapHelper
      *
      * @var array
      */
-    protected $_defaultConfig = [
+    protected array $_defaultConfig = [
         'scriptUrl' => 'https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js',
         'scriptBlock' => true,
         'cssUrl' => 'https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css',

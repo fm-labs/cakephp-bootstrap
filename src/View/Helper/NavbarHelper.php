@@ -14,7 +14,7 @@ use Cake\View\View;
  */
 class NavbarHelper extends Helper
 {
-    public $helpers = ['Bootstrap.Nav'];
+    public array $helpers = ['Bootstrap.Nav'];
 
 //    use StringTemplateTrait;
 //

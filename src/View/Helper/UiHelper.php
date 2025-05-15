@@ -26,14 +26,14 @@ class UiHelper extends Helper
     /**
      * @var array
      */
-    public $helpers = ['Html', 'Url', 'Bootstrap.Form', 'Bootstrap.Button', 'Bootstrap.Icon', 'Bootstrap.Label'];
+    public array $helpers = ['Html', 'Url', 'Bootstrap.Form', 'Bootstrap.Button', 'Bootstrap.Icon', 'Bootstrap.Label'];
 
     /**
      * Default config for this class
      *
      * @var array
      */
-    protected $_defaultConfig = [
+    protected array $_defaultConfig = [
         'templates' => [
             'modal' => '<div class="modal"></div>',
             'menu' => '<ul{{attrs}}>{{items}}</ul>',

@@ -9,7 +9,7 @@ class BadgeHelper extends BaseComponentHelper
 {
     use StringTemplateTrait;
 
-    protected $_defaultConfig = [
+    protected array $_defaultConfig = [
         'templates' => [
             'badge' => '<span class="badge text-bg-{{class}}"{{attrs}}>{{label}}</span>',
         ],

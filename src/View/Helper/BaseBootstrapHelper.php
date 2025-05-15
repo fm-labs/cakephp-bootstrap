@@ -13,7 +13,7 @@ use Cake\View\Helper;
  */
 abstract class BaseBootstrapHelper extends Helper
 {
-    public $helpers = ['Html'/*, 'Form' => ['className' => 'Bootstrap.Form']*/];
+    public array $helpers = ['Html'/*, 'Form' => ['className' => 'Bootstrap.Form']*/];
 
     /**
      * @inheritDoc

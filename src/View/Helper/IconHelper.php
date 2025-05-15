@@ -17,7 +17,7 @@ class IconHelper extends Helper
 {
     use StringTemplateTrait;
 
-    protected $_defaultConfig = [
+    protected array $_defaultConfig = [
         'defaultTemplate' => 'fontawesome',
         'templates' => [
             'icon_glyphicon' => '<span class="glyphicon glyphicon-{{class}}"{{attrs}}></span>', #bootstrap style
@@ -25,7 +25,7 @@ class IconHelper extends Helper
         ],
     ];
 
-    public $helpers = ['Html'];
+    public array $helpers = ['Html'];
 
     /**
      * @param string $icon Icon name

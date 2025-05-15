@@ -19,14 +19,14 @@ class MenuHelper extends Helper
     /**
      * @var array
      */
-    public $helpers = ['Html'];
+    public array $helpers = ['Html'];
 
     /**
      * Default config for this class
      *
      * @var array
      */
-    protected $_defaultConfig = [
+    protected array $_defaultConfig = [
         'templates' => [
             'navLink' => '<a href="{{url}}"{{attrs}}>{{content}}</a>',
             'navList' => '{{title}}<ul class="{{class}}">{{items}}</ul>',

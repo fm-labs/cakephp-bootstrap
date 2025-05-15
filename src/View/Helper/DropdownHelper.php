@@ -16,14 +16,14 @@ class DropdownHelper extends Helper
 {
     use StringTemplateTrait;
 
-    public $helpers = ['Url'];
+    public array $helpers = ['Url'];
 
     /**
      * Default configuration.
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected array $_defaultConfig = [
         'templates' => [
             'ddMenu' => '<ul class="{{class}}">{{items}}</ul>',
             'ddMenuItem' => ' <li><a class="{{class}}" href="{{url}}" {{attrs}}>{{title}}</a></li>',

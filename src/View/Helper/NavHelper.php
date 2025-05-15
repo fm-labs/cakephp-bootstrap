@@ -16,14 +16,14 @@ class NavHelper extends Helper
 {
     use StringTemplateTrait;
 
-    public $helpers = ['Url'];
+    public array $helpers = ['Url'];
 
     /**
      * Default configuration.
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected array $_defaultConfig = [
         'templates' => [
             'nav' => '<ul class="{{class}}">{{items}}</ul>',
             'navItem' => ' <li class="{{class}}">{{link}}</li>',

@@ -19,7 +19,7 @@ class LabelHelper extends BadgeHelper
 
     use StringTemplateTrait;
 
-    protected $_defaultConfig = [
+    protected array $_defaultConfig = [
         'templates' => [
             'label' => '<span class="badge text-bg-{{class}}"{{attrs}}>{{label}}</span>',
         ],
