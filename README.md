@@ -10,10 +10,11 @@ Twitter Bootstrap for CakePHP
 
 ## Version Info
 
-| Version   | Supported Bootstrap Versions | Default Bootstrap version |
-|-----------|------------------------------|---------------------------|
-| \<= 0.6.x | Bootstrap v3                 | v3                        |
-| \>= 0.7.x | Bootstrap v3/v4/v5           | v5                        |
+| Version   | CakePHP Version | Supported Bootstrap Versions | Default Bootstrap version |
+|-----------|-----------------|------------------------------|---------------------------|
+| \<= 0.6.x | CakePHP 3       | Bootstrap v3                 | v3                        |
+| \^4       | CakePHP 4       | Bootstrap v3/v4/v5           | v5                        |
+| \^5       | CakePHP 5       | Bootstrap v3/v4/v5           | v5                        |
 
 
 
