@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace Bootstrap\View\Helper;
 
-use Cupcake\Menu\MenuItem;
 use Cake\Datasource\EntityTrait;
 use Cake\View\Helper;
 use Cake\View\StringTemplateTrait;
+use Cupcake\Menu\MenuItem;
 
 /**
  * Class UiHelper
@@ -26,7 +26,7 @@ class UiHelper extends Helper
     /**
      * @var array
      */
-    public array $helpers = ['Html', 'Url', 'Bootstrap.Form', 'Bootstrap.Button', 'Bootstrap.Icon', 'Bootstrap.Label'];
+    public array $helpers = ['Html', 'Url', 'Form', 'Bootstrap.Button', 'Bootstrap.Icon', 'Bootstrap.Label'];
 
     /**
      * Default config for this class
@@ -47,25 +47,25 @@ class UiHelper extends Helper
 
     /**
      * @param string $title Title
-     * @param string|array $url URL
+     * @param array|string $url URL
      * @param array $options Additional options
      * @return string
      */
-    public function button($title, $url, array $options = [])
+    public function button(string $title, string|array $url, array $options = []): string
     {
         return $this->Button->link($title, $url, $options);
     }
 
     /**
      * @param string $title Title
-     * @param string|array $url URL
+     * @param array|string $url URL
      * @param array $options Additional options
      * @return string
      */
-    public function link($title, $url = null, array $options = [])
+    public function link(string $title, string|array|null $url = null, array $options = []): string
     {
         if (isset($options['icon'])) {
-            $title = $this->icon($options['icon']) . " " . $title;
+            $title = $this->icon($options['icon']) . ' ' . $title;
 
             $options['escape'] = false;
             unset($options['icon']);
@@ -76,14 +76,14 @@ class UiHelper extends Helper
 
     /**
      * @param string $title Title
-     * @param string|array $url URL
+     * @param array|string $url URL
      * @param array $options Additional options
      * @return string
      */
-    public function postLink($title, $url = null, array $options = [])
+    public function postLink(string $title, string|array|null $url = null, array $options = []): string
     {
         if (isset($options['icon'])) {
-            $title = $this->icon($options['icon']) . " " . $title;
+            $title = $this->icon($options['icon']) . ' ' . $title;
 
             $options['escape'] = false;
             unset($options['icon']);
@@ -94,11 +94,11 @@ class UiHelper extends Helper
 
     /**
      * @param string $title Title
-     * @param string|array $url URL
+     * @param array|string $url URL
      * @param array $options Additional options
      * @return string
      */
-    public function deleteLink($title, $url = null, array $options = [])
+    public function deleteLink(string $title, string|array|null $url = null, array $options = []): string
     {
         return $this->postLink($title, $url, $options);
     }
@@ -107,20 +107,21 @@ class UiHelper extends Helper
      * @param string|int $status Status value
      * @param array $options Additional options
      * @param array $map Status map
-     * @return null|string
+     * @return string|null
      */
-    public function statusLabel($status, $options = [], $map = [])
+    public function statusLabel(string|int $status, array $options = [], array $map = []): ?string
     {
-        deprecationWarning("UiHelper::statusLabel is deprecated. Use StatusHelper instead.");
+        deprecationWarning('UiHelper::statusLabel is deprecated. Use StatusHelper instead.');
+
         return $this->Label->status($status, $options, $map);
     }
 
     /**
      * @param string $class Icon class
      * @param array $options Additional options
-     * @return null|string
+     * @return string|null
      */
-    public function icon($class, $options = [])
+    public function icon(string $class, array $options = []): ?string
     {
         return $this->Icon->create($class, $options);
     }
@@ -130,9 +131,9 @@ class UiHelper extends Helper
      * @param array $menuOptions Menu options
      * @param array $childMenuOptions Child menu options
      * @param array $itemOptions Item options
-     * @return null|string
+     * @return string|null
      */
-    public function menu($menuList = [], $menuOptions = [], $childMenuOptions = [], $itemOptions = [])
+    public function menu(array $menuList = [], array $menuOptions = [], array $childMenuOptions = [], array $itemOptions = []): ?string
     {
         $menuOptions += [
             'class' => null,
@@ -140,7 +141,7 @@ class UiHelper extends Helper
             'itemtype' => 'http://www.schema.org/SiteNavigationElement',
         ];
 
-        $items = "";
+        $items = '';
 
         foreach ($menuList as $alias => $item) {
             if (is_object($item) && ($item instanceof EntityTrait || $item instanceof MenuItem)) {
@@ -161,9 +162,9 @@ class UiHelper extends Helper
      * @param array $item Menu item
      * @param array $childMenuOptions Child menu options
      * @param array $itemOptions Item options
-     * @return null|string
+     * @return string|null
      */
-    public function menuItem(array $item = [], array $childMenuOptions = [], array $itemOptions = [])
+    public function menuItem(array $item = [], array $childMenuOptions = [], array $itemOptions = []): ?string
     {
         $item += ['url' => null, 'children' => [], 'title' => null, 'class' => null, 'hide_in_nav' => null];
         $item['class'] = $item['class'] ?? 'nav-link';
@@ -204,9 +205,9 @@ class UiHelper extends Helper
             $ddAttrs = [
                 //'data-toggle' => ($url) ? "dropdown disabled" : "drowdown",
                 'data-toggle' => 'dropdown',
-                'role' => "button",
-                'aria-haspopup' => "true",
-                'aria-expanded' => "false",
+                'role' => 'button',
+                'aria-haspopup' => 'true',
+                'aria-expanded' => 'false',
                 //'href' => '#',
                 //'data-href' => $url ? $this->Url->build($url) : null,
                 'href' => $url ? $this->Url->build($url) : '#',
