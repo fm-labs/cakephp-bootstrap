@@ -111,7 +111,7 @@ class UiHelper extends Helper
      */
     public function statusLabel(string|int $status, array $options = [], array $map = []): ?string
     {
-        deprecationWarning('UiHelper::statusLabel is deprecated. Use StatusHelper instead.');
+        deprecationWarning('4.0.1', 'UiHelper::statusLabel is deprecated. Use StatusHelper instead.');
 
         return $this->Label->status($status, $options, $map);
     }

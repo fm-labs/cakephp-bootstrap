@@ -13,7 +13,7 @@ class LabelHelper extends BadgeHelper
 {
     public function initialize(array $config): void
     {
-        deprecationWarning("LabelHelper is deprecated. Use BadgeHelper instead");
+        deprecationWarning('4.0.1', "LabelHelper is deprecated. Use BadgeHelper instead");
         parent::initialize($config);
     }
 
@@ -46,7 +46,7 @@ class LabelHelper extends BadgeHelper
      */
     public function status($status, $options = [], $map = [])
     {
-        deprecationWarning("LabelHelper is deprecated. Use BadgeHelper instead");
+        deprecationWarning('4.0.1', "LabelHelper is deprecated. Use BadgeHelper instead");
         if (\Cake\Core\Plugin::isLoaded('Cupcake')) {
             $StatusHelper = $this->_View->loadHelper('Cupcake.Status');
             return $StatusHelper->boolean((bool) $status);
