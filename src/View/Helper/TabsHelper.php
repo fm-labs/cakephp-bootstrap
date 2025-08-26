@@ -173,7 +173,7 @@ class TabsHelper extends Helper
         foreach ($this->_tabs as $tabId => $item) {
             $tabLinkId = $tabId . '-tab';
             $tabPaneId = $tabId . '-pane';
-            $class = $tabClass . " fade";
+            $class = $tabClass; // . " fade";
             if ($i++ === 0) {
                 $class .= ' show active';
             }
